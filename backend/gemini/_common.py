@@ -36,6 +36,20 @@ from google import genai  # noqa: E402
 from google.genai import errors, types  # noqa: E402
 
 # ---------------------------------------------------------------------------
+# Geo helpers (shared by forecast + crossborder)
+# ---------------------------------------------------------------------------
+def haversine_km(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
+    """Great-circle distance in km between two lat/lng points."""
+    import math
+
+    r = 6371.0
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dphi = math.radians(lat2 - lat1)
+    dlmb = math.radians(lng2 - lng1)
+    a = math.sin(dphi / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dlmb / 2) ** 2
+    return 2 * r * math.asin(math.sqrt(a))
+
+# ---------------------------------------------------------------------------
 # Client singleton
 # ---------------------------------------------------------------------------
 _client: genai.Client | None = None
@@ -71,38 +85,54 @@ def gemini_retry(func):
 T = TypeVar("T")
 
 
-def to_model(response: types.GenerateContentResponse, schema_cls: type[T]) -> T:
-    """Turn a Gemini structured-JSON response into a validated Pydantic model.
+def _as_dict(obj) -> dict:
+    """Normalize a parsed SDK object into a plain dict."""
+    if hasattr(obj, "model_dump"):
+        return obj.model_dump(mode="json")
+    if hasattr(obj, "__dict__"):
+        return {k: v for k, v in vars(obj).items() if not k.startswith("_")}
+    return obj
 
-    Two extraction paths, newest SDK first:
-      1. `response.parsed` — populated automatically when response_schema is
-         given (google-genai 1.x+).
-      2. Parse `response.text` as JSON and validate through Pydantic.
-    Falls back to the exact error being re-raised so callers know why.
-    """
-    if response is None:
-        raise RuntimeError("Gemini returned no response object")
 
+def _extract_raw(response) -> dict | list:
+    """Return the JSON dict/list from a Gemini response (parsed or text)."""
     parsed = getattr(response, "parsed", None)
     if parsed is not None:
-        try:
-            return schema_cls.model_validate(
-                parsed.model_dump() if hasattr(parsed, "model_dump") else parsed
-            )
-        except Exception:
-            # parsed exists but doesn't conform — fall through to JSON path
-            pass
+        if isinstance(parsed, list):
+            return [_as_dict(p) for p in parsed]
+        return _as_dict(parsed)
 
     text = (response.text or "").strip()
     if not text:
         raise RuntimeError("Gemini returned empty content")
-
     # Strip markdown fences if the model wrapped JSON in ```json ... ```
     if text.startswith("```"):
         text = text.strip("`")
         if text.startswith("json"):
             text = text[4:]
         text = text.strip()
+    return json.loads(text)
 
-    data = json.loads(text)
-    return schema_cls.model_validate(data)
+
+def to_model(response, schema_cls: type[T] | list[type]) -> T | list[T]:
+    """Turn a Gemini structured-JSON response into validated Pydantic object(s).
+
+    Accepts a Pydantic model class OR `list[SomeModel]` (which returns a list,
+    validated element-by-element). Uses `response.parsed` when the SDK already
+    decoded it, else parses `response.text` as JSON.
+    """
+    from typing import get_args, get_origin
+
+    if response is None:
+        raise RuntimeError("Gemini returned no response object")
+
+    raw = _extract_raw(response)
+
+    if get_origin(schema_cls) is list:
+        item_cls = get_args(schema_cls)[0]
+        if not isinstance(raw, list):
+            raise RuntimeError(
+                f"Expected a JSON list for {schema_cls}, got {type(raw).__name__}"
+            )
+        return [item_cls.model_validate(x) for x in raw]
+    return schema_cls.model_validate(raw)

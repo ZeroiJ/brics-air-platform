@@ -15,11 +15,9 @@ main.py catches it and serves rule_analysis() instead. Never 500.
 """
 from __future__ import annotations
 
-import math
 import os
-from typing import Optional
 
-from backend.gemini._common import gemini_retry, get_client, to_model
+from backend.gemini._common import gemini_retry, get_client, haversine_km, to_model
 from backend.models import AQIReading, GeminiAQIAnalysis, MeteoData
 
 MODEL = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
@@ -143,20 +141,6 @@ def analyze_aqi(reading: AQIReading, meteo: MeteoData) -> GeminiAQIAnalysis:
     )
     result.confidence = round(min(max(result.confidence, 0.0), 1.0), 2)
     return result
-
-
-def _haversine_km(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
-    """Great-circle distance in km — reused by forecast/crossborder later."""
-    r = 6371.0
-    p1, p2 = math.radians(lat1), math.radians(lat2)
-    dphi = math.radians(lat2 - lat1)
-    dlmb = math.radians(lng2 - lng1)
-    a = math.sin(dphi / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dlmb / 2) ** 2
-    return 2 * r * math.asin(math.sqrt(a))
-
-
-# Also expose distance helper for sibling modules without circular imports.
-distance_km = _haversine_km
 
 
 if __name__ == "__main__":
