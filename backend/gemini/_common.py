@@ -56,13 +56,21 @@ _client: genai.Client | None = None
 
 
 def get_client() -> genai.Client:
-    """Return a lazily-created Gemini client, or raise if no API key set."""
+    """Return a lazily-created Gemini client, or raise if no API key set.
+
+    Explicit HTTP timeout: the public API can be slow under load (observed
+    10-15s for a trivial call) — the SDK default was timing out and spinning
+    into internal retries that looked like hangs.
+    """
     global _client
     key = os.getenv("GEMINI_API_KEY", "").strip()
     if not key:
         raise RuntimeError("GEMINI_API_KEY is not set — copy .env.example to .env and add your key")
     if _client is None:
-        _client = genai.Client(api_key=key)
+        _client = genai.Client(
+            api_key=key,
+            http_options=types.HttpOptions(timeout=180_000),  # ms; generous
+        )
     return _client
 
 
@@ -70,10 +78,17 @@ def get_client() -> genai.Client:
 # Retry policy
 # ---------------------------------------------------------------------------
 def gemini_retry(func):
-    """Retry transient API failures 3x with exponential backoff (2s/4s/8s)."""
+    """Retry transient API failures with exponential backoff.
+
+    Default: 5 attempts (2s/4s/8s/16s waits). The API returns 503-high-demand
+    in waves; override attempts with GEMINI_RETRIES if needed.
+    """
+    import os as _os
+
+    attempts = int(_os.getenv("GEMINI_RETRIES", "5"))
     return retry(
-        stop=stop_after_attempt(3),
-        wait=wait_exponential(multiplier=1, min=2, max=8),
+        stop=stop_after_attempt(attempts),
+        wait=wait_exponential(multiplier=1, min=2, max=16),
         retry=retry_if_exception_type((errors.APIError, errors.ClientError)),
         reraise=True,
     )(func)
