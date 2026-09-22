@@ -54,3 +54,15 @@
 - `scripts/refresh_cache.py`: one command to re-fetch all data sources. Skips sources whose key is missing (never clobbers committed cache), always refreshes no-key sources (meteo, sensors).
 - `scripts/smoke_test.py`: 15 checks on every endpoint + shapes + 404 case (in-process `TestClient`); `--base-url` flag for testing the deployed Render backend later.
 - Status: OpenAQ + WAQI keys still pending (user couldn't reach the signup/token pages); both modules sit in fallback mode — FIRMS, meteo, sensors are LIVE so nothing blocks Sarthak/Anoushka.
+
+## Sarthak — Gemini AI
+
+### 20 Sep 2026 — All 5 Gemini modules written, Module 1 live end-to-end
+- `backend/gemini/_common.py`: shared lazy client, tenacity retry (3x, exp backoff on API errors), structured-output extraction (`response.parsed` → JSON), `haversine_km`.
+- `backend/gemini/aqi_analysis.py` — **LIVE through `/api/analysis?city=Delhi`** (`gemini_live=true`). Uses `gemini-3.6-flash` (2.5-flash retired for new accounts; API drove the upgrade). Verified output: blood-risk vocabulary pinned to Indian AQI categories; ground-truth `city` forced from input (Gemini appended ", India" once).
+- `backend/gemini/forecast.py`: 500-km fire window + upwind/downwind bearing math (unit-checked: NW fire + NW wind = upwind), 6h/24h AQI + spike cause. Live-tested pre-quota: Delhi 287 → 322/295, spike warning.
+- `backend/gemini/crossborder.py`: compact 5°-grid fire-cluster prompt, Pro→flash fallback (Pro models have **zero free-tier quota** — `limit: 0`), de-dup + only events for monitored cities. Evidence-based: returned 0 events when live Delhi wind (NE 3.7 km/h) doesn't support Punjab transport; detects events when wind does.
+- `backend/gemini/alerts.py`: ONE call → Hindi + Portuguese + English + authority (authority forced from team mapping) + urgency.
+- `backend/gemini/photo_analysis.py`: magic-byte MIME sniffing (JPEG/PNG/WebP/GIF), Gemini Vision structured analysis.
+- **Quota reality:** free-tier = 20 generations/day for `gemini-3.6-flash` per key. Testing exhausted it same-day. Plan: each teammate uses their own key for local dev; dedicated key for the deployed backend; demo run ≈ 4 calls. Sujal's fallback chain verified: smoke test 14/14 even with quota exhausted.
+- Smoke test 14/14 with key set; pushed as branch `sarthak/gemini-modules` on Sarthak's fork (PR-ready, nothing pushed to upstream).
