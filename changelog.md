@@ -69,7 +69,17 @@
 - `render.yaml` (Render Blueprint): two services (`brics-air-backend` + `brics-air-frontend`), free tier, auto-deploy from `main`, `BACKEND_URL` auto-wired to backend internal URL via `hostport`.
 - `docs/DEPLOY.md`: full deploy runbook (render.com Blueprint → env vars → UptimeRobot ping at `/health` every 5 min → cold-start warm-up on demo day → rollback/redeploy flow + env var reference table).
 - `README.md` updated: `/api/status` row in API table, deploy docs reference.
-- Changelog updated.
+Changelog updated.
+
+### 22 Sep 2026 — LIVE on Render (Sujal, deploy moved up from Sep 26)
+- Blueprint deploy from `render.yaml`: pulled into repo `ZeroiJ/brics-air-platform` → Render auto-created both services.
+- **`brics-air-backend`** → `https://brics-air-backend.onrender.com` — `/health` 200, responding in ~1.5s cold.
+- **`brics-air-frontend`** → `https://brics-air-frontend.onrender.com` — `/_stcore/health` 200.
+- Config hardened pre-deploy: bind `$PORT`, pin `PYTHON_VERSION 3.12.10`, `GEMINI_RETRIES 5`, health checks at `/health` + `/_stcore/health`, frontend `BACKEND_URL` auto-wired via `hostport`.
+- Manual backend-only path documented in `docs/DEPLOY.md` (Option B).
+- TODO next: UptimeRobot 5-min ping on `/health` (keeps free tier hot), frontend env vars confirmed in dashboard, harden for demo day (auto-deploy off).
+- **Production sweep: 15/15 PASS** against `https://brics-air-backend.onrender.com` (TestClient → real network hits). Live state on Render: FIRMS `live`, meteo `live`, sensors `live`, openaq `cached`, waqi `cached`, gemini `fallback` (key not set on Render yet), `overall: ok`.
+- **Key action for Sujal:** set `GEMINI_API_KEY` (dedicated deploy key) in the backend's Render Environment tab → Gemini goes live on prod. OpenAQ/WAQI keys optional (fallback fine).
 
 ## Sarthak — Gemini AI
 
