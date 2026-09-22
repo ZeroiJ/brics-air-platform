@@ -36,6 +36,7 @@ uvicorn backend.main:app --host 0.0.0.0 --port 8000
 | `GET /api/alerts?city=Delhi` | `AlertMessage` (Hindi/Portuguese/English) |
 | `POST /api/analyze-photo` | `GeminiPhotoResult` (multipart `file` + `city`) |
 | `GET /api/cities`, `GET /api/meta` | metadata |
+| `GET /api/status` | per-source data indicators (live/cached/fallback) + Gemini state |
 
 Cities: Delhi, Mumbai, São Paulo, Beijing, Johannesburg.
 Every data route is live → `backend/cache/*.json` → hardcoded fallback. Never 500s during demo.
@@ -79,3 +80,6 @@ python scripts/refresh_cache.py            # refresh backend/cache/*.json
 python scripts/smoke_test.py               # verify all endpoints locally
 python scripts/smoke_test.py --base-url https://backend.onrender.com  # after deploy
 ```
+
+Deploy: `render.yaml` (Blueprint) + `docs/DEPLOY.md` (Render + UptimeRobot runbook).
+Everything degrades gracefully with zero keys — fallback is a feature.

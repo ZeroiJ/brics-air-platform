@@ -3,55 +3,55 @@
     "lat": 28.6139,
     "lng": 77.209,
     "city": "Delhi",
-    "wind_speed_kmh": 4.4,
-    "wind_direction_deg": 297.0,
-    "wind_direction_label": "NW",
-    "temperature_c": 33.7,
-    "humidity_pct": 46.0,
-    "timestamp": "2026-09-22T06:44:31.951088Z"
+    "wind_speed_kmh": 5.1,
+    "wind_direction_deg": 288.0,
+    "wind_direction_label": "W",
+    "temperature_c": 34.1,
+    "humidity_pct": 44.0,
+    "timestamp": "2026-09-22T07:01:14.433212Z"
   },
   {
     "lat": 19.076,
     "lng": 72.8777,
     "city": "Mumbai",
-    "wind_speed_kmh": 2.8,
-    "wind_direction_deg": 281.0,
+    "wind_speed_kmh": 6.7,
+    "wind_direction_deg": 265.0,
     "wind_direction_label": "W",
-    "temperature_c": 28.7,
-    "humidity_pct": 77.0,
-    "timestamp": "2026-09-22T06:44:32.151825Z"
+    "temperature_c": 29.2,
+    "humidity_pct": 75.0,
+    "timestamp": "2026-09-22T07:01:15.114525Z"
   },
   {
     "lat": -23.5505,
     "lng": -46.6333,
     "city": "S\u00e3o Paulo",
-    "wind_speed_kmh": 12.7,
-    "wind_direction_deg": 314.0,
+    "wind_speed_kmh": 9.1,
+    "wind_direction_deg": 311.0,
     "wind_direction_label": "NW",
-    "temperature_c": 20.8,
-    "humidity_pct": 71.0,
-    "timestamp": "2026-09-22T06:44:32.334756Z"
+    "temperature_c": 20.6,
+    "humidity_pct": 72.0,
+    "timestamp": "2026-09-22T07:01:15.362608Z"
   },
   {
     "lat": 39.9042,
     "lng": 116.4074,
     "city": "Beijing",
-    "wind_speed_kmh": 11.8,
-    "wind_direction_deg": 186.0,
+    "wind_speed_kmh": 13.1,
+    "wind_direction_deg": 192.0,
     "wind_direction_label": "S",
-    "temperature_c": 30.0,
-    "humidity_pct": 33.0,
-    "timestamp": "2026-09-22T06:44:32.847516Z"
+    "temperature_c": 29.8,
+    "humidity_pct": 34.0,
+    "timestamp": "2026-09-22T07:01:15.565761Z"
   },
   {
     "lat": -26.2041,
     "lng": 28.0473,
     "city": "Johannesburg",
-    "wind_speed_kmh": 8.7,
-    "wind_direction_deg": 8.0,
+    "wind_speed_kmh": 10.5,
+    "wind_direction_deg": 353.0,
     "wind_direction_label": "N",
-    "temperature_c": 16.5,
-    "humidity_pct": 71.0,
-    "timestamp": "2026-09-22T06:44:33.072843Z"
+    "temperature_c": 17.6,
+    "humidity_pct": 65.0,
+    "timestamp": "2026-09-22T07:01:15.797373Z"
   }
 ]

@@ -62,6 +62,15 @@
 - **Integration state:** backend 14/14 smoke pass; frontend structure verified; Gemini key rotation rule set — each dev uses own key locally, dedicated key for Render deploy (free tier ≈ 20 calls/day/key, demo run ≈ 4 calls).
 - OpenAQ + WAQI still keyless (fallback). Pushed to `origin/main`.
 
+### 22 Sep 2026 — Status endpoint, Render blueprint + deploy runbook (Sujal)
+- `GET /api/status` (new): per-source resilience indicators (`live` | `cached` | `fallback`) + Gemini state + overall health. Returns: openaq/firms/waqi (key-gated), meteo/sensors (no-key always-live), Gemini module count.
+  - In this sandbox: FIRMS `live`, meteo/sensors `live`, openaq/waqi `cached`, gemini `fallback` → `overall: ok`.
+  - Smoke test updated: 15/15 pass.
+- `render.yaml` (Render Blueprint): two services (`brics-air-backend` + `brics-air-frontend`), free tier, auto-deploy from `main`, `BACKEND_URL` auto-wired to backend internal URL via `hostport`.
+- `docs/DEPLOY.md`: full deploy runbook (render.com Blueprint → env vars → UptimeRobot ping at `/health` every 5 min → cold-start warm-up on demo day → rollback/redeploy flow + env var reference table).
+- `README.md` updated: `/api/status` row in API table, deploy docs reference.
+- Changelog updated.
+
 ## Sarthak — Gemini AI
 
 ### 20 Sep 2026 — All 5 Gemini modules written, Module 1 live end-to-end

@@ -39,6 +39,7 @@ def run(base_url: str | None) -> int:
     add("GET", "/health", keys=["status"])
     add("GET", "/api/cities", keys=["city", "country"])
     add("GET", "/api/meta", keys=["service"])
+    add("GET", "/api/status", keys=["sources", "overall", "gemini"])
     add("GET", "/api/aqi", keys=["city", "aqi", "pm25", "source"])
     add("GET", "/api/aqi?city=Delhi", keys=["city", "aqi", "pm25"])
     add("GET", "/api/aqi?city=Atlantis", status=404)

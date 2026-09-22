@@ -14,6 +14,7 @@ import asyncio
 import base64
 import math
 import os
+import time
 from datetime import datetime
 
 from dotenv import load_dotenv
@@ -81,6 +82,37 @@ except Exception:
 
 def _use_gemini(module) -> bool:
     return _gemini_available and module is not None and hasattr(module, "__call__")
+
+
+def _cache_state(module, env_var: str) -> tuple[str, str]:
+    """Resilience status for key-gated sources.
+
+    Returns (status, detail): "live" | "cached" | "fallback".
+    A cache file only exists if a real fetch saved it — fallback() never writes.
+    """
+    if module is None:
+        return "unavailable", f"{env_var} module not importable"
+    key = os.getenv(env_var, "").strip()
+    cache = getattr(module, "CACHE_PATH", None)
+    has_cache = cache is not None and cache.exists()
+    if key and has_cache:
+        age_h = (time.time() - cache.stat().st_mtime) / 3600
+        if age_h <= 24:
+            return "live", f"{env_var} set, snapshot {age_h:.1f}h old"
+        return "cached", f"{env_var} set but snapshot {age_h:.1f}h old"
+    if has_cache:
+        return "cached", f"no {env_var} — serving committed snapshot"
+    return "fallback", f"no {env_var} — serving hardcoded fallback"
+
+
+def _gemini_status() -> tuple[str, str]:
+    modules = [gem_aqi, gem_forecast, gem_cross, gem_alerts, gem_photo]
+    present = sum(m is not None for m in modules)
+    if _gemini_available and present == 5:
+        return "live", f"GEMINI_API_KEY set, {present}/5 modules wired (gemini-3.6-flash)"
+    if _gemini_available:
+        return "degraded", f"GEMINI_API_KEY set but {present}/5 modules importable"
+    return "fallback", "no GEMINI_API_KEY — rule-based stand-ins active"
 
 
 app = FastAPI(title="BRICS Climate Intelligence Platform", version="1.0.0")
@@ -519,4 +551,30 @@ def api_meta():
         "owner": "Sujal — data pipeline + backend",
         "gemini_live": bool(_gemini_available and any(m is not None for m in [gem_aqi, gem_forecast, gem_cross, gem_alerts, gem_photo])),
         "time": datetime.now().isoformat(),
+    }
+
+
+@app.get("/api/status")
+def api_status():
+    """Per-source resilience indicators (sidebar 'Data source indicators')."""
+    oaq = _cache_state(openaq_mod, "OPENAQ_API_KEY")
+    frs = _cache_state(firms_mod, "FIRMS_API_KEY")
+    wqi = _cache_state(waqi_mod, "WAQI_TOKEN")
+    sources = [
+        {"source": "openaq", "layer": "Government AQI", "status": oaq[0], "detail": oaq[1]},
+        {"source": "firms", "layer": "Satellite fires", "status": frs[0], "detail": frs[1]},
+        {"source": "waqi", "layer": "Backup AQI", "status": wqi[0], "detail": wqi[1]},
+        {"source": "meteo", "layer": "Wind/weather", "status": "live" if meteo_mod.load_cache() else "fallback",
+         "detail": "Open-Meteo — no key required"},
+        {"source": "sensors", "layer": "Citizen sensors", "status": "live" if sensors_mod and sensors_mod.load_cache() else "fallback",
+         "detail": "Sensor.Community — no key required, snapshot present"},
+    ]
+    gem_status, gem_detail = _gemini_status()
+    unknown = [s for s in sources if s["status"] == "unavailable"]
+    overall = "degraded" if unknown or gem_status == "degraded" else "ok"
+    return {
+        "generated_at": datetime.now().isoformat(),
+        "overall": overall,
+        "gemini": {"status": gem_status, "detail": gem_detail},
+        "sources": sources,
     }
