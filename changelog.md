@@ -55,6 +55,13 @@
 - `scripts/smoke_test.py`: 15 checks on every endpoint + shapes + 404 case (in-process `TestClient`); `--base-url` flag for testing the deployed Render backend later.
 - Status: OpenAQ + WAQI keys still pending (user couldn't reach the signup/token pages); both modules sit in fallback mode — FIRMS, meteo, sensors are LIVE so nothing blocks Sarthak/Anoushka.
 
+### 22 Sep 2026 — PR review + merge (Sujal)
+- Reviewed Sarthak's `sarthak/gemini-modules` (fork: `nglfrsarthak`) + Anoushka's `anoushka/frontend-reference` (fork: `Glizussy`), both PR-ready on forks.
+- **Merge 1 — Sarthak Gemini:** `backend/gemini/_common.py` (shared lazy client, 180s HTTP timeout, tenacity retry via `GEMINI_RETRIES`) + all 5 modules (`aqi_analysis`, `forecast`, `crossborder`, `alerts`, `photo_analysis`). Entry-point signatures match my `main.py` contract exactly (`analyze_aqi`, `forecast_aqi`, `detect_crossborder`, `generate_alert`, `analyze_photo`). Models `gemini-3.6-flash` (2.5-flash retired) with per-module env overrides; ground truth (city/aqi/authority) forced from inputs, not the LLM. Verified: all 5 import cleanly, each raises `RuntimeError` without a key — `main.py`'s try/except fallback chain catches all → no 500s, smoke test holds. `aqi_analysis` already live end-to-end on Sarthak's key (`/api/analysis?city=Delhi` → real Gemini output); `forecast` live too (Delhi 287 → 6h 322 / 24h 295, spike warning).
+- **Merge 2 — Anoushka frontend:** `.streamlit/config.toml` (dark theme, headless, minimal toolbar) + `frontend/app.py` (735 lines — 8 themes, city selector, AQI/risk/24h-forecast cards, folium+plotly-free custom panels, offline mock mode, zero emojis, calls ONLY my endpoints via `_get` with 3s/10s timeouts + graceful `None`) + `verify_frontend.py` (headless theme verification harness, 8 themes × 12 CSS vars).
+- **Integration state:** backend 14/14 smoke pass; frontend structure verified; Gemini key rotation rule set — each dev uses own key locally, dedicated key for Render deploy (free tier ≈ 20 calls/day/key, demo run ≈ 4 calls).
+- OpenAQ + WAQI still keyless (fallback). Pushed to `origin/main`.
+
 ## Sarthak — Gemini AI
 
 ### 20 Sep 2026 — All 5 Gemini modules written, Module 1 live end-to-end
