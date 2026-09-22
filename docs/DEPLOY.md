@@ -13,14 +13,43 @@ Both services on Render free tier. Total cost: **$0**.
       Sarthak + Anoushka + your status endpoint)
 - [ ] Created free account at `render.com`
 
-## 1. Blueprint deploy (10 min)
+## 1. Deploy (pick one)
+
+### Option A — Blueprint (both services, recommended)
 
 1. Render dashboard → **New → Blueprint**
-2. Select `ZeroiJ/brics-air-platform` → Render auto-reads `render.yaml`
-3. It will ask you to fill the 4 secret env vars (`sync: false` = secure, prompted):
-   - Backend: `OPENAQ_API_KEY`, `FIRMS_API_KEY`, `WAQI_TOKEN`, `GEMINI_API_KEY`
-   - Frontend: nothing — `BACKEND_URL` resolves automatically to the internal URL
-4. **Apply** → two services build in parallel
+2. Select `ZeroiJ/brics-air-platform` → Render reads `render.yaml`
+3. It prompts for secrets (fill when prompted):
+   - `OPENAQ_API_KEY` = *(blank or paste when available)*
+   - `FIRMS_API_KEY` = `010ca454ff64927fa3029df0fe5ad9be` *(your key)*
+   - `WAQI_TOKEN` = *(blank or paste when available)*
+   - `GEMINI_API_KEY` = *(dedicated deploy key — see section 0)*
+4. **Apply** → both services build + deploy
+
+### Option B — Backend only (manual, fast)
+
+1. Render dashboard → **New → Web Service**
+2. Connect GitHub → pick `ZeroiJ/brics-air-platform`
+3. Fill these exact values:
+   | Field | Value |
+   |---|---|
+   | Name | `brics-air-backend` |
+   | Region | Singapore / Frankfurt / Ohio (pick nearest) |
+   | Runtime | Python |
+   | Branch | `main` |
+   | Build Command | `pip install -r requirements.txt` |
+   | Start Command | `uvicorn backend.main:app --host 0.0.0.0 --port $PORT` |
+   | Plan | Free |
+4. **Advanced → Health Check Path** → `/health`
+5. **Environment** tab → add these key-value pairs:
+   ```
+   PYTHON_VERSION = 3.12.10
+   FIRMS_API_KEY = 010ca454ff64927fa3029df0fe5ad9be
+   GEMINI_API_KEY = <your dedicated deploy key>
+   OPENAQ_API_KEY = <blank for now>
+   WAQI_TOKEN     = <blank for now>
+   ```
+6. **Create Web Service** → wait ~60s for build
 
 ## 2. Verify
 
@@ -36,6 +65,9 @@ A deployed check that covers everything:
 ```bash
 python scripts/smoke_test.py --base-url https://<backend>.onrender.com   # expect 15/15
 ```
+
+> **Port note:** Render injects the `PORT` env var — always bind with `$PORT`,
+> never a hardcoded `8000`/`8501`. Locally you keep using `--port 8000`.
 
 ## 3. UptimeRobot (keep free tier awake)
 
