@@ -8,7 +8,7 @@
     "wind_direction_label": "NW",
     "temperature_c": 33.7,
     "humidity_pct": 46.0,
-    "timestamp": "2026-09-22T06:43:34.879241Z"
+    "timestamp": "2026-09-22T06:44:31.951088Z"
   },
   {
     "lat": 19.076,
@@ -19,7 +19,7 @@
     "wind_direction_label": "W",
     "temperature_c": 28.7,
     "humidity_pct": 77.0,
-    "timestamp": "2026-09-22T06:43:35.067663Z"
+    "timestamp": "2026-09-22T06:44:32.151825Z"
   },
   {
     "lat": -23.5505,
@@ -30,7 +30,7 @@
     "wind_direction_label": "NW",
     "temperature_c": 20.8,
     "humidity_pct": 71.0,
-    "timestamp": "2026-09-22T06:43:35.264864Z"
+    "timestamp": "2026-09-22T06:44:32.334756Z"
   },
   {
     "lat": 39.9042,
@@ -41,7 +41,7 @@
     "wind_direction_label": "S",
     "temperature_c": 30.0,
     "humidity_pct": 33.0,
-    "timestamp": "2026-09-22T06:43:35.521138Z"
+    "timestamp": "2026-09-22T06:44:32.847516Z"
   },
   {
     "lat": -26.2041,
@@ -52,6 +52,6 @@
     "wind_direction_label": "N",
     "temperature_c": 16.5,
     "humidity_pct": 71.0,
-    "timestamp": "2026-09-22T06:43:35.733464Z"
+    "timestamp": "2026-09-22T06:44:33.072843Z"
   }
 ]
