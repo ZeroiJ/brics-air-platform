@@ -1,0 +1,16 @@
+[theme]
+base = "dark"
+primaryColor = "#86b88f"
+backgroundColor = "#0a0c10"
+secondaryBackgroundColor = "#10131a"
+textColor = "#d7dbe2"
+font = "sans serif"
+
+[server]
+headless = true
+
+[client]
+# "minimal" tells Streamlit itself to drop the toolbar chrome (Deploy button,
+# main menu, status widget). The sidebar reopen arrow is unaffected — it is
+# rendered whenever the sidebar is collapsed, so it can never be lost.
+toolbarMode = "minimal"
