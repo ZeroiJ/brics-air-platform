@@ -35,6 +35,7 @@ Run:  streamlit run frontend/app.py   (BACKEND_URL overridable via env)
 """
 from __future__ import annotations
 
+import math
 import os
 from datetime import datetime, timezone
 
@@ -46,6 +47,12 @@ REQ_TIMEOUT = (3.0, 10.0)  # (connect, read) seconds
 CACHE_TTL = 60
 
 FALLBACK_CITIES = ["Delhi", "Mumbai", "São Paulo", "Beijing", "Johannesburg"]
+
+# city -> Sensor.Community country code (hyper-local layer)
+CITY_COUNTRY = {
+    "Delhi": "IN", "Mumbai": "IN", "São Paulo": "BR",
+    "Beijing": "CN", "Johannesburg": "ZA",
+}
 
 # ---------------------------------------------------------------------------
 # Design system — rev 2 (muted dark, professional, no emoji)
@@ -475,6 +482,42 @@ def fetch_forecast(city: str) -> dict | None:
     return data if isinstance(data, dict) else None
 
 
+@st.cache_data(ttl=CACHE_TTL, show_spinner=False)
+def fetch_fires(limit: int = 200) -> list[dict]:
+    data = _get("/api/fires", {"limit": limit})
+    return data if isinstance(data, list) else []
+
+
+@st.cache_data(ttl=CACHE_TTL, show_spinner=False)
+def fetch_crossborder() -> list[dict]:
+    data = _get("/api/crossborder")
+    return data if isinstance(data, list) else []
+
+
+@st.cache_data(ttl=CACHE_TTL, show_spinner=False)
+def fetch_alerts(city: str) -> dict | None:
+    data = _get("/api/alerts", {"city": city})
+    return data if isinstance(data, dict) and data else None
+
+
+@st.cache_data(ttl=CACHE_TTL, show_spinner=False)
+def fetch_meteo(city: str) -> dict | None:
+    data = _get("/api/meteo", {"city": city})
+    return data if isinstance(data, dict) and data else None
+
+
+@st.cache_data(ttl=CACHE_TTL, show_spinner=False)
+def fetch_sensors(country: str) -> list[dict]:
+    data = _get("/api/sensors", {"country": country})
+    return data if isinstance(data, list) else []
+
+
+@st.cache_data(ttl=CACHE_TTL, show_spinner=False)
+def fetch_status() -> dict:
+    data = _get("/api/status")
+    return data if isinstance(data, dict) else {}
+
+
 # ---------------------------------------------------------------------------
 # Small render helpers
 # ---------------------------------------------------------------------------
@@ -547,7 +590,25 @@ if st.sidebar.button("REFRESH DATA", use_container_width=True):
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("**DATA SOURCES**")
-if reading is not None:
+
+# live/cached/fallback indicators straight from the backend's /api/status
+status = fetch_status()
+if status.get("sources"):
+    _col = {"live": "#86b88f", "cached": "#c9a86a", "fallback": "#8b91a0", "unavailable": "#e24a33"}
+    for _s in status["sources"]:
+        _stt = _s.get("status", "fallback")
+        st.sidebar.markdown(
+            f"{status_dot(_col.get(_stt, '#8b91a0'), _stt == 'live')} "
+            f"{str(_s.get('layer', _s.get('source', '?'))).upper()} — {_stt.upper()}",
+            unsafe_allow_html=True,
+        )
+    _g = status.get("gemini", {})
+    _gstt = _g.get("status", "fallback")
+    st.sidebar.markdown(
+        f"{status_dot(_col.get(_gstt, '#8b91a0'), _gstt == 'live')} AI REASONING — {_gstt.upper()}",
+        unsafe_allow_html=True,
+    )
+elif reading is not None:
     source = reading.get("source", "unknown")
     live = source not in ("mock", "cached")
     st.sidebar.markdown(
@@ -670,66 +731,241 @@ st.markdown(
 )
 
 # ---------------------------------------------------------------------------
-# Rows 2-3 + below the fold — designed minimal placeholders (future milestones)
+# ROW 2 — Live Map (folium) + Cross-Border Alerts
 # ---------------------------------------------------------------------------
 st.subheader("MONITORING BOARD")
 
-st.markdown(
-    '<div class="row-2col">'
-    + placeholder_card(
-        "Live Map",
-        "Fire hotspots + AQI city markers + wind vectors. ",
-        "22 SEP",
-        "ENDPOINT /api/fires",
-    )
-    + placeholder_card(
-        "Cross-Border Alerts",
-        "Active transboundary transport events.",
-        "22–23 SEP",
-        "ENDPOINT /api/crossborder",
-    )
-    + "</div>",
-    unsafe_allow_html=True,
-)
+fires = fetch_fires(200)
+meteo_now = fetch_meteo(city)
+events = fetch_crossborder()
+center = (reading["lat"], reading["lng"]) if reading else (20.0, 78.0)
 
-st.markdown(
-    '<div class="row-2eq">'
-    + placeholder_card(
-        "BRICS Comparison",
-        "PM2.5 bar chart vs WHO 24h guideline (15 µg/m³).",
-        "23 SEP",
-        "ENDPOINT /api/aqi",
-    )
-    + placeholder_card(
-        "Multilingual Alerts",
-        "HINDI · PORTUGUESE · ENGLISH — one alert, three languages.",
-        "23 SEP",
-        "ENDPOINT /api/alerts",
-    )
-    + "</div>",
-    unsafe_allow_html=True,
-)
+with st.container():
+    map_col, cb_col = st.columns([3, 2], gap="medium")
 
-st.markdown(
-    '<div class="row-2eq">'
-    + placeholder_card(
-        "Citizen Photo Intake",
-        "Upload a photo; Gemini Vision grades the pollution.",
-        "24 SEP",
-        "ENDPOINT /api/analyze-photo",
+    # --- Live Map ----------------------------------------------------------
+    with map_col:
+        import folium
+        from folium.plugins import MarkerCluster
+
+        fmap = folium.Map(location=center, zoom_start=4, tiles="CartoDB dark_matter")
+        # fire hotspots (red, opacity scaled by FRP)
+        fg = folium.FeatureGroup(name=f"Fire hotspots ({len(fires)})")
+        for f in fires:
+            try:
+                frp = float(f.get("frp") or 0)
+                lat, lng = float(f["lat"]), float(f["lng"])
+            except (KeyError, TypeError, ValueError):
+                continue
+            intensity = min(0.9, 0.25 + frp / 120.0)
+            fg.add_child(folium.CircleMarker(
+                (lat, lng), radius=3 + min(6, frp / 12), color="#ff6b4a",
+                fill=True, fill_color="#e24a33", fill_opacity=intensity, opacity=0.9))
+        fmap.add_child(fg)
+        # BRICS city markers colored by AQI
+        for r in readings:
+            try:
+                lat, lng, val = float(r["lat"]), float(r["lng"]), int(r.get("aqi") or 0)
+            except (KeyError, TypeError, ValueError):
+                continue
+            hexc = style_for_aqi(val)["hex"]
+            selected = r.get("city") == city
+            fmap.add_child(folium.CircleMarker(
+                (lat, lng), radius=11 if selected else 7, color=hexc,
+                fill=True, fill_color=hexc, fill_opacity=0.95, opacity=1.0,
+                tooltip=f"{r.get('city')} — AQI {val} ({style_for_aqi(val)['label']})"))
+        # wind vector at selected city (meteo direction is FROM; draw transport TO)
+        if meteo_now:
+            try:
+                to_deg = (float(meteo_now.get("wind_direction_deg", 0)) + 180.0) % 360.0
+                rad = math.radians(to_deg)
+                dlat = math.cos(rad) * 1.6
+                dlng = math.sin(rad) * 1.6 / max(0.3, math.cos(math.radians(center[0])))
+                fmap.add_child(folium.PolyLine(
+                    [center, (center[0] + dlat, center[1] + dlng)],
+                    color="#7fd1ff", weight=3, opacity=0.9,
+                    tooltip=f"Wind {meteo_now.get('wind_speed_kmh')} km/h from "
+                            f"{meteo_now.get('wind_direction_label')}"))
+            except (KeyError, TypeError, ValueError):
+                pass
+        # hyper-local citizen sensors (small grey dots)
+        cc = CITY_COUNTRY.get(city, "IN")
+        sensors = fetch_sensors(cc)
+        if sensors:
+            sg = folium.FeatureGroup(name=f"Citizen sensors ({len(sensors)})")
+            for s in sensors[:120]:
+                try:
+                    sg.add_child(folium.CircleMarker(
+                        (float(s["lat"]), float(s["lng"])), radius=2.5, color="#9aa0aa",
+                        fill=True, fill_color="#c9ccd4", fill_opacity=0.75, opacity=0.6))
+                except (KeyError, TypeError, ValueError):
+                    continue
+            fmap.add_child(sg)
+        fmap.add_child(folium.LayerControl(collapsed=True, position="topright"))
+        # folium >=0.17: full HTML doc via root.render(); older: get_root_html()
+        if hasattr(fmap, "get_root"):
+            _map_html = fmap.get_root().render()
+        else:  # pragma: no cover
+            _map_html = fmap.get_root_html()
+        st.components.v1.html(_map_html, height=470, scrolling=False)
+
+    # --- Cross-Border Alerts ----------------------------------------------
+    with cb_col:
+        if events:
+            for e in events[:3]:
+                ev_color = "#e24a33" if str(e.get("severity", "")).lower() in ("high", "severe", "critical") else "#c9a86a"
+                st.markdown(
+                    f'<div class="card" style="--cat:{ev_color};margin-bottom:10px;">'
+                    f'<div class="eyebrow">Transboundary Event · {str(e.get("severity", "?")).upper()}</div>'
+                    f'<div class="med" style="font-size:1.15rem;">'
+                    f'{e.get("source_city", "?")} → {e.get("affected_city", "?")}</div>'
+                    f'<div class="sub">{e.get("source_cause", "?").upper()} · '
+                    f'{e.get("source_country", "?")} → {e.get("affected_country", "?")} · '
+                    f'{e.get("transport_direction", "?")} · {e.get("distance_km", "?")} KM</div>'
+                    f'<div class="meta">{str(e.get("evidence_summary", ""))[:220]}</div></div>',
+                    unsafe_allow_html=True,
+                )
+        else:
+            st.markdown(
+                '<div class="card"><div class="eyebrow">Cross-Border Alerts</div>'
+                '<div class="sub">No active transboundary event detected '
+                '(winds do not support regional transport).</div></div>',
+                unsafe_allow_html=True,
+            )
+
+# --- BRICS Comparison chart (plotly, WHO guideline line) -------------------
+chart_col, alert_col = st.columns([1, 1], gap="medium")
+
+# --- BRICS Comparison chart (plotly, WHO guideline line) -------------------
+with chart_col:
+    import plotly.graph_objects as go
+
+    names = [r.get("city", "?") for r in readings]
+    pm25_vals = [float(r.get("pm25") or 0) for r in readings]
+    bar_colors = [style_for_aqi(int(r.get("aqi") or 0))["hex"] for r in readings]
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=names, y=pm25_vals, marker_color=bar_colors,
+        text=[f"{v:.0f}" for v in pm25_vals], textposition="outside",
+        hovertemplate="%{x}<br>PM2.5 %{y:.1f} µg/m³<extra></extra>"))
+    fig.add_hline(y=15, line_color="#e24a33", line_dash="dash",
+                  annotation_text="WHO 24h guideline 15 µg/m³", annotation_position="top left")
+    th = THEMES[active_theme]
+    fig.update_layout(
+        margin=dict(l=8, r=8, t=34, b=8), height=300, showlegend=False,
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(family="JetBrains Mono, monospace", size=11, color=th["text-dim"]),
+        title=dict(text="REAL-TIME PM2.5 vs WHO GUIDELINE", font=dict(size=12, color=th["text-soft"])),
+        yaxis=dict(gridcolor=th["border"], zeroline=False, title="µg/m³"),
     )
-    + placeholder_card(
-        "Hyper-Local Sensors",
-        "Sensor.Community readings as fine-grained dots.",
-        "24 SEP",
-        "ENDPOINT /api/sensors",
-    )
-    + "</div>",
-    unsafe_allow_html=True,
-)
+    try:
+        st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+    except TypeError:  # older streamlit
+        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+
+# --- Multilingual alerts (Hindi / Portuguese / English) --------------------
+with alert_col:
+    alert = fetch_alerts(city)
+    if alert:
+        urg = str(alert.get("urgency", "watch")).lower()
+        urg_color = {"immediate": "#e24a33", "advisory": "#c9a86a"}.get(urg, "#86b88f")
+        st.markdown(
+            f'<div class="card" style="--cat:{urg_color};margin-bottom:8px;">'
+            f'<div class="eyebrow">Authority Alert · {urg.upper()}</div>'
+            f'<div class="med" style="font-size:1.2rem;">{alert.get("city", city)} — '
+            f'{alert.get("risk_level", "?")}</div>'
+            f'<div class="meta">TARGET: {alert.get("target_authority", "—")}</div></div>',
+            unsafe_allow_html=True,
+        )
+        c1, c2, c3 = st.columns(3)
+        for col, (label, key) in zip(
+            (c1, c2, c3),
+            (("HINDI", "message_hindi"), ("PORTUGUESE", "message_portuguese"), ("ENGLISH", "message_english")),
+        ):
+            with col:
+                st.markdown(
+                    f'<div class="eyebrow" style="margin-bottom:4px;">{label}</div>'
+                    f'<div class="sub" style="font-size:.74rem;line-height:1.5;">'
+                    f'{alert.get(key, "—")}</div>',
+                    unsafe_allow_html=True,
+                )
+    else:
+        st.markdown(
+            '<div class="card"><div class="eyebrow">Multilingual Alerts</div>'
+            '<div class="sub">Alert service unavailable — backend offline.</div></div>',
+            unsafe_allow_html=True,
+        )
+
+# --- Citizen Photo Intake + Hyper-Local Sensors -----------------------------
+photo_col, sensor_col = st.columns([1, 1], gap="medium")
+
+with photo_col:
+    upload = st.file_uploader("Upload pollution photo (jpg/png)", type=["jpg", "jpeg", "png"])
+    if upload is not None:
+        try:
+            resp = requests.post(
+                f"{BACKEND_URL}/api/analyze-photo",
+                data={"city": city},
+                files={"file": (upload.name, upload.getvalue(), upload.type or "image/jpeg")},
+                timeout=(5, 90),
+            )
+            resp.raise_for_status()
+            pr = resp.json()
+            sev = int(pr.get("severity_score") or 0)
+            st.markdown(
+                f'<div class="card" style="--cat:{"#e24a33" if sev >= 6 else "#c9a86a"};">'
+                f'<div class="eyebrow">Gemini Vision Result</div>'
+                f'<div class="med" style="font-size:1.15rem;">{pr.get("pollution_type", "—")}</div>'
+                f'<div class="sub">AQI CATEGORY: {pr.get("estimated_aqi_category", "—")} · '
+                f'VISIBILITY: {pr.get("visibility_km", "—")} KM · SEVERITY: {sev}/10</div>'
+                f'<div class="meta">SOURCE: {pr.get("likely_source", "—")}<br>'
+                f'ADVICE: {pr.get("recommendation", "—")} '
+                f'(confidence {float(pr.get("confidence", 0))*100:.0f}%)</div></div>',
+                unsafe_allow_html=True,
+            )
+        except requests.RequestException as e:
+            st.markdown(
+                f'<div class="notice" style="--cat:#e24a33;">PHOTO ANALYSIS FAILED: {e.__class__.__name__}</div>',
+                unsafe_allow_html=True,
+            )
+    else:
+        st.markdown(
+            '<div class="card"><div class="eyebrow">Citizen Photo Intake</div>'
+            '<div class="sub">Upload a smog/haze photo — Gemini Vision estimates pollution '
+            'type, visibility, severity (1–10) and health advice.</div></div>',
+            unsafe_allow_html=True,
+        )
+
+with sensor_col:
+    sensors = fetch_sensors(CITY_COUNTRY.get(city, "IN"))
+    if sensors:
+        top = sorted(sensors, key=lambda s: float(s.get("pm25") or 0), reverse=True)[:8]
+        worst = float(top[0].get("pm25") or 0)
+        rows_html = "".join(
+            f'<tr><td style="padding:2px 6px 2px 0;color:{th["text-faint"]};">'
+            f'{float(s.get("pm25") or 0):.0f} µg/m³</td>'
+            f'<td style="padding:2px 0;color:{th["text-soft"]};">{s.get("city", "")} '
+            f'· {float(s.get("lat") or 0):.2f}, {float(s.get("lng") or 0):.2f}</td></tr>'
+            for s in top
+        )
+        st.markdown(
+            f'<div class="card"><div class="eyebrow">Hyper-Local Citizen Sensors</div>'
+            f'<div class="med" style="font-size:1.6rem;">{len(sensors)} readings · peak {worst:.0f} µg/m³</div>'
+            f'<table style="width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:.72rem;">'
+            f'{rows_html}</table>'
+            f'<div class="meta">SENSOR.COMMUNITY · COUNTRY {CITY_COUNTRY.get(city, "IN")} · '
+            f'GRANULARITY BELOW GOVERNMENT STATIONS</div></div>',
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown(
+            '<div class="card"><div class="eyebrow">Hyper-Local Citizen Sensors</div>'
+            '<div class="sub">No citizen sensor readings for this country right now.</div></div>',
+            unsafe_allow_html=True,
+        )
 
 st.divider()
 st.caption(
-    f"REFERENCE BUILD BY SARTHAK FOR ANOUSHKA · 21 SEP 2026 · "
+    f"DESIGN BY SARTHAK & ANOUSHKA · DATA PIPELINE BY SUJAL · "
     f"BACKEND {BACKEND_URL} · REFRESH {datetime.now().strftime('%H:%M:%S')} UTC"
 )

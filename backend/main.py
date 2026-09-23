@@ -128,11 +128,27 @@ app.add_middleware(
 # ===========================================================================
 # Helpers — resilient data loading (live -> cache -> fallback)
 # ===========================================================================
+# Short in-process TTL so ONE page load / one demo click causes ONE upstream
+# fetch per source, not one per endpoint. Without this, /api/analysis +
+# /api/forecast + /api/crossborder + /api/fires all re-hit FIRMS concurrently.
+_MEM: dict[str, tuple[float, object]] = {}
+
+
+async def _memo(key: str, factory, ttl: float = 120.0):
+    now = time.time()
+    hit = _MEM.get(key)
+    if hit is not None and now - hit[0] < ttl:
+        return hit[1]
+    val = await factory()
+    _MEM[key] = (time.time(), val)
+    return val
+
+
 async def _with_timeout(coro, seconds: float = 12.0):
     return await asyncio.wait_for(coro, timeout=seconds)
 
 
-async def get_aqi_all() -> list[AQIReading]:
+async def _fetch_aqi_all() -> list[AQIReading]:
     try:
         return await _with_timeout(openaq_mod.fetch_aqi_all())
     except Exception:
@@ -151,6 +167,10 @@ async def get_aqi_all() -> list[AQIReading]:
     return openaq_mod.fallback()
 
 
+async def get_aqi_all() -> list[AQIReading]:
+    return await _memo("aqi_all", _fetch_aqi_all, ttl=120.0)
+
+
 async def get_aqi_city(city: str) -> AQIReading:
     lookup_city(city)  # validates, raises KeyError -> 404
     for r in await get_aqi_all():
@@ -159,23 +179,44 @@ async def get_aqi_city(city: str) -> AQIReading:
     return openaq_mod.fallback_city(city)
 
 
-async def get_fires() -> list[FireHotspot]:
-    if firms_mod is not None:
-        try:
-            return await asyncio.to_thread(firms_mod.fetch_fires)
-        except Exception:
-            pass
-        try:
-            cached = firms_mod.load_cache()
-            if cached:
-                return cached
-        except Exception:
-            pass
+async def _fetch_fires() -> list[FireHotspot]:
+    """Serve the last snapshot immediately; revalidate FIRMS in the background.
+
+    FIRMS area queries return 5k-12k CSV rows (10-30s download). Blocking the
+    request on that made every dashboard load crawl, so the committed snapshot
+    is served at once and refreshed out-of-band for the next request.
+    """
+    if firms_mod is None:
+        return []
+    try:
+        cached = firms_mod.load_cache()
+    except Exception:
+        cached = []
+    if cached:
+        if not _MEM.get("fires_refreshing"):
+            task = asyncio.create_task(_refresh_fires())
+            _MEM["fires_refreshing"] = task
+            task.add_done_callback(lambda t: _MEM.pop("fires_refreshing", None))
+        return cached
+    try:
+        return await asyncio.to_thread(firms_mod.fetch_fires)
+    except Exception:
         return firms_mod.fallback()
-    return []
 
 
-async def get_meteo_all() -> list[MeteoData]:
+async def _refresh_fires() -> None:
+    try:
+        rows = await asyncio.to_thread(firms_mod.fetch_fires)
+        _MEM["fires"] = (time.time(), rows)
+    except Exception:
+        pass
+
+
+async def get_fires() -> list[FireHotspot]:
+    return await _memo("fires", _fetch_fires, ttl=60.0)
+
+
+async def _fetch_meteo_all() -> list[MeteoData]:
     try:
         return await _with_timeout(meteo_mod.fetch_meteo_all())
     except Exception:
@@ -189,6 +230,10 @@ async def get_meteo_all() -> list[MeteoData]:
     return meteo_mod.fallback()
 
 
+async def get_meteo_all() -> list[MeteoData]:
+    return await _memo("meteo_all", _fetch_meteo_all, ttl=120.0)
+
+
 async def get_meteo_city(city: str) -> MeteoData:
     lookup_city(city)
     for m in await get_meteo_all():
@@ -197,7 +242,7 @@ async def get_meteo_city(city: str) -> MeteoData:
     return meteo_mod.fallback_city(city)
 
 
-async def get_sensors(country: str | None = None) -> list[AQIReading]:
+async def _fetch_sensors(country: str | None = None) -> list[AQIReading]:
     if sensors_mod is not None:
         try:
             rows = await asyncio.to_thread(sensors_mod.fetch_sensors, country)
@@ -221,6 +266,11 @@ async def get_sensors(country: str | None = None) -> list[AQIReading]:
             pass
         return sensors_mod.fallback()
     return []
+
+
+async def get_sensors(country: str | None = None) -> list[AQIReading]:
+    key = f"sensors_{country or 'ALL'}"
+    return await _memo(key, lambda: _fetch_sensors(country), ttl=120.0)
 
 
 # ===========================================================================

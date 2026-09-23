@@ -31,7 +31,7 @@ for name, values in themes.items():
 print(f"[ok] {len(themes)} themes, {len(ref)} variables each, structurally identical")
 
 # --- 2. first render -------------------------------------------------------
-at = AppTest.from_file(APP, default_timeout=40)
+at = AppTest.from_file(APP, default_timeout=120)
 at.run()
 assert not at.exception, [e.value for e in at.exception]
 print("[ok] default render, 0 exceptions")

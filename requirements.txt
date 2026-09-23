@@ -9,7 +9,7 @@ tenacity>=8.2
 python-multipart>=0.0.9
 # Frontend (Anoushka — Streamlit dashboard)
 streamlit>=1.36
-folium>=0.16
+folium>=0.17
 plotly>=5.22
 # Gemini SDK (Sarthak — AI modules)
 google-genai>=1.0

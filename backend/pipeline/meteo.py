@@ -7,6 +7,7 @@ Caches to backend/cache/meteo.json. Includes realistic fallback.
 """
 from __future__ import annotations
 
+import asyncio
 import json
 from pathlib import Path
 
@@ -52,13 +53,14 @@ async def _fetch_one(client: httpx.AsyncClient, city: str, lat: float, lng: floa
 
 
 async def fetch_meteo_all() -> list[MeteoData]:
-    rows: list[MeteoData] = []
     async with httpx.AsyncClient(timeout=TIMEOUT) as client:
-        for c in BRICS_CITIES:
-            try:
-                rows.append(await _fetch_one(client, c["city"], c["lat"], c["lng"]))
-            except Exception:
-                rows.append(fallback_city(c["city"]))
+        results = await asyncio.gather(
+            *(_fetch_one(client, c["city"], c["lat"], c["lng"]) for c in BRICS_CITIES),
+            return_exceptions=True,
+        )
+    rows: list[MeteoData] = []
+    for c, res in zip(BRICS_CITIES, results):
+        rows.append(res if isinstance(res, MeteoData) else fallback_city(c["city"]))
     # Only cache if at least one live reading succeeded; simplest: cache always
     save_cache(rows)
     return rows
