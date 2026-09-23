@@ -1,2702 +1,2702 @@
 [
   {
-    "lat": -7.7536,
-    "lng": -46.73722,
+    "lat": -11.67251,
+    "lng": -43.47484,
     "brightness": 367.0,
-    "frp": 350.89,
+    "frp": 452.26,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.75301,
-    "lng": -46.73315,
+    "lat": -11.67201,
+    "lng": -43.47117,
     "brightness": 367.0,
-    "frp": 350.89,
+    "frp": 452.26,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.75003,
-    "lng": -46.73777,
+    "lat": -11.66791,
+    "lng": -43.47172,
     "brightness": 367.0,
-    "frp": 350.89,
+    "frp": 452.26,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.74944,
-    "lng": -46.73369,
+    "lat": -10.92598,
+    "lng": -68.15886,
     "brightness": 367.0,
-    "frp": 350.89,
+    "frp": 383.2,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -4.90721,
-    "lng": -45.09834,
+    "lat": -13.20483,
+    "lng": -51.59653,
     "brightness": 367.0,
-    "frp": 328.49,
+    "frp": 306.63,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -10.1015,
-    "lng": -46.08979,
+    "lat": -9.04689,
+    "lng": -65.41072,
     "brightness": 367.0,
-    "frp": 295.8,
+    "frp": 301.02,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -15.57229,
-    "lng": -67.84973,
-    "brightness": 338.48,
-    "frp": 255.12,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:15:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.43595,
-    "lng": -45.35107,
-    "brightness": 367.0,
-    "frp": 244.4,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.43246,
-    "lng": -45.35157,
-    "brightness": 367.0,
-    "frp": 244.4,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.70661,
-    "lng": -61.232,
-    "brightness": 354.75,
-    "frp": 232.88,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.9253,
-    "lng": -57.80534,
-    "brightness": 367.0,
-    "frp": 232.64,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.93303,
-    "lng": -57.81047,
-    "brightness": 338.07,
-    "frp": 217.76,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.93211,
-    "lng": -57.80439,
-    "brightness": 367.0,
-    "frp": 217.76,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.54395,
-    "lng": -45.90493,
-    "brightness": 367.0,
-    "frp": 217.51,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.65567,
-    "lng": -67.86024,
-    "brightness": 367.0,
-    "frp": 209.36,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.65233,
-    "lng": -67.86078,
-    "brightness": 367.0,
-    "frp": 209.36,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.19401,
-    "lng": -47.59606,
-    "brightness": 367.0,
-    "frp": 205.09,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.67937,
-    "lng": -70.02539,
-    "brightness": 367.0,
-    "frp": 202.47,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": 3.67635,
-    "lng": -61.86675,
-    "brightness": 208.0,
-    "frp": 196.89,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:21:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.75599,
-    "lng": -46.72856,
-    "brightness": 367.0,
-    "frp": 195.69,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.7554,
-    "lng": -46.72449,
-    "brightness": 367.0,
-    "frp": 195.69,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -3.3781,
-    "lng": -50.40678,
-    "brightness": 348.48,
-    "frp": 190.87,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -3.37753,
-    "lng": -50.40298,
-    "brightness": 342.7,
-    "frp": 190.87,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.62874,
-    "lng": -62.50474,
-    "brightness": 350.97,
-    "frp": 188.42,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.62663,
-    "lng": -75.34344,
-    "brightness": 348.71,
-    "frp": 182.59,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.14567,
-    "lng": -45.55951,
-    "brightness": 367.0,
-    "frp": 182.46,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.14509,
-    "lng": -45.55566,
-    "brightness": 367.0,
-    "frp": 182.46,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -9.81113,
-    "lng": -64.9985,
-    "brightness": 356.7,
-    "frp": 181.3,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.13299,
-    "lng": -59.96004,
-    "brightness": 367.0,
-    "frp": 180.88,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.93221,
-    "lng": -50.94202,
-    "brightness": 346.72,
-    "frp": 179.4,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.23602,
-    "lng": -41.65629,
-    "brightness": 367.0,
-    "frp": 171.23,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.2354,
-    "lng": -41.65234,
-    "brightness": 346.97,
-    "frp": 171.23,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -17.08669,
-    "lng": -46.16536,
-    "brightness": 350.84,
-    "frp": 170.99,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.82891,
-    "lng": -50.14439,
-    "brightness": 367.0,
-    "frp": 166.72,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.8243,
-    "lng": -50.145,
-    "brightness": 349.76,
-    "frp": 166.72,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.14678,
-    "lng": -45.5594,
-    "brightness": 367.0,
-    "frp": 164.21,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.14623,
-    "lng": -45.55555,
-    "brightness": 367.0,
-    "frp": 164.21,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.93436,
-    "lng": -57.81399,
-    "brightness": 208.0,
-    "frp": 160.0,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.93347,
-    "lng": -57.80789,
-    "brightness": 367.0,
-    "frp": 160.0,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.92755,
-    "lng": -57.81497,
-    "brightness": 352.26,
-    "frp": 160.0,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.92667,
-    "lng": -57.80887,
-    "brightness": 339.76,
-    "frp": 160.0,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.14454,
-    "lng": -45.55192,
-    "brightness": 367.0,
-    "frp": 159.07,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -4.58203,
-    "lng": -42.94455,
-    "brightness": 367.0,
-    "frp": 155.74,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.84492,
-    "lng": -45.93306,
-    "brightness": 367.0,
-    "frp": 147.81,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.61024,
-    "lng": -54.63084,
-    "brightness": 353.73,
-    "frp": 147.67,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.58978,
-    "lng": -44.55379,
-    "brightness": 367.0,
-    "frp": 143.56,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -3.38286,
-    "lng": -50.41,
-    "brightness": 367.0,
-    "frp": 139.55,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -3.37923,
-    "lng": -50.41438,
-    "brightness": 356.02,
-    "frp": 139.55,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -3.37867,
-    "lng": -50.4106,
-    "brightness": 354.57,
-    "frp": 139.55,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -14.40584,
-    "lng": -68.55591,
-    "brightness": 367.0,
-    "frp": 139.36,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -14.4025,
-    "lng": -68.55646,
-    "brightness": 367.0,
-    "frp": 139.36,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.5826,
-    "lng": -57.69089,
-    "brightness": 367.0,
-    "frp": 138.65,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.53151,
-    "lng": -44.86498,
-    "brightness": 367.0,
-    "frp": 137.95,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.53098,
-    "lng": -44.86148,
-    "brightness": 367.0,
-    "frp": 137.95,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.93488,
-    "lng": -57.82269,
-    "brightness": 352.17,
-    "frp": 137.46,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.93395,
-    "lng": -57.81657,
-    "brightness": 208.0,
-    "frp": 137.46,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.14568,
-    "lng": -45.5518,
-    "brightness": 367.0,
-    "frp": 137.42,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": 0.04284,
-    "lng": -60.6114,
-    "brightness": 367.0,
-    "frp": 134.6,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.78937,
-    "lng": -69.89328,
-    "brightness": 296.15,
-    "frp": 133.78,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.43888,
-    "lng": -45.34669,
-    "brightness": 367.0,
-    "frp": 132.53,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -34.6232,
-    "lng": -68.18976,
-    "brightness": 308.75,
-    "frp": 129.9,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T05:50:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -34.62256,
-    "lng": -68.19405,
-    "brightness": 337.47,
-    "frp": 129.9,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T05:50:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -34.61983,
-    "lng": -68.18903,
-    "brightness": 367.0,
-    "frp": 129.9,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T05:50:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -5.73606,
-    "lng": -43.72774,
-    "brightness": 367.0,
-    "frp": 128.47,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -20.92021,
-    "lng": -57.91853,
-    "brightness": 344.21,
-    "frp": 127.86,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:13:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -20.91541,
-    "lng": -57.91963,
-    "brightness": 343.0,
-    "frp": 127.86,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:13:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.63479,
-    "lng": -75.2084,
-    "brightness": 344.58,
-    "frp": 127.82,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.90283,
-    "lng": -41.69658,
-    "brightness": 367.0,
-    "frp": 125.76,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -14.42254,
-    "lng": -68.5422,
-    "brightness": 314.14,
-    "frp": 125.28,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.43578,
-    "lng": -42.48346,
-    "brightness": 367.0,
-    "frp": 124.63,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -14.4053,
-    "lng": -68.55233,
-    "brightness": 337.84,
-    "frp": 123.36,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.44269,
-    "lng": -45.39787,
-    "brightness": 367.0,
-    "frp": 120.26,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.43975,
-    "lng": -45.40226,
-    "brightness": 351.63,
-    "frp": 120.26,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.43919,
-    "lng": -45.39835,
-    "brightness": 367.0,
-    "frp": 120.26,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.32642,
-    "lng": -50.68611,
-    "brightness": 338.04,
-    "frp": 119.72,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.32572,
-    "lng": -50.68063,
-    "brightness": 367.0,
-    "frp": 119.72,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.32153,
-    "lng": -50.68673,
-    "brightness": 339.23,
-    "frp": 119.72,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.32083,
-    "lng": -50.68126,
-    "brightness": 348.24,
-    "frp": 119.72,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.26616,
-    "lng": -68.79629,
-    "brightness": 342.56,
-    "frp": 118.79,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.00575,
-    "lng": -78.33979,
-    "brightness": 352.87,
-    "frp": 118.79,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:21:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -20.89256,
-    "lng": -57.9306,
-    "brightness": 351.77,
-    "frp": 118.18,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:13:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.43539,
-    "lng": -45.34719,
-    "brightness": 367.0,
-    "frp": 117.64,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.43483,
-    "lng": -45.34329,
-    "brightness": 348.2,
-    "frp": 117.64,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.4319,
-    "lng": -45.3477,
-    "brightness": 367.0,
-    "frp": 117.64,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -9.97841,
-    "lng": -68.79219,
-    "brightness": 339.48,
-    "frp": 117.55,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.79829,
-    "lng": -74.865,
-    "brightness": 345.75,
-    "frp": 116.78,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.68239,
-    "lng": -43.43011,
-    "brightness": 367.0,
-    "frp": 116.21,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.68186,
-    "lng": -43.42658,
-    "brightness": 367.0,
-    "frp": 116.21,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -13.50858,
-    "lng": -51.85365,
-    "brightness": 367.0,
-    "frp": 116.16,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.78082,
-    "lng": -44.2811,
-    "brightness": 356.09,
-    "frp": 113.71,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.78028,
-    "lng": -44.27758,
-    "brightness": 367.0,
-    "frp": 113.71,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.71648,
-    "lng": -61.23027,
-    "brightness": 351.05,
-    "frp": 113.49,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.71253,
-    "lng": -61.23669,
-    "brightness": 333.85,
-    "frp": 113.49,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.71155,
-    "lng": -61.23113,
-    "brightness": 356.52,
-    "frp": 113.49,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.72804,
-    "lng": -51.55139,
-    "brightness": 342.03,
-    "frp": 111.8,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -3.92225,
-    "lng": -60.55527,
-    "brightness": 355.24,
-    "frp": 111.66,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.54766,
-    "lng": -44.85896,
-    "brightness": 367.0,
-    "frp": 110.04,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": 5.08042,
-    "lng": -70.09198,
-    "brightness": 342.95,
-    "frp": 109.54,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:21:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.70956,
-    "lng": -61.24861,
-    "brightness": 348.26,
-    "frp": 108.25,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.70858,
-    "lng": -61.24306,
-    "brightness": 350.06,
-    "frp": 108.25,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.0529,
-    "lng": -54.14703,
-    "brightness": 367.0,
-    "frp": 107.57,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.04576,
-    "lng": -54.14883,
-    "brightness": 356.6,
-    "frp": 107.57,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.84693,
-    "lng": -46.82029,
-    "brightness": 367.0,
-    "frp": 107.55,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.93593,
-    "lng": -66.27239,
-    "brightness": 335.61,
-    "frp": 106.05,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.18316,
-    "lng": -68.43231,
-    "brightness": 355.98,
-    "frp": 105.8,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.17984,
-    "lng": -68.43283,
-    "brightness": 353.35,
-    "frp": 105.8,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.7172,
-    "lng": -74.8762,
-    "brightness": 355.89,
-    "frp": 105.51,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.15706,
-    "lng": -47.49731,
-    "brightness": 348.26,
-    "frp": 105.48,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.12719,
-    "lng": -48.43436,
-    "brightness": 343.12,
-    "frp": 105.4,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.92959,
-    "lng": -66.25623,
-    "brightness": 340.53,
-    "frp": 105.16,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.33511,
-    "lng": -50.18966,
-    "brightness": 340.61,
-    "frp": 105.02,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -3.44466,
-    "lng": -50.61938,
-    "brightness": 342.04,
-    "frp": 104.95,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -3.44405,
-    "lng": -50.61533,
-    "brightness": 344.18,
-    "frp": 104.95,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -15.54131,
-    "lng": -41.03812,
-    "brightness": 342.3,
-    "frp": 104.56,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -15.53795,
-    "lng": -41.03869,
-    "brightness": 367.0,
-    "frp": 104.56,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -3.92185,
-    "lng": -60.55426,
-    "brightness": 367.0,
-    "frp": 103.38,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.83243,
-    "lng": -72.2746,
-    "brightness": 335.77,
-    "frp": 103.35,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -14.47915,
-    "lng": -67.37821,
-    "brightness": 337.71,
-    "frp": 102.26,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.96172,
-    "lng": -72.52617,
-    "brightness": 340.76,
-    "frp": 101.84,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -17.84116,
-    "lng": -52.03186,
-    "brightness": 367.0,
-    "frp": 101.42,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.3804,
-    "lng": -44.04688,
-    "brightness": 367.0,
-    "frp": 101.22,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.85778,
-    "lng": -70.17091,
-    "brightness": 329.46,
-    "frp": 100.05,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -5.39281,
-    "lng": -42.95123,
-    "brightness": 367.0,
-    "frp": 100.03,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -5.39225,
-    "lng": -42.94761,
-    "brightness": 343.39,
-    "frp": 100.03,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -3.41304,
-    "lng": -60.20067,
-    "brightness": 351.56,
-    "frp": 99.63,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -16.03333,
-    "lng": -52.50866,
-    "brightness": 367.0,
-    "frp": 99.02,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -16.02752,
-    "lng": -52.50916,
-    "brightness": 367.0,
-    "frp": 99.02,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": 4.57895,
-    "lng": -52.42938,
-    "brightness": 336.18,
-    "frp": 98.86,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:41:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.84267,
-    "lng": -44.20591,
-    "brightness": 367.0,
-    "frp": 98.81,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.84212,
-    "lng": -44.20221,
-    "brightness": 339.46,
-    "frp": 98.81,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.65289,
-    "lng": -67.86432,
-    "brightness": 304.3,
-    "frp": 97.89,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": 9.62022,
-    "lng": -63.71962,
-    "brightness": 340.72,
-    "frp": 97.61,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:24:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.19034,
-    "lng": -47.59655,
-    "brightness": 355.51,
-    "frp": 97.51,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -4.26188,
-    "lng": -60.00732,
-    "brightness": 367.0,
-    "frp": 96.17,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.07866,
-    "lng": -74.19353,
-    "brightness": 343.18,
-    "frp": 93.33,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -5.79842,
-    "lng": -43.87423,
-    "brightness": 356.12,
-    "frp": 92.65,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -5.79563,
-    "lng": -43.87822,
-    "brightness": 337.96,
-    "frp": 92.65,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -5.79509,
-    "lng": -43.87474,
-    "brightness": 367.0,
-    "frp": 92.65,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.86068,
-    "lng": -70.16653,
-    "brightness": 342.88,
-    "frp": 92.6,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.58924,
-    "lng": -44.55026,
-    "brightness": 367.0,
-    "frp": 92.17,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -5.82161,
-    "lng": -76.22174,
-    "brightness": 345.52,
-    "frp": 92.08,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.05021,
-    "lng": -54.14189,
-    "brightness": 343.42,
-    "frp": 91.53,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -9.89192,
-    "lng": -48.42359,
-    "brightness": 347.51,
-    "frp": 91.13,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.67667,
-    "lng": -43.45998,
-    "brightness": 367.0,
-    "frp": 91.0,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.67614,
-    "lng": -43.45645,
-    "brightness": 353.45,
-    "frp": 91.0,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.67334,
-    "lng": -43.4605,
-    "brightness": 367.0,
-    "frp": 91.0,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.67281,
-    "lng": -43.45697,
-    "brightness": 367.0,
-    "frp": 91.0,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.04904,
-    "lng": -54.1488,
-    "brightness": 367.0,
-    "frp": 90.52,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.04298,
-    "lng": -54.14934,
-    "brightness": 298.34,
-    "frp": 90.52,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.04243,
-    "lng": -54.14482,
-    "brightness": 367.0,
-    "frp": 90.52,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -17.08415,
-    "lng": -46.17594,
-    "brightness": 294.79,
-    "frp": 90.4,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.0369,
-    "lng": -46.59018,
-    "brightness": 346.41,
-    "frp": 89.95,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.25639,
-    "lng": -55.28714,
-    "brightness": 356.77,
-    "frp": 89.74,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.25507,
-    "lng": -55.28033,
-    "brightness": 367.0,
-    "frp": 89.74,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.24809,
-    "lng": -55.28221,
-    "brightness": 367.0,
-    "frp": 89.74,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.83036,
-    "lng": -71.80034,
-    "brightness": 338.05,
-    "frp": 89.31,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -4.22572,
-    "lng": -63.08028,
-    "brightness": 332.98,
-    "frp": 89.14,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -4.22495,
-    "lng": -63.07548,
-    "brightness": 314.95,
-    "frp": 89.14,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.57629,
-    "lng": -61.16418,
-    "brightness": 353.36,
-    "frp": 89.1,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -14.14075,
-    "lng": -72.10204,
-    "brightness": 351.69,
-    "frp": 88.61,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.12521,
-    "lng": -51.10014,
-    "brightness": 338.19,
-    "frp": 88.31,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.01099,
-    "lng": -78.34144,
-    "brightness": 352.74,
-    "frp": 88.27,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:21:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.01027,
-    "lng": -78.33667,
-    "brightness": 353.32,
-    "frp": 88.27,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:21:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.15644,
-    "lng": -47.49308,
-    "brightness": 348.62,
-    "frp": 88.22,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -9.8156,
-    "lng": -65.00238,
-    "brightness": 345.6,
-    "frp": 87.78,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.93524,
-    "lng": -57.82012,
-    "brightness": 352.97,
-    "frp": 87.64,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.92844,
-    "lng": -57.82112,
-    "brightness": 351.58,
-    "frp": 87.64,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -4.22368,
-    "lng": -63.07669,
-    "brightness": 286.15,
-    "frp": 87.52,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -4.21906,
-    "lng": -63.0774,
-    "brightness": 353.18,
-    "frp": 87.52,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.87557,
-    "lng": -45.18396,
-    "brightness": 330.16,
-    "frp": 87.26,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.03692,
-    "lng": -54.14993,
-    "brightness": 208.0,
-    "frp": 87.14,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.03637,
-    "lng": -54.14543,
-    "brightness": 367.0,
-    "frp": 87.14,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -17.90347,
-    "lng": -65.42144,
-    "brightness": 357.01,
-    "frp": 86.86,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T05:46:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -17.90289,
-    "lng": -65.42503,
-    "brightness": 347.76,
-    "frp": 86.86,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T05:46:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -17.90014,
-    "lng": -65.42085,
-    "brightness": 347.67,
-    "frp": 86.86,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T05:46:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.73123,
-    "lng": -61.25623,
-    "brightness": 352.12,
-    "frp": 86.56,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.72533,
-    "lng": -61.2516,
-    "brightness": 348.78,
-    "frp": 86.56,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.40875,
-    "lng": -76.74635,
-    "brightness": 338.31,
-    "frp": 86.41,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.72635,
-    "lng": -61.22855,
-    "brightness": 335.07,
-    "frp": 86.23,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.7224,
-    "lng": -61.23497,
-    "brightness": 351.5,
-    "frp": 86.23,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.72142,
-    "lng": -61.22941,
-    "brightness": 347.26,
-    "frp": 86.23,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.80015,
-    "lng": -74.86466,
-    "brightness": 345.1,
-    "frp": 86.11,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -15.07003,
-    "lng": -66.89315,
-    "brightness": 338.49,
-    "frp": 85.4,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:15:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.19151,
-    "lng": -70.09026,
-    "brightness": 367.0,
-    "frp": 85.24,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.18816,
-    "lng": -70.09076,
-    "brightness": 347.38,
-    "frp": 85.24,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.69764,
-    "lng": -59.9586,
-    "brightness": 337.53,
-    "frp": 84.64,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.53947,
-    "lng": -69.82735,
-    "brightness": 335.86,
-    "frp": 84.0,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -5.53951,
-    "lng": -45.25069,
+    "lat": -15.5307,
+    "lng": -67.16662,
     "brightness": 367.0,
-    "frp": 83.89,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -5.98332,
-    "lng": -53.59192,
-    "brightness": 332.26,
-    "frp": 83.83,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.87334,
-    "lng": -73.01425,
-    "brightness": 301.24,
-    "frp": 83.77,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.87269,
-    "lng": -73.00973,
-    "brightness": 334.55,
-    "frp": 83.77,
+    "frp": 285.08,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
+    "detected_at": "2026-09-22T17:58:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -14.55916,
-    "lng": -68.68699,
-    "brightness": 354.36,
-    "frp": 83.67,
+    "lat": -15.52625,
+    "lng": -67.16302,
+    "brightness": 347.98,
+    "frp": 285.08,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T17:58:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -8.52867,
-    "lng": -67.00665,
-    "brightness": 343.27,
-    "frp": 83.07,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -34.62384,
-    "lng": -68.18548,
-    "brightness": 303.49,
-    "frp": 83.06,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T05:50:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -34.62047,
-    "lng": -68.18474,
+    "lat": -8.7836,
+    "lng": -45.61773,
     "brightness": 367.0,
-    "frp": 83.06,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T05:50:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.79346,
-    "lng": -69.02199,
-    "brightness": 351.9,
-    "frp": 82.79,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -5.73053,
-    "lng": -49.14825,
-    "brightness": 339.95,
-    "frp": 82.34,
+    "frp": 274.01,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -10.9309,
-    "lng": -75.99499,
-    "brightness": 355.54,
-    "frp": 81.63,
+    "lat": -12.34102,
+    "lng": -50.22185,
+    "brightness": 336.04,
+    "frp": 269.38,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T17:58:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -8.50646,
-    "lng": -47.03267,
-    "brightness": 335.31,
-    "frp": 81.36,
+    "lat": -10.92932,
+    "lng": -68.15623,
+    "brightness": 331.2,
+    "frp": 251.25,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.58105,
-    "lng": -57.67751,
-    "brightness": 339.58,
-    "frp": 80.88,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.58016,
-    "lng": -57.67055,
-    "brightness": 351.65,
-    "frp": 80.88,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.57388,
-    "lng": -57.6784,
+    "lat": -6.89189,
+    "lng": -41.69211,
     "brightness": 367.0,
-    "frp": 80.88,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.91338,
-    "lng": -69.29955,
-    "brightness": 339.18,
-    "frp": 80.76,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -2.00664,
-    "lng": -78.34568,
-    "brightness": 335.91,
-    "frp": 80.11,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:21:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.70828,
-    "lng": -59.00017,
-    "brightness": 349.91,
-    "frp": 79.91,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.70755,
-    "lng": -58.99607,
-    "brightness": 350.49,
-    "frp": 79.91,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -9.76335,
-    "lng": -65.05742,
-    "brightness": 343.3,
-    "frp": 79.77,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -9.75962,
-    "lng": -65.05802,
-    "brightness": 337.75,
-    "frp": 79.77,
+    "frp": 242.87,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T16:20:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.58284,
-    "lng": -57.69157,
+    "lat": -6.89131,
+    "lng": -41.68822,
     "brightness": 367.0,
-    "frp": 79.55,
+    "frp": 242.87,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:20:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.58194,
-    "lng": -57.68454,
-    "brightness": 356.25,
-    "frp": 79.55,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.57567,
-    "lng": -57.69253,
+    "lat": -6.8884,
+    "lng": -41.69267,
     "brightness": 367.0,
-    "frp": 79.55,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.57478,
-    "lng": -57.68546,
-    "brightness": 327.51,
-    "frp": 79.55,
+    "frp": 242.87,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:20:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -2.93259,
-    "lng": -57.80182,
+    "lat": -6.88782,
+    "lng": -41.68878,
     "brightness": 367.0,
-    "frp": 79.5,
+    "frp": 242.87,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
+    "detected_at": "2026-09-22T16:20:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -2.92579,
-    "lng": -57.80278,
-    "brightness": 367.0,
-    "frp": 79.5,
+    "lat": -9.0485,
+    "lng": -65.42152,
+    "brightness": 293.9,
+    "frp": 237.92,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -2.92491,
-    "lng": -57.7967,
-    "brightness": 338.3,
-    "frp": 79.5,
+    "lat": -11.09447,
+    "lng": -68.08282,
+    "brightness": 340.73,
+    "frp": 230.0,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:39:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -6.25073,
-    "lng": -41.65797,
-    "brightness": 367.0,
-    "frp": 79.05,
+    "lat": -11.0906,
+    "lng": -68.08339,
+    "brightness": 341.53,
+    "frp": 230.0,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -6.24721,
-    "lng": -41.65854,
-    "brightness": 367.0,
-    "frp": 79.05,
+    "lat": -6.61933,
+    "lng": -59.96335,
+    "brightness": 345.54,
+    "frp": 209.63,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.56735,
-    "lng": -57.67836,
-    "brightness": 367.0,
-    "frp": 78.93,
+    "lat": -6.61619,
+    "lng": -59.96909,
+    "brightness": 345.59,
+    "frp": 209.63,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -6.19654,
-    "lng": -57.77887,
+    "lat": -6.61535,
+    "lng": -59.96394,
     "brightness": 367.0,
-    "frp": 78.92,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.8486,
-    "lng": -50.15144,
-    "brightness": 345.88,
-    "frp": 78.39,
+    "frp": 209.63,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -10.84462,
-    "lng": -50.15681,
-    "brightness": 299.95,
-    "frp": 78.39,
+    "lat": -5.89548,
+    "lng": -76.34199,
+    "brightness": 336.93,
+    "frp": 209.16,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T18:02:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -10.84399,
-    "lng": -50.15204,
-    "brightness": 367.0,
-    "frp": 78.39,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -13.05015,
-    "lng": -65.19331,
-    "brightness": 335.08,
-    "frp": 78.36,
+    "lat": -10.92613,
+    "lng": -68.16167,
+    "brightness": 286.7,
+    "frp": 206.78,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -13.04947,
-    "lng": -65.18921,
+    "lat": -14.68249,
+    "lng": -45.62531,
     "brightness": 367.0,
-    "frp": 78.36,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -13.04659,
-    "lng": -65.19392,
-    "brightness": 346.29,
-    "frp": 78.36,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.9412,
-    "lng": -71.50503,
-    "brightness": 341.92,
-    "frp": 78.26,
+    "frp": 203.61,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
+    "detected_at": "2026-09-22T16:16:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -12.79224,
-    "lng": -69.88898,
-    "brightness": 355.79,
-    "frp": 78.1,
+    "lat": -14.68183,
+    "lng": -45.61976,
+    "brightness": 353.03,
+    "frp": 203.61,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T16:16:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -12.7917,
-    "lng": -69.88521,
-    "brightness": 337.07,
-    "frp": 78.1,
+    "lat": -14.67752,
+    "lng": -45.62584,
+    "brightness": 349.62,
+    "frp": 203.61,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T16:16:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -12.78882,
-    "lng": -69.88951,
+    "lat": -14.67687,
+    "lng": -45.6203,
     "brightness": 367.0,
-    "frp": 78.1,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.78827,
-    "lng": -69.88573,
-    "brightness": 337.55,
-    "frp": 78.1,
+    "frp": 203.61,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T16:16:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -11.45104,
-    "lng": -43.30779,
+    "lat": -8.43654,
+    "lng": -73.8402,
     "brightness": 349.09,
-    "frp": 78.07,
+    "frp": 202.55,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -11.44771,
-    "lng": -43.30832,
+    "lat": -6.32714,
+    "lng": -78.95251,
     "brightness": 367.0,
-    "frp": 78.07,
+    "frp": 202.28,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "detected_at": "2026-09-22T19:42:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -11.44718,
-    "lng": -43.30479,
-    "brightness": 355.1,
-    "frp": 78.07,
+    "lat": -8.22284,
+    "lng": -62.83778,
+    "brightness": 341.64,
+    "frp": 198.81,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -10.93118,
-    "lng": -75.99755,
-    "brightness": 352.99,
-    "frp": 77.75,
+    "lat": -6.89887,
+    "lng": -41.69103,
+    "brightness": 354.54,
+    "frp": 190.44,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T16:20:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -12.80087,
-    "lng": -44.20474,
+    "lat": -6.89829,
+    "lng": -41.68713,
     "brightness": 367.0,
-    "frp": 77.67,
+    "frp": 190.44,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "detected_at": "2026-09-22T16:20:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -18.79273,
-    "lng": -50.28985,
+    "lat": -6.89538,
+    "lng": -41.69156,
     "brightness": 367.0,
-    "frp": 77.35,
+    "frp": 190.44,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "detected_at": "2026-09-22T16:20:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -5.99655,
-    "lng": -44.72433,
+    "lat": -6.8948,
+    "lng": -41.68767,
     "brightness": 367.0,
-    "frp": 76.32,
+    "frp": 190.44,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:20:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -5.99322,
-    "lng": -44.72483,
+    "lat": -7.47439,
+    "lng": -45.50306,
+    "brightness": 337.65,
+    "frp": 183.91,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:20:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -14.42503,
+    "lng": -41.38264,
     "brightness": 367.0,
-    "frp": 76.32,
+    "frp": 178.83,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:16:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -20.92483,
-    "lng": -57.94079,
-    "brightness": 339.81,
-    "frp": 76.14,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:13:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.89296,
-    "lng": -41.702,
-    "brightness": 355.31,
-    "frp": 75.76,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.88946,
-    "lng": -41.70252,
+    "lat": -9.59876,
+    "lng": -63.91902,
     "brightness": 367.0,
-    "frp": 75.76,
+    "frp": 177.58,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.43504,
-    "lng": -73.52172,
-    "brightness": 333.53,
-    "frp": 75.74,
+    "lat": -9.59822,
+    "lng": -63.91552,
+    "brightness": 345.13,
+    "frp": 177.58,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.57713,
-    "lng": -57.68104,
-    "brightness": 355.79,
-    "frp": 75.59,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.57178,
-    "lng": -57.68702,
-    "brightness": 344.61,
-    "frp": 75.59,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.57089,
-    "lng": -57.68212,
-    "brightness": 340.25,
-    "frp": 75.59,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -5.61181,
-    "lng": -44.8419,
+    "lat": -9.59544,
+    "lng": -63.91954,
     "brightness": 367.0,
-    "frp": 75.19,
+    "frp": 177.58,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -8.60905,
-    "lng": -54.63041,
+    "lat": -9.5949,
+    "lng": -63.91603,
+    "brightness": 344.94,
+    "frp": 177.58,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -8.92574,
+    "lng": -61.4772,
+    "brightness": 340.1,
+    "frp": 177.12,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.04972,
+    "lng": -65.40662,
     "brightness": 367.0,
-    "frp": 74.6,
+    "frp": 175.08,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -8.60845,
-    "lng": -54.62592,
-    "brightness": 340.41,
-    "frp": 74.6,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.29113,
-    "lng": -47.64868,
-    "brightness": 349.11,
-    "frp": 74.56,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.2905,
-    "lng": -47.64436,
-    "brightness": 354.83,
-    "frp": 74.56,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.28744,
-    "lng": -47.64919,
+    "lat": -9.5993,
+    "lng": -63.92252,
     "brightness": 367.0,
-    "frp": 74.56,
+    "frp": 167.19,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -6.28681,
-    "lng": -47.64488,
-    "brightness": 354.1,
-    "frp": 74.56,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.58168,
-    "lng": -57.686,
-    "brightness": 344.64,
-    "frp": 73.72,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.58075,
-    "lng": -57.68112,
+    "lat": -9.59597,
+    "lng": -63.92304,
     "brightness": 367.0,
-    "frp": 73.72,
+    "frp": 167.19,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.57452,
-    "lng": -57.68221,
-    "brightness": 337.6,
-    "frp": 73.72,
+    "lat": -10.00914,
+    "lng": -45.35687,
+    "brightness": 343.88,
+    "frp": 166.26,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -5.91612,
-    "lng": -57.67706,
+    "lat": -10.59403,
+    "lng": -46.71905,
     "brightness": 367.0,
-    "frp": 73.66,
+    "frp": 165.99,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -9.02808,
-    "lng": -69.23101,
-    "brightness": 337.04,
-    "frp": 73.64,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -9.02475,
-    "lng": -69.23152,
+    "lat": -12.09925,
+    "lng": -45.64943,
     "brightness": 367.0,
-    "frp": 73.64,
+    "frp": 162.65,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -6.29905,
-    "lng": -43.78431,
-    "brightness": 354.93,
-    "frp": 73.43,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -6.29572,
-    "lng": -43.78481,
+    "lat": -12.0986,
+    "lng": -45.64417,
     "brightness": 367.0,
-    "frp": 73.43,
+    "frp": 162.65,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -12.54756,
-    "lng": -45.90439,
+    "lat": -12.09446,
+    "lng": -45.65,
+    "brightness": 344.51,
+    "frp": 162.65,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -8.78762,
+    "lng": -45.62035,
+    "brightness": 355.01,
+    "frp": 160.68,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -8.78238,
+    "lng": -45.61606,
+    "brightness": 348.89,
+    "frp": 160.68,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -10.55172,
+    "lng": -43.97199,
+    "brightness": 352.43,
+    "frp": 157.99,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -10.5512,
+    "lng": -43.9682,
+    "brightness": 355.83,
+    "frp": 157.99,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -10.54755,
+    "lng": -43.97258,
     "brightness": 367.0,
-    "frp": 73.16,
+    "frp": 157.99,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -8.63537,
-    "lng": -75.21255,
-    "brightness": 296.71,
-    "frp": 71.77,
+    "lat": -10.54703,
+    "lng": -43.96879,
+    "brightness": 351.82,
+    "frp": 157.99,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.83331,
-    "lng": -72.27501,
-    "brightness": 339.34,
-    "frp": 71.67,
+    "lat": -10.54287,
+    "lng": -43.96939,
+    "brightness": 344.99,
+    "frp": 156.63,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -6.57839,
-    "lng": -78.00912,
+    "lat": -12.09946,
+    "lng": -45.64679,
     "brightness": 367.0,
-    "frp": 71.41,
+    "frp": 156.44,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -6.81728,
-    "lng": -74.866,
-    "brightness": 343.14,
-    "frp": 71.15,
+    "lat": -12.09877,
+    "lng": -45.64157,
+    "brightness": 346.81,
+    "frp": 156.44,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": 5.17246,
-    "lng": -70.1058,
-    "brightness": 342.8,
-    "frp": 71.07,
+    "lat": -12.09467,
+    "lng": -45.64737,
+    "brightness": 350.03,
+    "frp": 156.44,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:21:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -10.2104,
-    "lng": -53.9183,
-    "brightness": 344.61,
-    "frp": 70.95,
+    "lat": -4.66153,
+    "lng": -42.0872,
+    "brightness": 352.6,
+    "frp": 156.13,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:20:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -10.20987,
-    "lng": -53.91413,
+    "lat": -4.65805,
+    "lng": -42.08772,
     "brightness": 367.0,
-    "frp": 70.95,
+    "frp": 156.13,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:20:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -10.27793,
-    "lng": -68.8734,
+    "lat": -14.5989,
+    "lng": -41.59224,
     "brightness": 367.0,
-    "frp": 70.88,
+    "frp": 150.61,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T16:16:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -10.27739,
-    "lng": -68.86989,
-    "brightness": 335.19,
-    "frp": 70.88,
+    "lat": -2.92936,
+    "lng": -57.78261,
+    "brightness": 354.85,
+    "frp": 149.74,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T18:02:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -10.2746,
-    "lng": -68.87391,
-    "brightness": 272.92,
-    "frp": 70.88,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.27407,
-    "lng": -68.8704,
-    "brightness": 335.41,
-    "frp": 70.88,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.43121,
-    "lng": -45.36767,
+    "lat": -8.89387,
+    "lng": -62.37821,
     "brightness": 367.0,
-    "frp": 70.75,
+    "frp": 149.42,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "detected_at": "2026-09-22T18:00:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -11.42828,
-    "lng": -45.3721,
-    "brightness": 354.1,
-    "frp": 70.75,
+    "lat": -5.89416,
+    "lng": -76.33227,
+    "brightness": 349.6,
+    "frp": 148.51,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "detected_at": "2026-09-22T18:02:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -15.4538,
-    "lng": -48.44515,
-    "brightness": 347.66,
-    "frp": 70.66,
+    "lat": -13.2017,
+    "lng": -51.60198,
+    "brightness": 333.84,
+    "frp": 147.78,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.71268,
-    "lng": -73.07533,
-    "brightness": 347.71,
-    "frp": 70.62,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.81855,
-    "lng": -69.47379,
-    "brightness": 349.93,
-    "frp": 70.42,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -12.81463,
-    "lng": -69.47064,
-    "brightness": 330.33,
-    "frp": 70.42,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.828,
-    "lng": -73.39587,
-    "brightness": 348.69,
-    "frp": 70.36,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -7.82416,
-    "lng": -73.39643,
-    "brightness": 337.79,
-    "frp": 70.36,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.78415,
-    "lng": -44.28059,
-    "brightness": 355.26,
-    "frp": 70.12,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -8.78362,
-    "lng": -44.27707,
+    "lat": -13.20101,
+    "lng": -51.59512,
     "brightness": 367.0,
-    "frp": 70.12,
+    "frp": 147.78,
     "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -9.52802,
-    "lng": -75.20299,
-    "brightness": 343.0,
-    "frp": 69.79,
+    "lat": -11.01443,
+    "lng": -49.72364,
+    "brightness": 367.0,
+    "frp": 147.75,
     "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "detected_at": "2026-09-22T16:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -20.89373,
-    "lng": -57.9362,
+    "lat": -5.19699,
+    "lng": -62.57153,
+    "brightness": 349.69,
+    "frp": 147.48,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -11.6715,
+    "lng": -43.46749,
+    "brightness": 367.0,
+    "frp": 146.64,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -11.671,
+    "lng": -43.46381,
+    "brightness": 347.53,
+    "frp": 146.64,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -11.6674,
+    "lng": -43.46805,
+    "brightness": 367.0,
+    "frp": 146.64,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -11.6669,
+    "lng": -43.46437,
+    "brightness": 346.79,
+    "frp": 146.64,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -4.09309,
+    "lng": -62.09321,
+    "brightness": 346.48,
+    "frp": 143.52,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:02:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.6153,
+    "lng": -43.94851,
+    "brightness": 367.0,
+    "frp": 142.08,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.61477,
+    "lng": -43.94482,
+    "brightness": 367.0,
+    "frp": 142.08,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.61119,
+    "lng": -43.94909,
+    "brightness": 367.0,
+    "frp": 142.08,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.61067,
+    "lng": -43.9454,
+    "brightness": 367.0,
+    "frp": 142.08,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -3.15643,
+    "lng": -65.16309,
+    "brightness": 332.21,
+    "frp": 140.62,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:02:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -3.15364,
+    "lng": -65.16705,
+    "brightness": 367.0,
+    "frp": 140.62,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:02:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -3.1531,
+    "lng": -65.16359,
+    "brightness": 335.32,
+    "frp": 140.62,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:02:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -4.16021,
+    "lng": -60.79333,
+    "brightness": 347.28,
+    "frp": 138.53,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:02:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -10.26569,
+    "lng": -50.2046,
+    "brightness": 367.0,
+    "frp": 138.29,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -8.89044,
+    "lng": -62.37875,
+    "brightness": 352.93,
+    "frp": 137.71,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -10.55225,
+    "lng": -43.9758,
+    "brightness": 335.98,
+    "frp": 132.9,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 9.62012,
+    "lng": -63.7211,
+    "brightness": 339.42,
+    "frp": 128.6,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:04:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.61113,
+    "lng": -43.91923,
+    "brightness": 367.0,
+    "frp": 127.32,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.60705,
+    "lng": -43.91989,
+    "brightness": 367.0,
+    "frp": 127.32,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -11.51551,
+    "lng": -69.29936,
+    "brightness": 346.57,
+    "frp": 127.03,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -4.08946,
+    "lng": -62.0938,
+    "brightness": 347.89,
+    "frp": 125.98,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:02:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -3.13087,
+    "lng": -41.71691,
+    "brightness": 336.46,
+    "frp": 125.56,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:20:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -14.42455,
+    "lng": -41.38584,
+    "brightness": 367.0,
+    "frp": 125.29,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:16:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.88433,
+    "lng": -41.68933,
+    "brightness": 345.22,
+    "frp": 125.29,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:20:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.30989,
+    "lng": -60.31305,
+    "brightness": 336.91,
+    "frp": 124.23,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.30915,
+    "lng": -60.30849,
+    "brightness": 348.07,
+    "frp": 124.23,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -12.34648,
+    "lng": -50.21434,
+    "brightness": 367.0,
+    "frp": 122.53,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T17:58:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -12.33974,
+    "lng": -50.21574,
+    "brightness": 367.0,
+    "frp": 122.53,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T17:58:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -12.33846,
+    "lng": -50.20961,
+    "brightness": 367.0,
+    "frp": 122.53,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T17:58:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -7.47339,
+    "lng": -45.49984,
+    "brightness": 307.5,
+    "frp": 119.01,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.95617,
+    "lng": -53.98119,
+    "brightness": 367.0,
+    "frp": 118.56,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T17:58:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.95547,
+    "lng": -53.97747,
+    "brightness": 336.36,
+    "frp": 118.56,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T17:58:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.94984,
+    "lng": -53.97834,
+    "brightness": 367.0,
+    "frp": 118.56,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T17:58:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -14.67257,
+    "lng": -45.62643,
+    "brightness": 367.0,
+    "frp": 118.42,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:16:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -14.67191,
+    "lng": -45.62083,
+    "brightness": 367.0,
+    "frp": 118.42,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:16:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -14.66696,
+    "lng": -45.62142,
+    "brightness": 344.77,
+    "frp": 118.42,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:16:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -11.01377,
+    "lng": -49.7232,
+    "brightness": 367.0,
+    "frp": 117.86,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.74858,
+    "lng": -46.04666,
+    "brightness": 340.33,
+    "frp": 117.83,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -11.0205,
+    "lng": -49.72722,
+    "brightness": 340.32,
+    "frp": 117.8,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -14.69109,
+    "lng": -45.61319,
+    "brightness": 344.03,
+    "frp": 117.77,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:16:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.97317,
+    "lng": -71.75287,
+    "brightness": 351.11,
+    "frp": 115.99,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.9725,
+    "lng": -71.74804,
+    "brightness": 351.18,
+    "frp": 115.99,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.96851,
+    "lng": -71.75348,
+    "brightness": 341.82,
+    "frp": 115.99,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -11.51593,
+    "lng": -69.29927,
+    "brightness": 345.99,
+    "frp": 115.85,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -3.44665,
+    "lng": -60.19156,
+    "brightness": 330.87,
+    "frp": 115.75,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:02:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -13.20628,
+    "lng": -51.61012,
+    "brightness": 333.34,
+    "frp": 115.71,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -13.20556,
+    "lng": -51.60336,
+    "brightness": 277.11,
+    "frp": 115.71,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -10.54347,
+    "lng": -57.44165,
+    "brightness": 342.99,
+    "frp": 114.87,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T17:58:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.79006,
+    "lng": -46.06726,
+    "brightness": 367.0,
+    "frp": 114.82,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.78935,
+    "lng": -46.06211,
+    "brightness": 343.74,
+    "frp": 114.82,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -10.54002,
+    "lng": -57.442,
+    "brightness": 351.91,
+    "frp": 112.16,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T17:58:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -10.57038,
+    "lng": -46.73424,
+    "brightness": 354.54,
+    "frp": 111.92,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -10.56536,
+    "lng": -46.73499,
+    "brightness": 367.0,
+    "frp": 111.92,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -10.56461,
+    "lng": -46.72916,
+    "brightness": 367.0,
+    "frp": 111.92,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.60398,
+    "lng": -43.92774,
+    "brightness": 367.0,
+    "frp": 111.26,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.60347,
+    "lng": -43.92416,
+    "brightness": 367.0,
+    "frp": 111.26,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.5999,
+    "lng": -43.92842,
+    "brightness": 367.0,
+    "frp": 111.26,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.59939,
+    "lng": -43.92486,
+    "brightness": 345.82,
+    "frp": 111.26,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.52806,
+    "lng": -44.89962,
+    "brightness": 345.56,
+    "frp": 109.39,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:20:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.4656,
+    "lng": -59.98536,
+    "brightness": 336.95,
+    "frp": 109.34,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.46248,
+    "lng": -59.99121,
+    "brightness": 367.0,
+    "frp": 109.34,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.46163,
+    "lng": -59.98607,
+    "brightness": 349.81,
+    "frp": 109.34,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -11.68278,
+    "lng": -43.4584,
+    "brightness": 351.81,
+    "frp": 109.29,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -2.00427,
+    "lng": -78.34066,
+    "brightness": 367.0,
+    "frp": 108.6,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T07:01:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -15.5313,
+    "lng": -67.17104,
+    "brightness": 336.49,
+    "frp": 107.03,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T17:58:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.75172,
+    "lng": -63.14077,
+    "brightness": 367.0,
+    "frp": 106.57,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.75115,
+    "lng": -63.13713,
+    "brightness": 336.89,
+    "frp": 106.57,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.74832,
+    "lng": -63.14131,
+    "brightness": 351.96,
+    "frp": 106.57,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -11.68587,
+    "lng": -43.42058,
+    "brightness": 367.0,
+    "frp": 106.52,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -8.23303,
+    "lng": -62.83618,
+    "brightness": 350.29,
+    "frp": 105.78,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -8.22906,
+    "lng": -62.83307,
+    "brightness": 347.33,
+    "frp": 105.78,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -11.6618,
+    "lng": -43.45758,
+    "brightness": 344.52,
+    "frp": 105.65,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.7285,
+    "lng": -59.4375,
+    "brightness": 330.48,
+    "frp": 105.6,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -7.49899,
+    "lng": -63.87688,
+    "brightness": 349.06,
+    "frp": 103.86,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -7.49845,
+    "lng": -63.87337,
+    "brightness": 337.8,
+    "frp": 103.86,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -7.08829,
+    "lng": -77.07019,
+    "brightness": 356.51,
+    "frp": 102.16,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.50862,
+    "lng": -67.11954,
+    "brightness": 281.91,
+    "frp": 101.94,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.5884,
+    "lng": -46.56107,
+    "brightness": 310.65,
+    "frp": 101.63,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -9.58771,
+    "lng": -46.55579,
+    "brightness": 349.3,
+    "frp": 101.63,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T16:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.68485,
+    "lng": -55.07596,
+    "brightness": 208.0,
+    "frp": 100.56,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": -6.68541,
+    "lng": -55.07381,
+    "brightness": 208.0,
+    "frp": 99.82,
+    "country": "Brazil",
+    "detected_at": "2026-09-22T18:00:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 30.22848,
+    "lng": 76.19668,
+    "brightness": 340.79,
+    "frp": 28.31,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 19.37139,
+    "lng": 71.35529,
+    "brightness": 357.36,
+    "frp": 23.7,
+    "country": "India",
+    "detected_at": "2026-09-23T07:39:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 28.3224,
+    "lng": 67.84314,
+    "brightness": 347.23,
+    "frp": 20.47,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T09:24:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 38.05062,
+    "lng": 67.26413,
+    "brightness": 349.94,
+    "frp": 19.37,
+    "country": "India",
+    "detected_at": "2026-09-22T08:05:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 19.36658,
+    "lng": 71.35461,
+    "brightness": 351.34,
+    "frp": 13.94,
+    "country": "India",
+    "detected_at": "2026-09-23T07:39:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.10767,
+    "lng": 72.64611,
+    "brightness": 367.0,
+    "frp": 12.9,
+    "country": "India",
+    "detected_at": "2026-09-23T09:22:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 7.65535,
+    "lng": 81.04329,
+    "brightness": 349.07,
+    "frp": 12.29,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 30.24401,
+    "lng": 67.39128,
+    "brightness": 338.77,
+    "frp": 11.92,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T07:44:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 30.48473,
+    "lng": 73.68171,
+    "brightness": 341.75,
+    "frp": 11.86,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 28.32384,
+    "lng": 67.84344,
+    "brightness": 348.06,
+    "frp": 11.83,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T09:24:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 19.36956,
+    "lng": 71.34779,
+    "brightness": 328.23,
+    "frp": 11.77,
+    "country": "India",
+    "detected_at": "2026-09-23T07:39:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 25.23405,
+    "lng": 97.58522,
+    "brightness": 339.78,
+    "frp": 11.16,
+    "country": "India",
+    "detected_at": "2026-09-22T06:20:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.55172,
+    "lng": 77.81528,
+    "brightness": 350.32,
+    "frp": 10.65,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 25.35482,
+    "lng": 97.29365,
+    "brightness": 341.33,
+    "frp": 9.92,
+    "country": "India",
+    "detected_at": "2026-09-22T06:20:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 7.03032,
+    "lng": 81.6044,
+    "brightness": 352.94,
+    "frp": 9.56,
+    "country": "India",
+    "detected_at": "2026-09-23T07:35:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 27.11756,
+    "lng": 81.2395,
+    "brightness": 349.55,
+    "frp": 9.22,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 30.24679,
+    "lng": 67.39082,
+    "brightness": 349.59,
+    "frp": 8.59,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T07:44:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.02844,
+    "lng": 81.08794,
+    "brightness": 330.3,
+    "frp": 8.55,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 7.36846,
+    "lng": 81.0526,
+    "brightness": 329.73,
+    "frp": 8.31,
+    "country": "India",
+    "detected_at": "2026-09-23T07:35:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 38.05144,
+    "lng": 67.26744,
+    "brightness": 336.12,
+    "frp": 8.24,
+    "country": "India",
+    "detected_at": "2026-09-23T07:46:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 38.05002,
+    "lng": 67.26244,
+    "brightness": 354.23,
+    "frp": 8.15,
+    "country": "India",
+    "detected_at": "2026-09-23T07:46:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 6.70819,
+    "lng": 81.54375,
+    "brightness": 330.18,
+    "frp": 8.11,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 39.40002,
+    "lng": 63.26993,
+    "brightness": 344.84,
+    "frp": 8.03,
+    "country": "India",
+    "detected_at": "2026-09-23T09:26:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 31.79432,
+    "lng": 73.67976,
+    "brightness": 333.72,
+    "frp": 7.82,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.22173,
+    "lng": 80.66302,
+    "brightness": 330.0,
+    "frp": 7.72,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.8697,
+    "lng": 80.79491,
+    "brightness": 336.46,
+    "frp": 7.48,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.68473,
+    "lng": 80.86062,
+    "brightness": 339.02,
+    "frp": 7.15,
+    "country": "India",
+    "detected_at": "2026-09-23T07:37:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.10248,
+    "lng": 72.64541,
+    "brightness": 320.62,
+    "frp": 7.03,
+    "country": "India",
+    "detected_at": "2026-09-22T20:27:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.10729,
+    "lng": 72.64602,
+    "brightness": 341.41,
+    "frp": 7.03,
+    "country": "India",
+    "detected_at": "2026-09-22T20:27:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 29.25152,
+    "lng": 75.70355,
+    "brightness": 346.86,
+    "frp": 7.0,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.10369,
+    "lng": 72.64491,
+    "brightness": 345.87,
+    "frp": 6.98,
+    "country": "India",
+    "detected_at": "2026-09-22T20:27:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.10849,
+    "lng": 72.6455,
+    "brightness": 316.98,
+    "frp": 6.98,
+    "country": "India",
+    "detected_at": "2026-09-22T20:27:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 37.12064,
+    "lng": 62.36446,
+    "brightness": 341.78,
+    "frp": 6.84,
+    "country": "India",
+    "detected_at": "2026-09-22T09:43:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.76989,
+    "lng": 80.84837,
+    "brightness": 329.99,
+    "frp": 6.82,
+    "country": "India",
+    "detected_at": "2026-09-23T07:37:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 39.39919,
+    "lng": 63.27073,
+    "brightness": 344.04,
+    "frp": 6.78,
+    "country": "India",
+    "detected_at": "2026-09-23T07:46:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 23.78018,
+    "lng": 86.21159,
+    "brightness": 341.77,
+    "frp": 6.74,
+    "country": "India",
+    "detected_at": "2026-09-22T08:01:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 22.04179,
+    "lng": 83.72925,
+    "brightness": 329.56,
+    "frp": 6.7,
+    "country": "India",
+    "detected_at": "2026-09-22T08:01:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.53969,
+    "lng": 80.62257,
+    "brightness": 332.83,
+    "frp": 6.69,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 36.99623,
+    "lng": 60.75103,
+    "brightness": 342.3,
+    "frp": 6.62,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T09:43:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 23.80289,
+    "lng": 86.33267,
+    "brightness": 337.64,
+    "frp": 6.61,
+    "country": "India",
+    "detected_at": "2026-09-22T08:01:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 22.49384,
+    "lng": 97.49544,
+    "brightness": 337.34,
+    "frp": 6.59,
+    "country": "India",
+    "detected_at": "2026-09-23T07:39:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 14.86724,
+    "lng": 75.62377,
+    "brightness": 334.3,
+    "frp": 6.56,
+    "country": "India",
+    "detected_at": "2026-09-22T07:58:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 22.05082,
+    "lng": 99.65035,
+    "brightness": 341.97,
+    "frp": 6.22,
+    "country": "India",
+    "detected_at": "2026-09-22T06:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 25.23334,
+    "lng": 68.32078,
+    "brightness": 332.3,
+    "frp": 6.22,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 7.23722,
+    "lng": 81.3497,
+    "brightness": 331.65,
+    "frp": 6.04,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 7.64535,
+    "lng": 81.0276,
+    "brightness": 333.86,
+    "frp": 6.0,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 28.04023,
+    "lng": 74.92174,
+    "brightness": 344.45,
+    "frp": 5.98,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 37.79724,
+    "lng": 63.12551,
+    "brightness": 343.23,
+    "frp": 5.93,
+    "country": "India",
+    "detected_at": "2026-09-22T08:05:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 38.05996,
+    "lng": 61.58853,
+    "brightness": 340.21,
+    "frp": 5.87,
+    "country": "India",
+    "detected_at": "2026-09-23T09:26:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 22.35773,
+    "lng": 82.30088,
+    "brightness": 334.49,
+    "frp": 5.83,
+    "country": "India",
+    "detected_at": "2026-09-22T08:01:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 22.35829,
+    "lng": 82.30475,
+    "brightness": 338.12,
+    "frp": 5.83,
+    "country": "India",
+    "detected_at": "2026-09-22T08:01:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 26.89386,
+    "lng": 68.18821,
+    "brightness": 333.21,
+    "frp": 5.79,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T09:41:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 30.86372,
+    "lng": 72.00377,
+    "brightness": 340.91,
+    "frp": 5.58,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 14.63489,
+    "lng": 75.59111,
+    "brightness": 334.29,
+    "frp": 5.39,
+    "country": "India",
+    "detected_at": "2026-09-22T07:58:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.46197,
+    "lng": 98.24622,
+    "brightness": 327.81,
+    "frp": 5.38,
+    "country": "India",
+    "detected_at": "2026-09-22T06:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 27.24188,
+    "lng": 70.47696,
+    "brightness": 357.8,
+    "frp": 5.37,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T09:22:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.95788,
+    "lng": 80.8327,
+    "brightness": 331.52,
+    "frp": 5.36,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 26.63719,
+    "lng": 72.25947,
+    "brightness": 349.0,
+    "frp": 5.35,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T07:41:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 23.19924,
+    "lng": 69.42709,
+    "brightness": 338.94,
+    "frp": 5.34,
+    "country": "India",
+    "detected_at": "2026-09-22T08:01:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.19812,
+    "lng": 80.69488,
+    "brightness": 330.14,
+    "frp": 5.33,
+    "country": "India",
+    "detected_at": "2026-09-23T07:37:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 39.39924,
+    "lng": 63.26701,
+    "brightness": 343.97,
+    "frp": 5.33,
+    "country": "India",
+    "detected_at": "2026-09-23T09:26:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 27.77869,
+    "lng": 77.67394,
+    "brightness": 341.58,
+    "frp": 5.25,
+    "country": "India",
+    "detected_at": "2026-09-23T07:41:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 27.33532,
+    "lng": 68.48615,
+    "brightness": 342.66,
+    "frp": 5.21,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.10496,
+    "lng": 72.63382,
+    "brightness": 329.1,
+    "frp": 5.2,
+    "country": "India",
+    "detected_at": "2026-09-22T20:27:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.10977,
+    "lng": 72.63442,
+    "brightness": 311.94,
+    "frp": 5.2,
+    "country": "India",
+    "detected_at": "2026-09-22T20:27:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 29.55039,
+    "lng": 68.53275,
+    "brightness": 344.16,
+    "frp": 5.14,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T09:24:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 31.87357,
+    "lng": 74.69193,
+    "brightness": 340.2,
+    "frp": 5.08,
+    "country": "India",
+    "detected_at": "2026-09-23T07:44:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 23.20078,
+    "lng": 69.42857,
+    "brightness": 344.69,
+    "frp": 5.07,
+    "country": "India",
+    "detected_at": "2026-09-22T08:01:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 31.83707,
+    "lng": 74.19294,
+    "brightness": 337.66,
+    "frp": 5.06,
+    "country": "India",
+    "detected_at": "2026-09-23T07:44:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 24.78866,
+    "lng": 99.39507,
+    "brightness": 337.82,
+    "frp": 5.04,
+    "country": "India",
+    "detected_at": "2026-09-22T06:20:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 27.98626,
+    "lng": 68.9976,
+    "brightness": 332.69,
+    "frp": 5.01,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T09:41:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 23.80193,
+    "lng": 86.32452,
+    "brightness": 339.05,
+    "frp": 4.92,
+    "country": "India",
+    "detected_at": "2026-09-22T08:01:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 23.8024,
+    "lng": 86.32857,
+    "brightness": 340.54,
+    "frp": 4.92,
+    "country": "India",
+    "detected_at": "2026-09-22T08:01:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.07158,
+    "lng": 81.05231,
+    "brightness": 331.2,
+    "frp": 4.91,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 39.83881,
+    "lng": 98.36796,
+    "brightness": 345.1,
+    "frp": 4.9,
+    "country": "India",
+    "detected_at": "2026-09-22T06:25:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 26.71939,
+    "lng": 97.65854,
+    "brightness": 336.26,
+    "frp": 4.81,
+    "country": "India",
+    "detected_at": "2026-09-22T06:20:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.67955,
+    "lng": 84.03915,
+    "brightness": 334.13,
+    "frp": 4.78,
+    "country": "India",
+    "detected_at": "2026-09-23T07:39:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 26.88991,
+    "lng": 68.18716,
+    "brightness": 332.22,
+    "frp": 4.75,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T09:41:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 37.78558,
+    "lng": 63.11856,
+    "brightness": 344.23,
+    "frp": 4.71,
+    "country": "India",
+    "detected_at": "2026-09-23T09:26:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 26.89217,
+    "lng": 68.18492,
+    "brightness": 336.39,
+    "frp": 4.68,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 7.88273,
+    "lng": 81.13206,
+    "brightness": 331.58,
+    "frp": 4.65,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 31.28773,
+    "lng": 73.37688,
+    "brightness": 335.51,
+    "frp": 4.65,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 28.05223,
+    "lng": 69.36979,
+    "brightness": 337.47,
+    "frp": 4.64,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 31.00626,
+    "lng": 74.24451,
+    "brightness": 333.72,
+    "frp": 4.6,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.49269,
+    "lng": 80.18095,
+    "brightness": 330.88,
+    "frp": 4.59,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 25.17206,
+    "lng": 67.03979,
+    "brightness": 339.69,
+    "frp": 4.59,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 7.71154,
+    "lng": 80.81905,
+    "brightness": 335.31,
+    "frp": 4.58,
+    "country": "India",
+    "detected_at": "2026-09-23T07:35:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 7.71653,
+    "lng": 80.81819,
+    "brightness": 328.48,
+    "frp": 4.58,
+    "country": "India",
+    "detected_at": "2026-09-23T07:35:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 31.53741,
+    "lng": 74.82207,
+    "brightness": 332.6,
+    "frp": 4.53,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 27.58669,
+    "lng": 77.46663,
+    "brightness": 339.9,
+    "frp": 4.5,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 27.9891,
+    "lng": 68.99803,
+    "brightness": 330.85,
+    "frp": 4.5,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T09:41:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 36.37964,
+    "lng": 61.90511,
+    "brightness": 345.69,
+    "frp": 4.49,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T09:26:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.10051,
+    "lng": 72.63617,
+    "brightness": 333.75,
+    "frp": 4.46,
+    "country": "India",
+    "detected_at": "2026-09-23T09:22:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 23.46351,
+    "lng": 99.55732,
+    "brightness": 340.26,
+    "frp": 4.41,
+    "country": "India",
+    "detected_at": "2026-09-22T06:18:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 24.17286,
+    "lng": 99.39139,
+    "brightness": 332.96,
+    "frp": 4.38,
+    "country": "India",
+    "detected_at": "2026-09-22T06:20:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 28.08182,
+    "lng": 77.72206,
+    "brightness": 339.87,
+    "frp": 4.38,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 38.3408,
+    "lng": 69.91518,
+    "brightness": 341.39,
+    "frp": 4.37,
+    "country": "India",
+    "detected_at": "2026-09-22T08:05:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.17802,
+    "lng": 80.62557,
+    "brightness": 335.98,
+    "frp": 4.29,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 28.63658,
+    "lng": 78.55211,
+    "brightness": 338.31,
+    "frp": 4.28,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 26.12201,
+    "lng": 68.94447,
+    "brightness": 334.26,
+    "frp": 4.27,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T07:41:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 28.05377,
+    "lng": 69.37,
+    "brightness": 334.71,
+    "frp": 4.25,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T09:24:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 29.13253,
+    "lng": 75.77234,
+    "brightness": 334.64,
+    "frp": 4.2,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.0028,
+    "lng": 81.44696,
+    "brightness": 336.59,
+    "frp": 4.18,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 9.46286,
+    "lng": 80.46727,
+    "brightness": 331.92,
+    "frp": 4.18,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 28.1074,
+    "lng": 77.62468,
+    "brightness": 334.0,
+    "frp": 4.15,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 37.17966,
+    "lng": 60.91852,
+    "brightness": 340.02,
+    "frp": 4.11,
+    "country": "India",
+    "detected_at": "2026-09-22T08:05:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 37.18581,
+    "lng": 60.91564,
+    "brightness": 331.4,
+    "frp": 4.11,
+    "country": "India",
+    "detected_at": "2026-09-22T08:05:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 27.58412,
+    "lng": 69.36333,
+    "brightness": 350.55,
+    "frp": 4.08,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 30.86281,
+    "lng": 71.99939,
+    "brightness": 330.56,
+    "frp": 4.01,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 37.78413,
+    "lng": 63.11719,
+    "brightness": 343.74,
+    "frp": 3.97,
+    "country": "India",
+    "detected_at": "2026-09-23T09:26:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.6728,
+    "lng": 84.04043,
+    "brightness": 329.34,
+    "frp": 3.89,
+    "country": "India",
+    "detected_at": "2026-09-23T07:39:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 28.92355,
+    "lng": 79.84691,
+    "brightness": 330.51,
+    "frp": 3.88,
+    "country": "India",
+    "detected_at": "2026-09-23T07:41:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 31.0038,
+    "lng": 74.24319,
+    "brightness": 334.4,
+    "frp": 3.82,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 31.00747,
+    "lng": 74.24226,
+    "brightness": 331.45,
+    "frp": 3.82,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 26.42662,
+    "lng": 80.35898,
+    "brightness": 344.56,
+    "frp": 3.8,
+    "country": "India",
+    "detected_at": "2026-09-22T08:01:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 37.78934,
+    "lng": 62.53794,
+    "brightness": 339.32,
+    "frp": 3.76,
+    "country": "India",
+    "detected_at": "2026-09-23T09:26:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 39.58848,
+    "lng": 99.74755,
+    "brightness": 343.95,
+    "frp": 3.69,
+    "country": "India",
+    "detected_at": "2026-09-22T06:22:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 37.1182,
+    "lng": 62.36153,
+    "brightness": 329.58,
+    "frp": 3.66,
+    "country": "India",
+    "detected_at": "2026-09-22T22:05:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 37.12161,
+    "lng": 62.3625,
+    "brightness": 309.79,
+    "frp": 3.66,
+    "country": "India",
+    "detected_at": "2026-09-22T22:05:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 8.12842,
+    "lng": 80.99175,
+    "brightness": 333.74,
+    "frp": 3.64,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 37.17952,
+    "lng": 60.92047,
+    "brightness": 330.89,
+    "frp": 3.64,
+    "country": "India",
+    "detected_at": "2026-09-22T08:05:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 37.18567,
+    "lng": 60.91756,
+    "brightness": 330.87,
+    "frp": 3.64,
+    "country": "India",
+    "detected_at": "2026-09-22T08:05:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 24.54708,
+    "lng": 99.34248,
+    "brightness": 341.16,
+    "frp": 3.62,
+    "country": "India",
+    "detected_at": "2026-09-22T06:20:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 24.55127,
+    "lng": 99.34162,
+    "brightness": 335.81,
+    "frp": 3.62,
+    "country": "India",
+    "detected_at": "2026-09-22T06:20:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 38.52357,
+    "lng": 68.60125,
+    "brightness": 331.68,
+    "frp": 3.59,
+    "country": "India",
+    "detected_at": "2026-09-23T07:46:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 31.84063,
+    "lng": 74.64835,
+    "brightness": 333.51,
+    "frp": 3.58,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 33.79535,
+    "lng": 74.92694,
+    "brightness": 325.33,
+    "frp": 3.56,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T07:44:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 30.99695,
+    "lng": 74.21501,
+    "brightness": 334.6,
+    "frp": 3.52,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 39.93352,
+    "lng": 98.98074,
+    "brightness": 341.02,
+    "frp": 3.5,
+    "country": "India",
+    "detected_at": "2026-09-22T06:25:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 31.74397,
+    "lng": 72.28693,
+    "brightness": 334.9,
+    "frp": 3.49,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T08:03:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.10367,
+    "lng": 72.63429,
+    "brightness": 332.03,
+    "frp": 3.45,
+    "country": "India",
+    "detected_at": "2026-09-22T20:27:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 21.10849,
+    "lng": 72.63493,
+    "brightness": 306.75,
+    "frp": 3.45,
+    "country": "India",
+    "detected_at": "2026-09-22T20:27:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 30.57632,
+    "lng": 76.99915,
+    "brightness": 336.76,
+    "frp": 3.45,
+    "country": "India",
+    "detected_at": "2026-09-23T07:44:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 31.10258,
+    "lng": 74.63383,
+    "brightness": 330.08,
+    "frp": 3.44,
+    "country": "India",
+    "detected_at": "2026-09-23T07:44:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 6.91941,
+    "lng": 81.64185,
+    "brightness": 338.3,
+    "frp": 3.39,
+    "country": "India",
+    "detected_at": "2026-09-23T07:35:00Z",
+    "satellite": "VIIRS"
+  },
+  {
+    "lat": 23.1648,
+    "lng": 82.34029,
     "brightness": 330.31,
-    "frp": 69.39,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:13:00Z",
+    "frp": 3.28,
+    "country": "India",
+    "detected_at": "2026-09-22T08:01:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -17.91297,
-    "lng": -65.48714,
-    "brightness": 354.35,
-    "frp": 69.25,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:15:00Z",
+    "lat": 28.18199,
+    "lng": 67.76538,
+    "brightness": 336.3,
+    "frp": 3.24,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T08:03:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -20.85045,
-    "lng": -59.88195,
-    "brightness": 344.96,
-    "frp": 69.18,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T05:46:00Z",
+    "lat": 31.28872,
+    "lng": 73.37511,
+    "brightness": 336.23,
+    "frp": 3.24,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -11.68001,
-    "lng": -43.45947,
-    "brightness": 332.51,
-    "frp": 69.15,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "lat": 9.12537,
+    "lng": 77.64301,
+    "brightness": 335.21,
+    "frp": 3.18,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -11.67947,
-    "lng": -43.45593,
-    "brightness": 367.0,
-    "frp": 69.15,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "lat": 31.79421,
+    "lng": 74.94135,
+    "brightness": 335.93,
+    "frp": 3.13,
+    "country": "India",
+    "detected_at": "2026-09-22T08:03:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -18.87635,
-    "lng": -47.04538,
-    "brightness": 353.59,
-    "frp": 69.03,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "lat": 28.05321,
+    "lng": 69.37051,
+    "brightness": 340.59,
+    "frp": 3.13,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T09:24:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -14.86014,
-    "lng": -66.62743,
-    "brightness": 367.0,
-    "frp": 68.98,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:15:00Z",
+    "lat": 8.34913,
+    "lng": 80.69286,
+    "brightness": 331.38,
+    "frp": 3.11,
+    "country": "India",
+    "detected_at": "2026-09-22T07:56:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -14.85679,
-    "lng": -66.628,
-    "brightness": 341.68,
-    "frp": 68.98,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:15:00Z",
+    "lat": 8.21114,
+    "lng": 80.05256,
+    "brightness": 334.35,
+    "frp": 3.08,
+    "country": "India",
+    "detected_at": "2026-09-23T07:37:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.56393,
-    "lng": -70.20652,
-    "brightness": 342.05,
-    "frp": 68.89,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
+    "lat": 37.03411,
+    "lng": 62.41821,
+    "brightness": 327.1,
+    "frp": 3.06,
+    "country": "India",
+    "detected_at": "2026-09-22T22:05:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -2.93922,
-    "lng": -42.863,
-    "brightness": 348.8,
-    "frp": 68.86,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:37:00Z",
+    "lat": 26.358,
+    "lng": 70.7627,
+    "brightness": 337.26,
+    "frp": 3.04,
+    "country": "Pakistan",
+    "detected_at": "2026-09-23T09:22:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.21173,
-    "lng": -76.77547,
-    "brightness": 341.95,
-    "frp": 68.81,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
+    "lat": 28.18563,
+    "lng": 67.76842,
+    "brightness": 335.12,
+    "frp": 3.03,
+    "country": "Pakistan",
+    "detected_at": "2026-09-22T08:03:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -7.21116,
-    "lng": -76.77134,
-    "brightness": 340.52,
-    "frp": 68.81,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:19:00Z",
+    "lat": 39.93272,
+    "lng": 98.97607,
+    "brightness": 339.48,
+    "frp": 3.02,
+    "country": "India",
+    "detected_at": "2026-09-22T06:25:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -11.44213,
-    "lng": -45.39396,
-    "brightness": 354.53,
-    "frp": 68.47,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "lat": 22.89583,
+    "lng": 99.3989,
+    "brightness": 329.96,
+    "frp": 2.98,
+    "country": "India",
+    "detected_at": "2026-09-22T06:18:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -11.44156,
-    "lng": -45.39006,
-    "brightness": 353.31,
-    "frp": 68.47,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
+    "lat": 39.81287,
+    "lng": 96.88205,
+    "brightness": 333.3,
+    "frp": 2.98,
+    "country": "India",
+    "detected_at": "2026-09-22T06:25:00Z",
     "satellite": "VIIRS"
   },
   {
-    "lat": -11.43863,
-    "lng": -45.39445,
-    "brightness": 367.0,
-    "frp": 68.47,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -11.43807,
-    "lng": -45.39055,
-    "brightness": 346.69,
-    "frp": 68.47,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T16:35:00Z",
-    "satellite": "VIIRS"
-  },
-  {
-    "lat": -10.56342,
-    "lng": -68.30991,
-    "brightness": 334.54,
-    "frp": 68.42,
-    "country": "Brazil",
-    "detected_at": "2026-09-21T18:17:00Z",
+    "lat": 8.20128,
+    "lng": 80.97897,
+    "brightness": 333.66,
+    "frp": 2.96,
+    "country": "India",
+    "detected_at": "2026-09-23T07:37:00Z",
     "satellite": "VIIRS"
   }
 ]

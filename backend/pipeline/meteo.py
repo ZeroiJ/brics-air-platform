@@ -59,10 +59,16 @@ async def fetch_meteo_all() -> list[MeteoData]:
             return_exceptions=True,
         )
     rows: list[MeteoData] = []
+    live_count = 0
     for c, res in zip(BRICS_CITIES, results):
-        rows.append(res if isinstance(res, MeteoData) else fallback_city(c["city"]))
-    # Only cache if at least one live reading succeeded; simplest: cache always
-    save_cache(rows)
+        if isinstance(res, MeteoData):
+            rows.append(res)
+            live_count += 1
+        else:
+            rows.append(fallback_city(c["city"]))
+    # Never overwrite a good live snapshot with all-fallback data
+    if live_count:
+        save_cache(rows)
     return rows
 
 

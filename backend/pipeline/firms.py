@@ -79,18 +79,22 @@ def fetch_fires(limit: int = 300) -> list[FireHotspot]:
     key = os.getenv("FIRMS_API_KEY", "").strip()
     if not key:
         raise RuntimeError("FIRMS_API_KEY not set")
+    # Per-region quota: South America returns 5k-12k rows, so a global top-N by
+    # FRP would evict every South Asian hotspot (Punjab crop-burning belt) and
+    # the cross-border demo could never trigger. Cap each region separately.
+    per_region = max(1, limit // 2)
     hotspots: list[FireHotspot] = []
     for _name, bbox in BBOXES.items():
         resp = requests.get(_bbox_url(key, bbox), timeout=TIMEOUT)
         resp.raise_for_status()
         if resp.text.strip().startswith(("Invalid", "Error", "<")):
             continue
-        hotspots.extend(_parse_csv(resp.text))
-    # Highest FRP first (most relevant for demo), cap volume
-    hotspots.sort(key=lambda h: h.frp, reverse=True)
-    hotspots = hotspots[:limit]
+        rows = _parse_csv(resp.text)
+        rows.sort(key=lambda h: h.frp, reverse=True)
+        hotspots.extend(rows[:per_region])
     if not hotspots:
         raise ValueError("FIRMS returned zero hotspots")
+    hotspots.sort(key=lambda h: h.frp, reverse=True)
     save_cache(hotspots)
     return hotspots
 
