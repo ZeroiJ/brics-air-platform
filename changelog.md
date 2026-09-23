@@ -101,6 +101,11 @@ Changelog updated.
 - **Docs** — `docs/PS_COVERAGE.md`: PS requirement → endpoint → UI matrix. All requirements ✅ **except federation/model-sharing (❌ gap)**.
 - Pushed `ae4dff9` → Render auto-deploy.
 
+### 23 Sep 2026 — Demo-critical data bug fixed (Sujal)
+- **FIRMS regional starvation:** `fetch_fires` took a global top-300 by FRP. South America returns 5k–12k rows/2 days, so the snapshot was 100% Brazilian and **zero Punjab-belt fires survived** — the headline cross-border scenario could never trigger. Now a per-region quota (150 South Asia + 150 South America). Verified: 150 South Asian hotspots, 21 in the Punjab belt (max FRP 28.3 MW).
+- **Meteo cache poisoning:** `fetch_meteo_all` saved cache even when every city fell back, overwriting a good live snapshot with fallback rows (observed on Render). Now only saves when ≥1 live fetch succeeds.
+- **Prod verified after deploy (`6aed343`):** `/api/crossborder` → 2 events — *Punjab burning belt → Delhi, NW→SE, 286 km, high* + *Amazon basin → São Paulo, 2435 km, moderate*; Delhi forecast 287 → 6h 300 / 24h 315, spike warning citing real nearby fires. Deployed smoke **15/15**.
+
 ## Sarthak — Gemini AI
 
 ### 20 Sep 2026 — All 5 Gemini modules written, Module 1 live end-to-end
