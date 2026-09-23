@@ -81,6 +81,26 @@ Changelog updated.
 - **Production sweep: 15/15 PASS** against `https://brics-air-backend.onrender.com` (TestClient → real network hits). Live state on Render: FIRMS `live`, meteo `live`, sensors `live`, openaq `cached`, waqi `cached`, gemini `fallback` (key not set on Render yet), `overall: ok`.
 - **Key action for Sujal:** set `GEMINI_API_KEY` (dedicated deploy key) in the backend's Render Environment tab → Gemini goes live on prod. OpenAQ/WAQI keys optional (fallback fine).
 
+### 23 Sep 2026 — Demo widgets built + performance fixed (Sujal)
+**Audit finding:** the merged frontend was a *reference* build — rows 2–3 were placeholder cards ("ENDPOINT /api/fires" etc). Live demo showed only 3 cards. PS requirements 2–7 were absent from the UI.
+
+- **Frontend (`app.py`)** — replaced all 6 placeholders with real widgets:
+  - **Live Map** — Folium (CartoDB dark): fire hotspots as red circles (radius/opacity scaled by FRP), BRICS city markers colored by AQI, wind-vector polyline at the selected city (direction corrected FROM→transport TO), hyper-local citizen sensors as grey dots, layer control
+  - **Cross-Border Alerts** — real event cards (source→affected, cause, countries, direction, km, severity, evidence); graceful empty state
+  - **BRICS Comparison** — Plotly PM2.5 bar chart, per-bar AQI colors, red dashed **WHO 15 µg/m³** guideline line, theme-matched axes
+  - **Multilingual Alerts** — authority card (target + urgency) + Hindi / Portuguese / English columns from `/api/alerts`
+  - **Citizen Photo Intake** — file uploader → POST `/api/analyze-photo` (city form field) → severity/type/visibility/advice card
+  - **Hyper-Local Sensors** — count + peak PM2.5 + top-8 table per country (`CITY_COUNTRY` map)
+  - Sidebar DATA SOURCES now driven by `/api/status` (live/cached/fallback per source + AI state)
+- **Backend perf** — dashboard load was doing ~8 redundant upstream fetches (FIRMS 11k-row CSV = 26s):
+  - in-process **TTL cache** (`_memo`, 120s AQI/meteo/sensors, 60s fires) → warm load 0.03s
+  - **stale-while-revalidate** for FIRMS: serve committed snapshot instantly, refresh in background (verified: FRP 330→452 after refresh)
+  - Open-Meteo 5 cities now fetched concurrently
+  - **Cold full load 27.8s → 2.6s**; slowest single call 1.7s
+- **Verification** — headless AppTest against live backend: 0 exceptions; all 8 themes render; all 5 cities switch (0.4–1.7s); REFRESH button works; file uploader present; all 9 content checks OK. `verify_frontend.py` timeout 40→120s.
+- **Docs** — `docs/PS_COVERAGE.md`: PS requirement → endpoint → UI matrix. All requirements ✅ **except federation/model-sharing (❌ gap)**.
+- Pushed `ae4dff9` → Render auto-deploy.
+
 ## Sarthak — Gemini AI
 
 ### 20 Sep 2026 — All 5 Gemini modules written, Module 1 live end-to-end
