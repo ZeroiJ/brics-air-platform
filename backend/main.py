@@ -133,6 +133,58 @@ app.add_middleware(
 # /api/forecast + /api/crossborder + /api/fires all re-hit FIRMS concurrently.
 _MEM: dict[str, tuple[float, object]] = {}
 
+# ---------------------------------------------------------------------------
+# Gemini circuit breaker + response cache.
+# Free-tier quota exhaustion (HTTP 429) otherwise costs 17-33s per panel while
+# tenacity retries with backoff — a visible stall during judging. After
+# _GEM_FAIL_THRESHOLD failures we stop calling Gemini for _GEM_COOLDOWN seconds
+# and serve the rule-based fallbacks (and cached Gemini answers) instantly.
+# ---------------------------------------------------------------------------
+_GEM_FAIL_STREAK = 0
+_GEM_OPENED_AT = 0.0
+_GEM_FAIL_THRESHOLD = 2
+_GEM_COOLDOWN = 300.0
+_GEM_CACHE_TTL = 600.0
+
+
+def _gem_circuit_open() -> bool:
+    return (_GEM_FAIL_STREAK >= _GEM_FAIL_THRESHOLD
+            and (time.time() - _GEM_OPENED_AT) < _GEM_COOLDOWN)
+
+
+def _gem_note(success: bool) -> None:
+    global _GEM_FAIL_STREAK, _GEM_OPENED_AT
+    if success:
+        _GEM_FAIL_STREAK = 0
+        return
+    _GEM_FAIL_STREAK += 1
+    if _GEM_FAIL_STREAK >= _GEM_FAIL_THRESHOLD:
+        _GEM_OPENED_AT = time.time()
+
+
+async def _gem_call(key: str, module, fn_name: str, *args):
+    """Call a Gemini module fn with caching + circuit breaker. Returns None on failure."""
+    if not _gemini_available or module is None:
+        return None
+    hit = _MEM.get(f"ai:{key}")
+    if hit is not None and (time.time() - hit[0]) < _GEM_CACHE_TTL:
+        return hit[1]
+    if _gem_circuit_open():
+        return None
+    fn = getattr(module, fn_name, None)
+    if fn is None:
+        return None
+    try:
+        result = fn(*args)
+        if asyncio.iscoroutine(result):
+            result = await result
+        _gem_note(True)
+        _MEM[f"ai:{key}"] = (time.time(), result)
+        return result
+    except Exception:
+        _gem_note(False)
+        return None
+
 
 async def _memo(key: str, factory, ttl: float = 120.0):
     now = time.time()
@@ -484,14 +536,9 @@ async def api_sensors(country: str | None = Query(default=None)):
 async def api_analysis(city: str = Query(...)):
     reading = await get_aqi_city(city)
     meteo = await get_meteo_city(reading.city)
-    if gem_aqi is not None and _gemini_available:
-        try:
-            result = gem_aqi.analyze_aqi(reading, meteo)  # type: ignore[attr-defined]
-            if asyncio.iscoroutine(result):
-                result = await result
-            return result
-        except Exception:
-            pass
+    result = await _gem_call(f"analysis:{reading.city}:{reading.aqi}", gem_aqi, "analyze_aqi", reading, meteo)
+    if result is not None:
+        return result
     fires = await get_fires()
     return rule_analysis(reading, meteo, fires)
 
@@ -501,28 +548,19 @@ async def api_forecast(city: str = Query(...)):
     reading = await get_aqi_city(city)
     meteo = await get_meteo_city(reading.city)
     fires = await get_fires()
-    if gem_forecast is not None and _gemini_available:
-        try:
-            result = gem_forecast.forecast_aqi(reading, meteo, fires)  # type: ignore[attr-defined]
-            if asyncio.iscoroutine(result):
-                result = await result
-            return result
-        except Exception:
-            pass
+    result = await _gem_call(f"forecast:{reading.city}:{reading.aqi}", gem_forecast, "forecast_aqi", reading, meteo, fires)
+    if result is not None:
+        return result
     return rule_forecast(reading, meteo, fires)
 
 
 @app.get("/api/crossborder", response_model=list[GeminiCrossBorderEvent])
 async def api_crossborder():
     readings, fires, meteos = await asyncio.gather(get_aqi_all(), get_fires(), get_meteo_all())
-    if gem_cross is not None and _gemini_available:
-        try:
-            result = gem_cross.detect_crossborder(readings, fires, meteos)  # type: ignore[attr-defined]
-            if asyncio.iscoroutine(result):
-                result = await result
-            return result
-        except Exception:
-            pass
+    sig = f"{len(fires)}:{len(readings)}"
+    result = await _gem_call(f"crossborder:{sig}", gem_cross, "detect_crossborder", readings, fires, meteos)
+    if result is not None:
+        return result
     return rule_crossborder(readings, fires, meteos)
 
 
@@ -531,26 +569,14 @@ async def api_alerts(city: str = Query(...)):
     reading = await get_aqi_city(city)
     meteo = await get_meteo_city(reading.city)
     fires = await get_fires()
-    analysis = rule_analysis(reading, meteo, fires)
-    # Prefer Gemini analysis when available
-    if gem_aqi is not None and _gemini_available:
-        try:
-            r = gem_aqi.analyze_aqi(reading, meteo)  # type: ignore[attr-defined]
-            if asyncio.iscoroutine(r):
-                r = await r
-            analysis = r
-        except Exception:
-            pass
+    analysis = await _gem_call(f"analysis:{reading.city}:{reading.aqi}", gem_aqi, "analyze_aqi", reading, meteo)
+    if analysis is None:
+        analysis = rule_analysis(reading, meteo, fires)
     events = rule_crossborder([reading], fires, [meteo])
     event = events[0] if events else None
-    if gem_alerts is not None and _gemini_available:
-        try:
-            r = gem_alerts.generate_alert(analysis, event)  # type: ignore[attr-defined]
-            if asyncio.iscoroutine(r):
-                r = await r
-            return r
-        except Exception:
-            pass
+    result = await _gem_call(f"alert:{reading.city}:{reading.aqi}", gem_alerts, "generate_alert", analysis, event)
+    if result is not None:
+        return result
     return rule_alert(analysis, event)
 
 
@@ -564,14 +590,9 @@ async def api_analyze_photo(
         return JSONResponse(status_code=400, content={"detail": "Empty file"})
     b64 = base64.b64encode(content).decode()
     photo = CitizenPhoto(city=city, image_base64=b64, uploaded_at=utcnow())
-    if gem_photo is not None and _gemini_available:
-        try:
-            r = gem_photo.analyze_photo(photo)  # type: ignore[attr-defined]
-            if asyncio.iscoroutine(r):
-                r = await r
-            return r
-        except Exception:
-            pass
+    result = await _gem_call(f"photo:{city}:{len(content)}", gem_photo, "analyze_photo", photo)
+    if result is not None:
+        return result
     # Rule-based placeholder (valid schema, honest low confidence)
     kb = len(content) / 1024
     return GeminiPhotoResult(
