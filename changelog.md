@@ -106,6 +106,16 @@ Changelog updated.
 - **Meteo cache poisoning:** `fetch_meteo_all` saved cache even when every city fell back, overwriting a good live snapshot with fallback rows (observed on Render). Now only saves when ≥1 live fetch succeeds.
 - **Prod verified after deploy (`6aed343`):** `/api/crossborder` → 2 events — *Punjab burning belt → Delhi, NW→SE, 286 km, high* + *Amazon basin → São Paulo, 2435 km, moderate*; Delhi forecast 287 → 6h 300 / 24h 315, spike warning citing real nearby fires. Deployed smoke **15/15**.
 
+### 24 Sep 2026 — All sources live + Gemini resilience (Sujal)
+- **Merged Sarthak's fork** (`0c4f401`): OpenAQ v3 was silently failing on 2 real bugs — `radius=50000` exceeds the v3 cap of 25000 (422), and `/latest` rows carry no `parameter` field, so PM2.5 never matched and every city fell back to mock. Fix maps `sensorsId→parameter` via the location-detail endpoint. **Verified live: 5/5 cities now real OpenAQ** (Delhi 467, Mumbai 68, São Paulo 72, Beijing 78, Johannesburg 127). Also merged WAQI backup-routing fix + 30s AQI fetch budget.
+- **All 5 data layers now LIVE on prod:** openaq/firms/waqi/meteo/sensors = `live`, gemini = `live` (was `fallback` since day 1).
+- **Gemini quota hazard fixed.** Measured: with the daily free-tier quota exhausted (HTTP 429), every AI panel took **17–33s** while tenacity retried with backoff — a visible stall for judges. Added to `main.py`:
+  - **circuit breaker** — after 2 consecutive Gemini failures, stop calling for 300s and serve rule-based fallbacks instantly
+  - **AI response cache** (600s TTL) keyed on city+AQI, so repeat views cost nothing
+  - verified: first pass trips the breaker, all subsequent panels **0.0s**, 15/15 smoke + 8/8 themes still green
+- Local `.env` updated with the 3 new keys (gitignored, verified ignored). Render Environment still needs `GEMINI_API_KEY`, `OPENAQ_API_KEY`, `WAQI_TOKEN` added manually by Sujal.
+- Pushed `55b75e1`.
+
 ## Sarthak — Gemini AI
 
 ### 20 Sep 2026 — All 5 Gemini modules written, Module 1 live end-to-end
