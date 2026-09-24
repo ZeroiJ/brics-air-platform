@@ -46,10 +46,15 @@ def _headers() -> dict:
 
 
 async def _latest_for_coords(client: httpx.AsyncClient, lat: float, lng: float) -> dict:
-    """Return {pm25, pm10, no2, so2} from nearest OpenAQ location."""
+    """Return {pm25, pm10, no2, so2} from nearest OpenAQ location.
+
+    v3 /latest rows carry no parameter name, so map each row's sensorsId to a
+    parameter via the location detail (one extra request per location).
+    The newest-utc value wins per parameter (some stations' 'latest' is stale).
+    """
     loc_resp = await client.get(
         f"{BASE_URL}/locations",
-        params={"coordinates": f"{lat},{lng}", "radius": 50000, "limit": 5},
+        params={"coordinates": f"{lat},{lng}", "radius": 25000, "limit": 5},
     )
     loc_resp.raise_for_status()
     locations = loc_resp.json().get("results", [])
@@ -57,29 +62,47 @@ async def _latest_for_coords(client: httpx.AsyncClient, lat: float, lng: float) 
         raise ValueError("No OpenAQ locations nearby")
 
     merged: dict = {}
+    best_stamp: dict[str, str] = {}
     for loc in locations[:3]:
         loc_id = loc.get("id")
         if loc_id is None:
             continue
         try:
-            s_resp = await client.get(
-                f"{BASE_URL}/locations/{loc_id}/latest",
-            )
+            # sensor id -> parameter name for this location
+            param_by_sensor: dict[int, str] = {}
+            detail = await client.get(f"{BASE_URL}/locations/{loc_id}")
+            if detail.status_code == 200:
+                detail_loc = (detail.json().get("results") or [{}])[0]
+                for sens in detail_loc.get("sensors") or []:
+                    sid = sens.get("id")
+                    pn = sens.get("parameter")
+                    pname = (pn.get("name") if isinstance(pn, dict) else pn or "")
+                    if sid is not None and pname:
+                        param_by_sensor[sid] = str(pname).lower()
+            s_resp = await client.get(f"{BASE_URL}/locations/{loc_id}/latest")
             if s_resp.status_code != 200:
                 continue
             for row in s_resp.json().get("results", []):
-                param = (row.get("parameter") or "").lower()
-                val = (row.get("measurements") or [{}])[0].get("value") if row.get("measurements") else row.get("value")
+                param = param_by_sensor.get(row.get("sensorsId"))
+                if not param:
+                    continue
+                val = row.get("value")
                 if val is None:
                     continue
-                if param in ("pm25", "pm2.5") and "pm25" not in merged:
-                    merged["pm25"] = float(val)
-                elif param == "pm10" and "pm10" not in merged:
-                    merged["pm10"] = float(val)
-                elif param == "no2" and "no2" not in merged:
-                    merged["no2"] = float(val)
-                elif param == "so2" and "so2" not in merged:
-                    merged["so2"] = float(val)
+                if param in ("pm25", "pm2.5"):
+                    key = "pm25"
+                elif param == "pm10":
+                    key = "pm10"
+                elif param == "no2":
+                    key = "no2"
+                elif param == "so2":
+                    key = "so2"
+                else:
+                    continue
+                stamp = str((row.get("datetime") or {}).get("utc") or "")
+                if key not in merged or stamp > best_stamp.get(key, ""):
+                    merged[key] = float(val)
+                    best_stamp[key] = stamp
         except Exception:
             continue
         if "pm25" in merged and "pm10" in merged:

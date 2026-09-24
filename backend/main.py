@@ -150,20 +150,22 @@ async def _with_timeout(coro, seconds: float = 12.0):
 
 async def _fetch_aqi_all() -> list[AQIReading]:
     try:
-        return await _with_timeout(openaq_mod.fetch_aqi_all())
+        return await _with_timeout(openaq_mod.fetch_aqi_all(), seconds=30.0)
     except Exception:
         pass
+    # WAQI live backup first when a token is set: openaq.load_cache() never
+    # returns empty (it falls back to mock), so WAQI was previously unreachable.
+    if waqi_mod is not None and os.getenv("WAQI_TOKEN", "").strip():
+        try:
+            return await _with_timeout(waqi_mod.fetch_all_waqi())
+        except Exception:
+            pass
     try:
         cached = openaq_mod.load_cache()
         if cached:
             return cached
     except Exception:
         pass
-    if waqi_mod is not None:
-        try:
-            return await _with_timeout(waqi_mod.fetch_all_waqi())
-        except Exception:
-            pass
     return openaq_mod.fallback()
 
 
