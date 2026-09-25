@@ -38,7 +38,9 @@ SYSTEM_PROMPT = (
     "public broadcast. urgency: 'immediate' for Very Poor/Severe, 'advisory' "
     "for Poor, 'watch' for Good/Moderate. Return structured JSON exactly "
     "matching the schema — the three message_* fields must be the SAME alert "
-    "in each language."
+    "in each language. The message_hindi field must be written ENTIRELY in the "
+    "Devanagari script (हिन्दी लिपि) — no Latin/English words or sentences; "
+    "only unavoidable units such as PM2.5, N95 and AQI may remain in Latin."
 )
 
 
@@ -63,7 +65,7 @@ Likely sources: {', '.join(analysis.likely_sources)}
 Cross-border information: {cross_txt}
 
 Write the alert message in THREE languages (same meaning, natural in each):
-1. Hindi — for Indian authorities and citizens
+1. Hindi — for Indian authorities and citizens (must be full Devanagari script)
 2. Portuguese — for Brazilian authorities and citizens
 3. English — for international coordination
 

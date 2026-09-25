@@ -474,10 +474,25 @@ def rule_crossborder(
 def rule_alert(analysis: GeminiAQIAnalysis, event: GeminiCrossBorderEvent | None) -> AlertMessage:
     src = f" Cross-border source: {event.source_cause} in {event.source_city}." if event else ""
     en = f"{analysis.city} AQI alert — {analysis.risk_level} ({analysis.primary_pollutant}). {analysis.health_advisory}{src}"
+    _ADV_HI = {
+        "Severe": "यह स्थिति अत्यंत गंभीर है — घर के अंदर ही रहें, बाहर निकलने से बचें और अधिकारियों के निर्देशों का पालन करें",
+        "Very Poor": "वायु गुणवत्ता बहुत खराब है — घर के अंदर रहें और बाहर जाने से बचें",
+        "Poor": "वायु गुणवत्ता खराब है — सावधानी बरतें और बाहरी गतिविधि सीमित करें",
+        "Moderate": "वायु गुणवत्ता मध्यम है — संवेदनशील लोग सावधानी बरतें",
+        "Good": "वायु गुणवत्ता अच्छी है",
+    }
+    _CB_HI = {
+        "crop burning": "फसल अवशेष जलाना",
+        "wildfire": "जंगल की आग",
+        "industrial": "औद्योगिक उत्सर्जन",
+        "dust storm": "धूल भरी आंधी",
+    }
     hi = (
-        f"{analysis.city} वायु गुणवत्ता चेतावनी — {analysis.risk_level} ({analysis.primary_pollutant})। "
-        f"{analysis.health_advisory}{(' सीमा-पार स्रोत: ' + event.source_cause + ', ' + event.source_city + '।') if event else ''} "
-        f"कृपया मास्क पहनें और अनावश्यक बाहर निकलने से बचें।"
+        f"{analysis.city} वायु गुणवत्ता चेतावनी — {analysis.risk_level} "
+        f"({analysis.primary_pollutant})। "
+        f"{_ADV_HI.get(analysis.risk_level, analysis.health_advisory)}"
+        + (f" सीमा-पार स्रोत: {_CB_HI.get(event.source_cause, event.source_cause)}, {event.source_city}।" if event else "")
+        + " कृपया मास्क पहनें और अनावश्यक बाहर निकलने से बचें।"
     )
     pt = (
         f"Alerta de qualidade do ar em {analysis.city} — {analysis.risk_level} ({analysis.primary_pollutant}). "
@@ -595,13 +610,18 @@ async def api_analyze_photo(
         return result
     # Rule-based placeholder (valid schema, honest low confidence)
     kb = len(content) / 1024
+    vision_note = (
+        "unknown — Gemini vision unavailable (API quota exhausted or circuit open)"
+        if bool(os.getenv("GEMINI_API_KEY", "").strip())
+        else "unknown — connect GEMINI_API_KEY for vision analysis"
+    )
     return GeminiPhotoResult(
         pollution_visible=True,
         pollution_type="haze/smoke (unverified — Gemini Vision pending)",
         estimated_aqi_category="Poor",
         visibility_km=round(max(0.5, 5.0 - min(kb / 500, 4.0)), 1),
         severity_score=6,
-        likely_source="unknown — connect GEMINI_API_KEY for vision analysis",
+        likely_source=vision_note,
         recommendation="Limit outdoor activity until verified analysis is available.",
         confidence=0.25,
     )

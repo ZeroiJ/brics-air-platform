@@ -43,7 +43,10 @@ import requests
 import streamlit as st
 
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000").rstrip("/")
-REQ_TIMEOUT = (3.0, 10.0)  # (connect, read) seconds
+REQ_TIMEOUT = (5.0, 300.0)  # (connect, read) seconds — 300s read so cold Gemini
+# routes (real generation is 17-60s+, up to 180s worst case) finish instead of
+# aborting at 10s into "NO DATA / AI ENGINE NOT REACHABLE" and dropping the
+# connection mid-request (which kills the dev uvicorn accept loop on Windows).
 CACHE_TTL = 60
 
 FALLBACK_CITIES = ["Delhi", "Mumbai", "São Paulo", "Beijing", "Johannesburg"]
@@ -206,6 +209,17 @@ h2 {
   padding-top: .85rem;
   margin-top: 1.9rem !important;
 }
+h3 {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.15rem !important;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  padding: 0 0 .8rem;
+  margin: 2.6rem 0 1.3rem !important;
+}
 [data-testid="stCaptionContainer"] {
   font-family: var(--font-mono);
   font-size: .76rem;
@@ -318,11 +332,11 @@ code, pre {
   border: 1px solid var(--border);
   border-top: 2px solid var(--cat, var(--border));
   border-radius: 12px;
-  padding: 20px 22px 18px;
+  padding: 24px 26px 22px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 9px;
   box-shadow: var(--shadow);
   animation: riseIn .5s cubic-bezier(.2,.7,.3,1) both;
 }
@@ -399,23 +413,76 @@ code, pre {
   color: var(--text-dim);
 }
 
+/* inline danger badge — sits beside a section header (e.g. cross-border flag) */
+.xb-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: .6rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent-brick);
+  background: rgba(199, 111, 100, .10);
+  border: 1px solid rgba(199, 111, 100, .35);
+  border-radius: 4px;
+  padding: 2px 9px 3px;
+  margin-left: 10px;
+  vertical-align: 3px;
+  white-space: nowrap;
+}
+
+/* multilingual alert rows — one hairline-separated row per language */
+.lang-row {
+  display: flex;
+  gap: 14px;
+  padding: 10px 0 11px;
+  border-top: 1px solid var(--border);
+}
+.lang-tag {
+  flex: 0 0 92px;
+  font-family: var(--font-mono);
+  font-size: .62rem;
+  letter-spacing: .16em;
+  color: var(--text-faint);
+  padding-top: 2px;
+}
+.lang-body {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  line-height: 1.55;
+  color: var(--text-soft);
+  word-break: break-word;
+}
+
+/* the BRICS chart renders as its own compact panel card */
+[data-testid="stPlotlyChart"] {
+  background: linear-gradient(180deg, var(--bg-elevated), var(--bg-panel));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  max-height: 480px;
+  box-sizing: border-box;
+}
+
 .card-grid3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin: 6px 0 8px;
+  gap: 26px;
+  margin: 16px 0 24px;
 }
 .row-2col {
   display: grid;
   grid-template-columns: 3fr 2fr;
-  gap: 14px;
-  margin: 6px 0 8px;
+  gap: 26px;
+  margin: 16px 0 24px;
 }
 .row-2eq {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin: 6px 0 8px;
+  gap: 26px;
+  margin: 16px 0 24px;
 }
 @media (max-width: 900px) {
   .card-grid3, .row-2col, .row-2eq { grid-template-columns: 1fr; }
@@ -642,10 +709,18 @@ st.sidebar.caption("BACKGROUND THEME · APPLIES INSTANTLY")
 # ---------------------------------------------------------------------------
 # Row 1 — three balanced cards: CURRENT AQI / RISK / 24H OUTLOOK
 # ---------------------------------------------------------------------------
-st.subheader(f"CURRENT AIR QUALITY — {city}")
-
 analysis = fetch_analysis(city)
 forecast = fetch_forecast(city)
+
+_badge = (
+    '<span class="xb-badge">CROSS-BORDER CONTRIBUTION SUSPECTED</span>'
+    if analysis and analysis.get("cross_border_suspected")
+    else ""
+)
+st.markdown(
+    f'<h3>CURRENT AIR QUALITY — {city} {_badge}</h3>',
+    unsafe_allow_html=True,
+)
 
 # --- card 1: current AQI -------------------------------------------------
 if reading is not None:
@@ -684,11 +759,6 @@ if analysis:
         f'<div class="sub">AI CONFIDENCE {conf:.0f}%</div>'
         f'<div class="meta">SOURCES: {src_line}</div></div>'
     )
-    if analysis.get("cross_border_suspected"):
-        card_risk += (
-            '<div class="notice" style="--cat:var(--accent-brick);margin-top:10px;">'
-            'CROSS-BORDER CONTRIBUTION SUSPECTED</div>'
-        )
 else:
     risk = risk_from_aqi(reading.get("aqi", 0)) if reading else "Unknown"
     card_risk = (
@@ -748,7 +818,18 @@ with st.container():
         import folium
         from folium.plugins import MarkerCluster
 
-        fmap = folium.Map(location=center, zoom_start=4, tiles="CartoDB dark_matter")
+        # Key-free dark tiles (Esri World Dark Gray). CartoDB dark_matter now
+        # requires an API key; override via MAP_TILES env var if you have one.
+        map_url = os.getenv(
+            "MAP_TILES",
+            "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/"
+            "World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+        )
+        fmap = folium.Map(
+            location=center, zoom_start=4,
+            tiles=map_url,
+            attr="Esri, HERE, Garmin, © OpenStreetMap contributors, and the GIS User Community",
+        )
         # fire hotspots (red, opacity scaled by FRP)
         fg = folium.FeatureGroup(name=f"Fire hotspots ({len(fires)})")
         for f in fires:
@@ -833,68 +914,75 @@ with st.container():
                 unsafe_allow_html=True,
             )
 
-# --- BRICS Comparison chart (plotly, WHO guideline line) -------------------
-chart_col, alert_col = st.columns([1, 1], gap="medium")
+# --- BRICS Comparison chart (plotly, WHO guideline line) — full width -------
+import plotly.graph_objects as go
 
-# --- BRICS Comparison chart (plotly, WHO guideline line) -------------------
-with chart_col:
-    import plotly.graph_objects as go
+names = [r.get("city", "?") for r in readings]
+pm25_vals = [float(r.get("pm25") or 0) for r in readings]
+bar_colors = [style_for_aqi(int(r.get("aqi") or 0))["hex"] for r in readings]
+th = THEMES[active_theme]
+fig = go.Figure()
+fig.add_trace(go.Bar(
+    x=names, y=pm25_vals,
+    marker=dict(color=bar_colors, cornerradius=6, line=dict(width=0)),
+    text=[f"{v:.0f}" for v in pm25_vals], textposition="outside",
+    textfont=dict(family="JetBrains Mono, monospace", size=10, color=th["text-soft"]),
+    hovertemplate="%{x}<br>PM2.5 %{y:.1f} µg/m³<extra></extra>"))
+fig.add_hline(
+    y=15, line_color="#e24a33", line_dash="dash", line_width=1.4,
+    annotation_text="WHO 24h · 15", annotation_position="top right",
+    annotation_font=dict(family="JetBrains Mono, monospace", size=9, color="#e24a33"),
+)
+fig.update_layout(
+    title=dict(
+        text="PM2.5 (µg/m³) vs WHO 24H GUIDELINE · BRICS CITIES",
+        font=dict(family="JetBrains Mono, monospace", size=10.5, color=th["text-soft"]),
+        x=0.02, xanchor="left",
+    ),
+    margin=dict(l=2, r=12, t=46, b=8), height=420, showlegend=False,
+    paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+    font=dict(family="JetBrains Mono, monospace", size=10.5, color=th["text-dim"]),
+    bargap=0.5,
+    xaxis=dict(color=th["text-faint"]),
+    yaxis=dict(gridcolor=th["border"], zeroline=False, tickcolor=th["border"]),
+    hoverlabel=dict(bgcolor=th["bg-elevated"], bordercolor=th["border"],
+                    font=dict(family="JetBrains Mono, monospace", size=10, color=th["text"])),
+)
+try:
+    st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+except TypeError:  # older streamlit
+    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
-    names = [r.get("city", "?") for r in readings]
-    pm25_vals = [float(r.get("pm25") or 0) for r in readings]
-    bar_colors = [style_for_aqi(int(r.get("aqi") or 0))["hex"] for r in readings]
-    fig = go.Figure()
-    fig.add_trace(go.Bar(
-        x=names, y=pm25_vals, marker_color=bar_colors,
-        text=[f"{v:.0f}" for v in pm25_vals], textposition="outside",
-        hovertemplate="%{x}<br>PM2.5 %{y:.1f} µg/m³<extra></extra>"))
-    fig.add_hline(y=15, line_color="#e24a33", line_dash="dash",
-                  annotation_text="WHO 24h guideline 15 µg/m³", annotation_position="top left")
-    th = THEMES[active_theme]
-    fig.update_layout(
-        margin=dict(l=8, r=8, t=34, b=8), height=300, showlegend=False,
-        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(family="JetBrains Mono, monospace", size=11, color=th["text-dim"]),
-        title=dict(text="REAL-TIME PM2.5 vs WHO GUIDELINE", font=dict(size=12, color=th["text-soft"])),
-        yaxis=dict(gridcolor=th["border"], zeroline=False, title="µg/m³"),
+# --- Multilingual alerts (Hindi / Portuguese / English) — full width --------
+alert = fetch_alerts(city)
+if alert:
+    urg = str(alert.get("urgency", "watch")).lower()
+    urg_color = {"immediate": "#e24a33", "advisory": "#c9a86a"}.get(urg, "#86b88f")
+    _langs = (
+        ("HINDI", alert.get("message_hindi", "—")),
+        ("PORTUGUESE", alert.get("message_portuguese", "—")),
+        ("ENGLISH", alert.get("message_english", "—")),
     )
-    try:
-        st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
-    except TypeError:  # older streamlit
-        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
-
-# --- Multilingual alerts (Hindi / Portuguese / English) --------------------
-with alert_col:
-    alert = fetch_alerts(city)
-    if alert:
-        urg = str(alert.get("urgency", "watch")).lower()
-        urg_color = {"immediate": "#e24a33", "advisory": "#c9a86a"}.get(urg, "#86b88f")
-        st.markdown(
-            f'<div class="card" style="--cat:{urg_color};margin-bottom:8px;">'
-            f'<div class="eyebrow">Authority Alert · {urg.upper()}</div>'
-            f'<div class="med" style="font-size:1.2rem;">{alert.get("city", city)} — '
-            f'{alert.get("risk_level", "?")}</div>'
-            f'<div class="meta">TARGET: {alert.get("target_authority", "—")}</div></div>',
-            unsafe_allow_html=True,
-        )
-        c1, c2, c3 = st.columns(3)
-        for col, (label, key) in zip(
-            (c1, c2, c3),
-            (("HINDI", "message_hindi"), ("PORTUGUESE", "message_portuguese"), ("ENGLISH", "message_english")),
-        ):
-            with col:
-                st.markdown(
-                    f'<div class="eyebrow" style="margin-bottom:4px;">{label}</div>'
-                    f'<div class="sub" style="font-size:.74rem;line-height:1.5;">'
-                    f'{alert.get(key, "—")}</div>',
-                    unsafe_allow_html=True,
-                )
-    else:
-        st.markdown(
-            '<div class="card"><div class="eyebrow">Multilingual Alerts</div>'
-            '<div class="sub">Alert service unavailable — backend offline.</div></div>',
-            unsafe_allow_html=True,
-        )
+    _rows = "".join(
+        f'<div class="lang-row"><div class="lang-tag">{tag}</div>'
+        f'<div class="lang-body">{text}</div></div>'
+        for tag, text in _langs
+    )
+    st.markdown(
+        f'<div class="card" style="--cat:{urg_color};margin-bottom:22px;">'
+        f'<div class="eyebrow">Authority Alert · {urg.upper()}</div>'
+        f'<div class="med" style="font-size:1.2rem;">{alert.get("city", city)} — '
+        f'{alert.get("risk_level", "?")}</div>'
+        f'{_rows}'
+        f'<div class="meta">TARGET: {alert.get("target_authority", "—")}</div></div>',
+        unsafe_allow_html=True,
+    )
+else:
+    st.markdown(
+        '<div class="card"><div class="eyebrow">Multilingual Alerts</div>'
+        '<div class="sub">Alert service unavailable — backend offline.</div></div>',
+        unsafe_allow_html=True,
+    )
 
 # --- Citizen Photo Intake + Hyper-Local Sensors -----------------------------
 photo_col, sensor_col = st.columns([1, 1], gap="medium")
