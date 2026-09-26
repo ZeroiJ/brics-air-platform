@@ -116,6 +116,18 @@ Changelog updated.
 - Local `.env` updated with the 3 new keys (gitignored, verified ignored). Render Environment still needs `GEMINI_API_KEY`, `OPENAQ_API_KEY`, `WAQI_TOKEN` added manually by Sujal.
 - Pushed `55b75e1`.
 
+### 26 Sep 2026 — Keys verified, Sarthak's Track 2 work integrated (Sujal)
+- **Verified all 3 new keys locally** (`.env`, gitignored): Gemini `…Ky-KnuKk…` → `KEY_OK` against `gemini-3.6-flash`; OpenAQ → 5/5 cities live; WAQI token `demo` valid.
+- **Quota reality confirmed:** free-tier `generate_content` is exhausted today (HTTP 429, `generate_content_free_tier_requests`) — account-level, resets midnight Pacific. This is *exactly* the case the circuit breaker exists for: measured all AI panels returning **instantly** with honest Devanagari rule-based fallbacks, no 17–33s stalls, 15/15 smoke + 8/8 themes green.
+- **Reviewed + merged Sarthak's `9b32924`** (dashboard polish + Devanagari multilingual alerts) — fast-forward, no conflicts. Review findings:
+  - `rule_alert` Hindi template now uses proper Devanagari risk advisories (`_ADV_HI`) and translated cross-border causes (`_CB_HI`) instead of embedding the English advisory in a Hindi sentence.
+  - `alerts.py` system prompt now pins `message_hindi` to full Devanagari script (units PM2.5/N95/AQI may stay Latin) — closes the half-English-Hindi failure mode judges would notice.
+  - Photo fallback wording is honest about *why* ("Gemini vision unavailable — API quota exhausted or circuit open") instead of implying the key was never configured.
+  - **Critical fix in `frontend/app.py`:** frontend read timeout 10s → **300s**. Real Gemini generations take 17–60s (up to 180s), so the old 10s timeout aborted mid-request and rendered "NO DATA / AI ENGINE NOT REACHABLE" exactly when AI was working. This alone would have failed the demo.
+  - Verified all 6 widgets survived the polish (folium map, crossborder cards, alerts, uploader, plotly + WHO line).
+- Pushed: `9b32924` (his commit, now main) → `aad20c6` (cache refresh).
+- **Pending on Sujal:** paste the 3 keys into Render `brics-air-backend` → Environment (prod still reports `gemini: fallback` until then).
+
 ## Sarthak — Gemini AI
 
 ### 20 Sep 2026 — All 5 Gemini modules written, Module 1 live end-to-end
