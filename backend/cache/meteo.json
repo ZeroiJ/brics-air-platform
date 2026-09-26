@@ -3,55 +3,55 @@
     "lat": 28.6139,
     "lng": 77.209,
     "city": "Delhi",
-    "wind_speed_kmh": 9.3,
-    "wind_direction_deg": 114.0,
-    "wind_direction_label": "SE",
-    "temperature_c": 29.7,
-    "humidity_pct": 67.0,
-    "timestamp": "2026-09-24T14:25:57.228162Z"
+    "wind_speed_kmh": 2.6,
+    "wind_direction_deg": 344.0,
+    "wind_direction_label": "N",
+    "temperature_c": 23.8,
+    "humidity_pct": 78.0,
+    "timestamp": "2026-09-26T13:53:37.211345Z"
   },
   {
     "lat": 19.076,
     "lng": 72.8777,
     "city": "Mumbai",
-    "wind_speed_kmh": 7.1,
-    "wind_direction_deg": 308.0,
-    "wind_direction_label": "NW",
-    "temperature_c": 27.9,
-    "humidity_pct": 88.0,
-    "timestamp": "2026-09-24T14:25:57.250278Z"
+    "wind_speed_kmh": 8.8,
+    "wind_direction_deg": 259.0,
+    "wind_direction_label": "W",
+    "temperature_c": 28.0,
+    "humidity_pct": 78.0,
+    "timestamp": "2026-09-26T13:53:37.216064Z"
   },
   {
     "lat": -23.5505,
     "lng": -46.6333,
     "city": "S\u00e3o Paulo",
-    "wind_speed_kmh": 7.6,
-    "wind_direction_deg": 105.0,
-    "wind_direction_label": "E",
-    "temperature_c": 18.1,
-    "humidity_pct": 74.0,
-    "timestamp": "2026-09-24T14:25:57.220368Z"
+    "wind_speed_kmh": 1.2,
+    "wind_direction_deg": 153.0,
+    "wind_direction_label": "SE",
+    "temperature_c": 26.6,
+    "humidity_pct": 60.0,
+    "timestamp": "2026-09-26T13:53:37.194412Z"
   },
   {
     "lat": 39.9042,
     "lng": 116.4074,
     "city": "Beijing",
-    "wind_speed_kmh": 3.8,
-    "wind_direction_deg": 11.0,
-    "wind_direction_label": "N",
-    "temperature_c": 19.8,
-    "humidity_pct": 83.0,
-    "timestamp": "2026-09-24T14:25:57.235249Z"
+    "wind_speed_kmh": 4.5,
+    "wind_direction_deg": 85.0,
+    "wind_direction_label": "E",
+    "temperature_c": 18.4,
+    "humidity_pct": 96.0,
+    "timestamp": "2026-09-26T13:53:37.188242Z"
   },
   {
     "lat": -26.2041,
     "lng": 28.0473,
     "city": "Johannesburg",
-    "wind_speed_kmh": 13.3,
-    "wind_direction_deg": 182.0,
-    "wind_direction_label": "S",
-    "temperature_c": 24.6,
-    "humidity_pct": 28.0,
-    "timestamp": "2026-09-24T14:25:57.221674Z"
+    "wind_speed_kmh": 18.5,
+    "wind_direction_deg": 339.0,
+    "wind_direction_label": "N",
+    "temperature_c": 24.3,
+    "humidity_pct": 33.0,
+    "timestamp": "2026-09-26T13:53:37.224537Z"
   }
 ]
