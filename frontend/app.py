@@ -643,24 +643,9 @@ st.markdown(f"<style>{APP_CSS}\n{_theme_override}</style>", unsafe_allow_html=Tr
 st.title("BRICS Climate Intelligence Platform")
 st.caption("TRACK 2 · CLEAN AIR & CLIMATE RESILIENCE")
 
-meta = fetch_meta()
-backend_ok = "service" in meta
-gemini_live = bool(meta.get("gemini_live"))
-
-if backend_ok:
-    st.markdown(
-        f'<div class="notice">BACKEND CONNECTED &nbsp;·&nbsp; <code>{BACKEND_URL}</code>'
-        f"&nbsp;·&nbsp; OWNER: {meta.get('owner', '?')}"
-        f"&nbsp;·&nbsp; AI: {'GEMINI LIVE' if gemini_live else 'RULE-BASED FALLBACK'}</div>",
-        unsafe_allow_html=True,
-    )
-else:
-    st.markdown(
-        f'<div class="notice" style="--cat:var(--accent-amber);">'
-        f"BACKEND UNREACHABLE AT <code>{BACKEND_URL}</code> — OFFLINE MOCK MODE "
-        f"(LAYOUT PREVIEW ONLY)</div>",
-        unsafe_allow_html=True,
-    )
+# The connectivity banner is rendered at the BOTTOM of the page (see
+# "Backend connectivity" above the footer) — it is diagnostic chrome, not
+# content, and at the top it pushed the dashboard itself below the fold.
 
 # ---------------------------------------------------------------------------
 # Sidebar
@@ -1161,6 +1146,30 @@ else:
     st.markdown(
         '<div class="card"><div class="eyebrow">Federation / Model Exchange</div>'
         '<div class="sub">Model-exchange registry unavailable — backend offline.</div></div>',
+        unsafe_allow_html=True,
+    )
+
+# --- Backend connectivity (moved here from the top of the page) -------------
+# Kept verbatim, just relocated: the live form is useful evidence for judges
+# ("our AI is actually connected"), but as a banner under the title it pushed
+# the dashboard below the fold. The offline form still names the URL, which is
+# what makes a BACKEND_URL misconfiguration diagnosable.
+meta = fetch_meta()
+backend_ok = "service" in meta
+gemini_live = bool(meta.get("gemini_live"))
+
+if backend_ok:
+    st.markdown(
+        f'<div class="notice">BACKEND CONNECTED &nbsp;·&nbsp; <code>{BACKEND_URL}</code>'
+        f"&nbsp;·&nbsp; OWNER: {meta.get('owner', '?')}"
+        f"&nbsp;·&nbsp; AI: {'GEMINI LIVE' if gemini_live else 'RULE-BASED FALLBACK'}</div>",
+        unsafe_allow_html=True,
+    )
+else:
+    st.markdown(
+        f'<div class="notice" style="--cat:var(--accent-amber);">'
+        f"BACKEND UNREACHABLE AT <code>{BACKEND_URL}</code> — OFFLINE MOCK MODE "
+        f"(LAYOUT PREVIEW ONLY)</div>",
         unsafe_allow_html=True,
     )
 
