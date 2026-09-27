@@ -38,8 +38,12 @@ services:
     healthCheckPath: /_stcore/health
     autoDeploy: true
     envVars:
+      # NOTE: do NOT replace this with `fromService: {property: hostport}`.
+      # Render's FREE tier has no private networking, so the internal hostname
+      # it yields ("brics-air-backend:10800") never resolves from the frontend
+      # container — the dashboard silently drops to offline mock mode. Worse,
+      # `fromService` is re-synced from this blueprint on EVERY deploy, which
+      # reverts any manual correction made in the dashboard. Hardcode the public
+      # URL (work-division.md -> Deployment -> Frontend).
       - key: BACKEND_URL
-        fromService:
-          type: web
-          name: brics-air-backend
-          property: hostport   # internal URL: http://brics-air-backend:8000
+        value: https://brics-air-backend.onrender.com

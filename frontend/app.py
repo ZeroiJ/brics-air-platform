@@ -42,7 +42,20 @@ from datetime import datetime, timezone
 import requests
 import streamlit as st
 
-BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000").rstrip("/")
+BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000").strip().rstrip("/")
+if not BACKEND_URL:
+    BACKEND_URL = "http://localhost:8000"
+if "://" not in BACKEND_URL:
+    # A scheme-less value is not parseable by requests and fails instantly.
+    # Render's `fromService: hostport` produces exactly this shape
+    # ("brics-air-backend:10800"). Anything with a dot in the host is a real
+    # public DNS name, so default those to https; bare names stay http.
+    host = BACKEND_URL.split(":")[0]
+    BACKEND_URL = f"https://{BACKEND_URL}" if "." in host else f"http://{BACKEND_URL}"
+# Echo the resolved value into the service log. Without this, a wrong BACKEND_URL
+# is only visible in the rendered page, which is exactly how the demo build lost
+# a day to offline mock mode with no clue in the logs.
+print(f"[startup] BACKEND_URL resolved to: {BACKEND_URL}", flush=True)
 REQ_TIMEOUT = (5.0, 300.0)  # (connect, read) seconds — 300s read so cold Gemini
 # routes (real generation is 17-60s+, up to 180s worst case) finish instead of
 # aborting at 10s into "NO DATA / AI ENGINE NOT REACHABLE" and dropping the

@@ -68,6 +68,20 @@ python scripts/smoke_test.py --base-url https://<backend>.onrender.com   # expec
 
 > **Port note:** Render injects the `PORT` env var — always bind with `$PORT`,
 > never a hardcoded `8000`/`8501`. Locally you keep using `--port 8000`.
+>
+> ### ⚠️ BACKEND_URL on the frontend (the bug that cost us a day)
+> The frontend service needs `BACKEND_URL=https://brics-air-backend.onrender.com`
+> — the **public** URL. It does **not** come from `fromService: hostport`.
+>
+> - Render **free tier has no private networking**, so the internal hostname that
+>   `hostport` yields (`brics-air-backend:10800`) never resolves from the frontend
+>   container. The dashboard drops to "OFFLINE MOCK MODE" and every panel shows
+>   NO DATA, with no error anywhere.
+> - `fromService` is re-synced from `render.yaml` on **every deploy**, so editing
+>   the value by hand in the dashboard works — right up until the next deploy
+>   silently reverts it. Fix it in `render.yaml`, not in the dashboard.
+> - `frontend/app.py` prints the resolved `BACKEND_URL` to the service log on
+>   startup. **Check that line first** if the dashboard ever looks empty.
 
 > ### Gemini quota (read before demo day)
 > Free tier is **~20 generations/day per Google account** — not per key, not per

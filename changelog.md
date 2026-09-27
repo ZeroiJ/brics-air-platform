@@ -134,6 +134,14 @@ Changelog updated.
 - Real token verified: all 5 BRICS cities return genuine per-city readings from correct stations (Delhi 10 · Mumbai 158 · São Paulo 74 · Beijing 35 · Johannesburg 116). Guard test passes, full smoke 15/15.
 - Pushed `59adbf9`. **Render env to set:** `WAQI_TOKEN=3ab348db86303129667cd59b047d77ff8f7eb901` (replaces `demo`), plus `GEMINI_API_KEY`, `OPENAQ_API_KEY`, `GEMINI_RETRIES=2`.
 
+### 27 Sep 2026 — CRITICAL: frontend was silently offline (BACKEND_URL)
+- **Symptom:** entire dashboard rendered in "OFFLINE MOCK MODE — BACKEND UNREACHABLE AT `brics-air-backend:10800`". NO DATA / Unknown / NO FORECAST / empty PM2.5 chart / no sensors / no AI, despite the backend being fully live (`/health` 200, all 6 sources `live`).
+- **Two compounding root causes:**
+  1. `render.yaml` wired the frontend's `BACKEND_URL` via `fromService: {property: hostport}`. Render **free tier has no private networking**, so the internal hostname it produced (`brics-air-backend:10800`) is unresolvable from the frontend container. It is also **scheme-less**, which `requests` cannot even parse.
+  2. `fromService` values are **re-synced from the blueprint on every deploy**. Manually correcting the value in the Render dashboard therefore worked only until the next deploy, which silently reverted it — which is exactly what happened.
+- **Fix:** `render.yaml` now hardcodes the public URL `https://brics-air-backend.onrender.com` (as `work-division.md` prescribes), so the correct value is re-applied on every deploy instead of being clobbered. `frontend/app.py` additionally normalises a scheme-less `BACKEND_URL` (adds `https://` for real DNS names) and **prints the resolved value to the service log on startup** — the missing observability that made this undiagnosable from the logs.
+- **Lesson recorded in `docs/DEPLOY.md`:** check the `[startup] BACKEND_URL` log line first whenever the dashboard renders empty.
+
 ### 27 Sep 2026 — PRODUCTION FULLY LIVE + demo quota protection (Sujal)
 - **All 6 sources live on prod** (`/api/status` → `overall: ok`, `gemini_live: true`): openaq · firms · waqi · meteo · sensors · gemini. Deployed smoke **15/15**.
 - **9-step judge dry run executed against the live URLs.** Every step passed with real data:
