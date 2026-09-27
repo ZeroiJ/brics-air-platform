@@ -128,6 +128,12 @@ Changelog updated.
 - Pushed: `9b32924` (his commit, now main) → `aad20c6` (cache refresh).
 - **Pending on Sujal:** paste the 3 keys into Render `brics-air-backend` → Environment (prod still reports `gemini: fallback` until then).
 
+### 27 Sep 2026 — WAQI real token + anti-fabrication guard (Sujal)
+- **Caught a data-integrity risk before it shipped:** the widely-shared `WAQI_TOKEN=demo` does not honour the requested city — it returns a canned **Shanghai** reading (`aqi=72`, station *Major Dhyan Chand…* no — it returns `Shanghai (上海)`) with HTTP 200 for Delhi, Paris and Tokyo alike. Shipping it as the backup AQI layer would have labelled Shanghai's numbers as Delhi on the judges' screen. **Never add `demo` to Render.**
+- `waqi.py` hardened: (1) refuses the `demo` token explicitly with a pointer to the real token page, (2) rejects any station >150 km from the requested city (catches shared/throttled tokens returning a different station), (3) reports the city's canonical BRICS lat/lng instead of echoing whatever the station returned.
+- Real token verified: all 5 BRICS cities return genuine per-city readings from correct stations (Delhi 10 · Mumbai 158 · São Paulo 74 · Beijing 35 · Johannesburg 116). Guard test passes, full smoke 15/15.
+- Pushed `59adbf9`. **Render env to set:** `WAQI_TOKEN=3ab348db86303129667cd59b047d77ff8f7eb901` (replaces `demo`), plus `GEMINI_API_KEY`, `OPENAQ_API_KEY`, `GEMINI_RETRIES=2`.
+
 ## Sarthak — Gemini AI
 
 ### 20 Sep 2026 — All 5 Gemini modules written, Module 1 live end-to-end
