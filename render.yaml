@@ -34,7 +34,14 @@ services:
     plan: free
     rootDir: .
     buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run frontend/app.py --server.port $PORT --server.address 0.0.0.0
+    # `echo` first so the effective BACKEND_URL is visible in the service log at
+    # process start. Streamlit only executes app.py when a browser connects, so a
+    # misconfigured BACKEND_URL used to leave no trace in the logs at all — the
+    # only symptom was a silently empty dashboard. `exec` keeps streamlit as
+    # PID 1 so it still receives Render's stop signals.
+    startCommand: >-
+      sh -c 'echo "[startup] BACKEND_URL=$BACKEND_URL";
+      exec streamlit run frontend/app.py --server.port $PORT --server.address 0.0.0.0'
     healthCheckPath: /_stcore/health
     autoDeploy: true
     envVars:
