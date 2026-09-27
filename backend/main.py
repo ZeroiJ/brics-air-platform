@@ -702,6 +702,37 @@ async def key_error_handler(_, exc: KeyError):
     return JSONResponse(status_code=404, content={"detail": str(exc)})
 
 
+# ---------------------------------------------------------------------------
+# Root route
+#
+# Not decoration — this is what keeps the service alive on Render. After every
+# deploy Render probes `HEAD /`; a 404 there is treated as an unhealthy service
+# and the process is shut down mid-rollout ("Update In Progress" forever, with
+# the build log showing a successful build and an immediate shutdown).
+# Starlette answers HEAD automatically for any GET route, so this one covers it.
+#
+# It also means anyone who opens the backend URL gets pointed at the dashboard
+# instead of a bare {"detail": "Not Found"}.
+# ---------------------------------------------------------------------------
+# Starlette does NOT add HEAD to a GET route the way some frameworks do — a
+# plain `@app.get("/")` answers HEAD with 405, which fails the probe just as
+# badly as the 404 did. `methods` must list HEAD explicitly.
+@app.api_route("/", methods=["GET", "HEAD"], include_in_schema=False)
+def api_root():
+    return {
+        "service": "BRICS Climate Intelligence Platform",
+        "role": "backend API — returns JSON, not the dashboard",
+        "dashboard": os.getenv("FRONTEND_URL", "https://brics-air-frontend.onrender.com"),
+        "health": "/health",
+        "openapi_docs": "/docs",
+        "endpoints": [
+            "/api/aqi", "/api/fires", "/api/meteo", "/api/sensors",
+            "/api/analysis", "/api/forecast", "/api/crossborder", "/api/alerts",
+            "/api/analyze-photo", "/api/reports", "/api/models", "/api/status",
+        ],
+    }
+
+
 @app.get("/api/cities")
 def api_cities():
     return BRICS_CITIES

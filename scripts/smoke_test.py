@@ -36,6 +36,9 @@ def add(method: str, path: str, status: int = 200, keys: list[str] | None = None
 
 
 def run(base_url: str | None) -> int:
+    # Render's post-deploy probe is `HEAD /`. A 404 there makes Render treat the
+    # service as unhealthy and shut it down, so the root route is load-bearing.
+    add("GET", "/", keys=["service", "dashboard", "endpoints"])
     add("GET", "/health", keys=["status"])
     add("GET", "/api/cities", keys=["city", "country"])
     add("GET", "/api/meta", keys=["service"])
