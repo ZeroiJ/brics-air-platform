@@ -935,6 +935,45 @@ with st.container():
                 unsafe_allow_html=True,
             )
 
+        # Data-layer status. Two jobs: fills the dead space beside the 470px map,
+        # and surfaces the live/cached/fallback indicators the spec asks for
+        # without depending on the collapsed sidebar. Reuses fetch_status(),
+        # which is @st.cache_data — no extra network call. `th` is not defined
+        # until further down, so read the palette directly.
+        _t = THEMES[active_theme]
+        _c = {"live": "#86b88f", "cached": "#c9a86a",
+              "fallback": "#8b91a0", "unavailable": "#e24a33"}
+        _srcs = (status or {}).get("sources") or []
+        if _srcs:
+            def _stat_row(label, value, rule=False):
+                return (
+                    f'<div style="display:flex;justify-content:space-between;'
+                    f'align-items:center;padding:2px 0;'
+                    f'{"border-top:1px solid " + _t["border"] + ";margin-top:4px;" if rule else ""}">'
+                    f'<span style="color:{_t["text-soft"]};font-size:.72rem;">{label}</span>'
+                    f'<span style="color:{_c.get(value, "#8b91a0")};'
+                    f'font-family:var(--font-mono);font-size:.64rem;">{str(value).upper()}</span>'
+                    f'</div>'
+                )
+
+            _rows = "".join(
+                _stat_row(str(s.get("layer", s.get("source", "?"))).upper(),
+                          s.get("status", "fallback"))
+                for s in _srcs
+            )
+            _rows += _stat_row("AI REASONING",
+                               (status.get("gemini") or {}).get("status", "fallback"),
+                               rule=True)
+            _live = sum(1 for s in _srcs if s.get("status") == "live")
+            st.markdown(
+                f'<div class="card" style="margin-top:10px;">'
+                f'<div class="eyebrow">Data Layer Status</div>'
+                f'<div class="med" style="font-size:1.15rem;">'
+                f'{_live}/{len(_srcs)} data layers live</div>'
+                f'<div style="margin-top:4px;">{_rows}</div></div>',
+                unsafe_allow_html=True,
+            )
+
 # --- BRICS Comparison chart (plotly, WHO guideline line) — full width -------
 import plotly.graph_objects as go
 
@@ -948,6 +987,7 @@ fig.add_trace(go.Bar(
     marker=dict(color=bar_colors, cornerradius=6, line=dict(width=0)),
     text=[f"{v:.0f}" for v in pm25_vals], textposition="outside",
     textfont=dict(family="JetBrains Mono, monospace", size=10, color=th["text-soft"]),
+    cliponaxis=False,  # value labels sit above the bars — don't let the axis clip them
     hovertemplate="%{x}<br>PM2.5 %{y:.1f} µg/m³<extra></extra>"))
 fig.add_hline(
     y=15, line_color="#e24a33", line_dash="dash", line_width=1.4,
@@ -960,12 +1000,15 @@ fig.update_layout(
         font=dict(family="JetBrains Mono, monospace", size=10.5, color=th["text-soft"]),
         x=0.02, xanchor="left",
     ),
-    margin=dict(l=2, r=12, t=46, b=8), height=420, showlegend=False,
+    # b was 8, which sliced the x tick labels in half at the card edge. automargin
+    # lets plotly reserve exactly what the labels need instead of a guessed value.
+    margin=dict(l=2, r=12, t=52, b=44), height=440, showlegend=False,
     paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
     font=dict(family="JetBrains Mono, monospace", size=10.5, color=th["text-dim"]),
     bargap=0.5,
-    xaxis=dict(color=th["text-faint"]),
-    yaxis=dict(gridcolor=th["border"], zeroline=False, tickcolor=th["border"]),
+    xaxis=dict(color=th["text-faint"], automargin=True),
+    yaxis=dict(gridcolor=th["border"], zeroline=False, tickcolor=th["border"],
+               automargin=True),
     hoverlabel=dict(bgcolor=th["bg-elevated"], bordercolor=th["border"],
                     font=dict(family="JetBrains Mono, monospace", size=10, color=th["text"])),
 )
