@@ -6,6 +6,7 @@ Used only when OpenAQ is down. Caches to backend/cache/waqi.json.
 from __future__ import annotations
 
 import json
+import math
 import os
 from pathlib import Path
 
@@ -26,16 +27,36 @@ WAQI_SLUGS = {
 }
 
 
+DEMO_TOKEN = "demo"
+
+
+def _haversine_km(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
+    r = 6371.0
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dphi = math.radians(lat2 - lat1)
+    dlmb = math.radians(lng2 - lng1)
+    a = math.sin(dphi / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dlmb / 2) ** 2
+    return 2 * r * math.asin(math.sqrt(a))
+
+
 async def fetch_city_waqi(city: str) -> AQIReading:
     token = os.getenv("WAQI_TOKEN", "").strip()
     if not token:
         raise RuntimeError("WAQI_TOKEN not set")
-    slug = WAQI_SLUGS.get(city.strip().title(), city.strip().lower())
-    # Fix title() mangling of São Paulo
-    for k, v in WAQI_SLUGS.items():
-        if k.lower() == city.strip().lower():
-            slug = v
-            break
+    if token.lower() == DEMO_TOKEN:
+        # The public "demo" token ignores the requested city and always returns a
+        # canned Shanghai reading (aqi=72) with a 200 OK. Serving that as our
+        # backup would be fabricated data, so refuse it and let the caller fall
+        # back to the committed OpenAQ snapshot instead.
+        raise RuntimeError(
+            "WAQI_TOKEN is the public 'demo' token — it returns a fixed Shanghai "
+            "sample for every city. Request a real token at "
+            "https://aqicn.org/data-platform/token"
+        )
+    meta = next((c for c in BRICS_CITIES if c["city"].lower() == city.strip().lower()), None)
+    if meta is None:
+        raise KeyError(f"Unknown city '{city}'")
+    slug = WAQI_SLUGS.get(meta["city"], city.strip().lower())
     async with httpx.AsyncClient(timeout=TIMEOUT) as client:
         resp = await client.get(f"https://api.waqi.info/feed/{slug}/", params={"token": token})
         resp.raise_for_status()
@@ -45,19 +66,26 @@ async def fetch_city_waqi(city: str) -> AQIReading:
     data = payload["data"]
     aqi = int(data.get("aqi", 0) or 0)
     iaqi = data.get("iaqi") or {}
+
     def _v(key: str) -> float | None:
         node = iaqi.get(key)
         return float(node["v"]) if node and node.get("v") is not None else None
+
     pm25 = _v("pm25") or max(aqi * 0.8, 1.0)
     pm10 = _v("pm10") or pm25 * 1.6
     geo = data.get("city", {}).get("geo") or []
-    meta = next((c for c in BRICS_CITIES if c["city"].lower() == city.strip().lower()),
-                {"city": city, "country": "", "lat": float(geo[0]) if len(geo) == 2 else 0.0,
-                 "lng": float(geo[1]) if len(geo) == 2 else 0.0})
+    # Sanity-check: the station must actually be near the city we asked for,
+    # otherwise a shared/throttled token may have returned some other station.
+    if len(geo) == 2:
+        dist = _haversine_km(meta["lat"], meta["lng"], float(geo[0]), float(geo[1]))
+        if dist > 150:
+            raise ValueError(
+                f"WAQI returned a station {dist:.0f} km from {meta['city']} "
+                f"(got {data.get('city', {}).get('name')}) — refusing mismatched data"
+            )
     reading = AQIReading(
         city=meta["city"], country=meta["country"],
-        lat=float(geo[0]) if len(geo) == 2 else meta["lat"],
-        lng=float(geo[1]) if len(geo) == 2 else meta["lng"],
+        lat=meta["lat"], lng=meta["lng"],
         aqi=aqi, pm25=round(pm25, 1), pm10=round(pm10, 1),
         no2=_v("no2"), so2=_v("so2"), source="waqi", timestamp=utcnow(),
     )
