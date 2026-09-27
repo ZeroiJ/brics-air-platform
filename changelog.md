@@ -134,6 +134,17 @@ Changelog updated.
 - Real token verified: all 5 BRICS cities return genuine per-city readings from correct stations (Delhi 10 · Mumbai 158 · São Paulo 74 · Beijing 35 · Johannesburg 116). Guard test passes, full smoke 15/15.
 - Pushed `59adbf9`. **Render env to set:** `WAQI_TOKEN=3ab348db86303129667cd59b047d77ff8f7eb901` (replaces `demo`), plus `GEMINI_API_KEY`, `OPENAQ_API_KEY`, `GEMINI_RETRIES=2`.
 
+### 27 Sep 2026 — CLOSED the last PS gap: federation / model exchange (Sujal)
+- **Track 2 requirement 8 now met → PS coverage 8/8.** PS: *"designed for interoperability so BRICS nations can share predictive models and coordinate resources."* This was the only ❌ in `docs/PS_COVERAGE.md` since the 23rd audit.
+- **New `backend/federation.py`** — a `BRICS-AIR-MODEL-EXCHANGE/1.0` registry node publishing **5 versioned contracts**: AQI cause attribution, transboundary smoke transport, 6h/24h spike forecast, citizen photo attribution, multilingual authority alert.
+- **New endpoints** (additive, no existing route touched): `GET /api/models` (full registry) and `GET /api/models/{model_id}` (single contract, what a peer node would call).
+- **New schemas** appended to `models.py`: `ModelCard`, `FederationRegistry` — per the work-division rule that all Pydantic schemas live there.
+- **New "Federation / Model Exchange" card** in the frontend (appended below the sensor card, existing layout untouched): 5 contracts · 5 countries · 6 corridors, table of model / task / returns / corridors.
+- **Deliberately NOT a model zoo.** The obvious move was to invent trained-model cards with accuracy numbers. That would be fabricated data — the same failure mode as `WAQI_TOKEN=demo`. Instead each card is a **contract**: it declares the wire format of a reasoning module already deployed here, carries `trained: false`, and names the real in-repo `module` that implements it. `work-division.md` lists "train custom ML models" as an anti-pattern and we follow it.
+- **Verified, not asserted:** all 5 `output_schema` values resolve to actual Pydantic classes in `models.py` (5/5, 0 broken references); corridors match what the cross-border detector evaluates; countries match `BRICS_CITIES`. The claim is checkable.
+- **Demo-safe:** both endpoints are pure metadata reads — no network calls, no Gemini quota — so the federation card cannot fail or stall a live demo.
+- Smoke **17/17** (was 15/15; +2 for the new endpoints). Frontend suite: 8/8 themes, 0 exceptions. Card render confirmed against a live local backend (headline `5 shareable contracts · 5 countries · 6 corridors`, all 5 rows, `trained=false` disclosed in the UI).
+
 ### 27 Sep 2026 — CRITICAL: frontend was silently offline (BACKEND_URL)
 - **Symptom:** entire dashboard rendered in "OFFLINE MOCK MODE — BACKEND UNREACHABLE AT `brics-air-backend:10800`". NO DATA / Unknown / NO FORECAST / empty PM2.5 chart / no sensors / no AI, despite the backend being fully live (`/health` 200, all 6 sources `live`).
 - **Two compounding root causes:**

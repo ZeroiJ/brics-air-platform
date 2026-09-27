@@ -35,6 +35,7 @@ Run:  streamlit run frontend/app.py   (BACKEND_URL overridable via env)
 """
 from __future__ import annotations
 
+import html
 import math
 import os
 from datetime import datetime, timezone
@@ -593,6 +594,13 @@ def fetch_sensors(country: str) -> list[dict]:
 
 
 @st.cache_data(ttl=CACHE_TTL, show_spinner=False)
+def fetch_models() -> dict | None:
+    """Federation / model-exchange registry (PS: BRICS model sharing)."""
+    data = _get("/api/models")
+    return data if isinstance(data, dict) else None
+
+
+@st.cache_data(ttl=CACHE_TTL, show_spinner=False)
 def fetch_status() -> dict:
     data = _get("/api/status")
     return data if isinstance(data, dict) else {}
@@ -1064,6 +1072,54 @@ with sensor_col:
             '<div class="sub">No citizen sensor readings for this country right now.</div></div>',
             unsafe_allow_html=True,
         )
+
+# --- Federation / model exchange ---------------------------------------------
+# PS: "designed for interoperability so BRICS nations can share predictive
+# models and coordinate resources". This lists the wire contracts this node
+# publishes. Metadata only — no Gemini call, so it cannot fail or stall a demo.
+registry = fetch_models()
+_cards = (registry or {}).get("models") or []
+if _cards:
+    e = lambda s: html.escape(str(s))  # noqa: E731
+    rows = "".join(
+        f'<tr>'
+        f'<td style="padding:3px 14px 3px 0;color:{th["text"]};'
+        f'font-family:var(--font-mono);font-size:.74rem;white-space:nowrap;">'
+        f'{e(m.get("id", ""))}'
+        f'<span style="color:{th["text-faint"]};"> v{e(m.get("version", ""))}</span></td>'
+        f'<td style="padding:3px 14px 3px 0;color:{th["text-soft"]};font-size:.73rem;">'
+        f'{e(str(m.get("task", "")).replace("_", " "))}</td>'
+        f'<td style="padding:3px 14px 3px 0;color:{th["text-faint"]};'
+        f'font-family:var(--font-mono);font-size:.7rem;white-space:nowrap;">'
+        f'→ {e(m.get("output_schema", ""))}</td>'
+        f'<td style="padding:3px 0;color:{th["text-faint"]};font-size:.7rem;">'
+        f'{e(" · ".join(m.get("corridors") or [])[:58])}</td>'
+        f'</tr>'
+        for m in _cards
+    )
+    st.markdown(
+        f'<div class="card"><div class="eyebrow">Federation / Model Exchange</div>'
+        f'<div class="med" style="font-size:1.6rem;">{len(_cards)} shareable contracts'
+        f' · {len({c for m in _cards for c in (m.get("countries") or [])})} countries'
+        f' · {len({c for m in _cards for c in (m.get("corridors") or [])})} corridors</div>'
+        f'<table style="width:100%;border-collapse:collapse;margin-top:6px;">'
+        f'<tr style="color:{th["text-faint"]};font-size:.64rem;letter-spacing:.08em;">'
+        f'<th style="text-align:left;padding:0 14px 4px 0;font-weight:500;">MODEL</th>'
+        f'<th style="text-align:left;padding:0 14px 4px 0;font-weight:500;">TASK</th>'
+        f'<th style="text-align:left;padding:0 14px 4px 0;font-weight:500;">RETURNS</th>'
+        f'<th style="text-align:left;padding:0 0 4px 0;font-weight:500;">CORRIDORS</th></tr>'
+        f'{rows}</table>'
+        f'<div class="meta">{e(registry.get("protocol", ""))} · NODE {e(registry.get("node", ""))}'
+        f' · EXCHANGEABLE AS REST/JSON — <code>GET /api/models</code> · '
+        f'trained=false (declared contracts, not fitted weights)</div></div>',
+        unsafe_allow_html=True,
+    )
+else:
+    st.markdown(
+        '<div class="card"><div class="eyebrow">Federation / Model Exchange</div>'
+        '<div class="sub">Model-exchange registry unavailable — backend offline.</div></div>',
+        unsafe_allow_html=True,
+    )
 
 st.divider()
 st.caption(

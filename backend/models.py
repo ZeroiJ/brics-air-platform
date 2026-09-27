@@ -146,3 +146,41 @@ class AlertMessage(BaseModel):
     message_english: str
     target_authority: str
     urgency: str = Field(description='"immediate" | "advisory" | "watch"')
+
+
+# ---------------------------------------------------------------------------
+# Federation — PS: "designed for interoperability so BRICS nations can share
+# predictive models and coordinate resources".
+#
+# A ModelCard is a *contract*, not a trained artifact. It declares the wire
+# format (inputs, output schema, corridors, countries) of a reasoning module
+# already deployed on this node, so another BRICS node could consume the same
+# interface without re-deriving it. The `trained` flag is explicit and always
+# False: this project trains no models (work-division.md anti-patterns), and
+# claiming otherwise would be fabricated data.
+# ---------------------------------------------------------------------------
+
+
+class ModelCard(BaseModel):
+    id: str
+    name: str
+    version: str
+    module: str = Field(description="In-repo module implementing this contract")
+    kind: str = Field(description='"gemini_reasoning" | "rule_based_heuristic"')
+    trained: bool = Field(description="Always False — no custom model training in this project")
+    task: str
+    input_layers: list[str] = Field(description="PS data layers consumed (L1 gov AQI, L2 satellite, L3 meteo, L4 citizen)")
+    input_schema: dict[str, str] = Field(description="field -> type, as consumed by this contract")
+    output_schema: str = Field(description="Name of the Pydantic model returned")
+    corridors: list[str]
+    countries: list[str]
+    transport: str = Field(default="REST/JSON")
+    license: str = Field(default="MIT")
+    shareable: bool = True
+
+
+class FederationRegistry(BaseModel):
+    protocol: str
+    node: str
+    note: str
+    models: list[ModelCard]

@@ -52,6 +52,10 @@ def run(base_url: str | None) -> int:
     add("GET", "/api/alerts?city=Delhi", keys=["message_hindi", "message_portuguese", "message_english"])
     add("POST", "/api/analyze-photo", status=200,
         keys=["pollution_type", "severity_score", "confidence"])
+    # Federation / model exchange (PS: "BRICS nations can share predictive models")
+    add("GET", "/api/models", keys=["protocol", "node", "note", "models"])
+    add("GET", "/api/models/brics-aqi-forecast-6h24h-v1",
+        keys=["id", "version", "module", "kind", "trained", "output_schema", "corridors"])
 
     c = _client(base_url)
     failures = 0

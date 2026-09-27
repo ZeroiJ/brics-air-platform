@@ -1,5 +1,5 @@
 # PS Coverage Audit — BRICS Sustainability Challenge
-**Audited: 23 Sep 2026 · against the official problem/challenge statement**
+**Audited: 27 Sep 2026 · against the official problem/challenge statement**
 
 | # | PS requirement | Data layer / endpoint | UI (frontend/app.py) | Status |
 |---|---|---|---|---|
@@ -10,21 +10,35 @@
 | 5 | **Detect hidden hyper-local hotspots** | sensors + fires + AQI | Sensor dots + fire clusters + cross-border detection cards | ✅ |
 | 6 | **Forecast AQI spikes across economic corridors** | `GET /api/forecast?city=`, `GET /api/crossborder` | 24h Outlook card (6h/24h + spike cause) + Transboundary Event cards (source→affected, km, severity, evidence) | ✅ |
 | 7 | **Alert relevant authorities** | `GET /api/alerts?city=` | Authority Alert card (target authority + urgency) + Hindi / Portuguese / English message columns | ✅ |
-| 8 | **Federalated / interoperable model sharing** | — | — | ❌ **GAP** (see below) |
+| 8 | **Federated / interoperable model sharing** | `GET /api/models`, `GET /api/models/{id}` | Federation / Model Exchange card (5 contracts, 5 countries, 6 corridors) | ✅ |
 
-## The one remaining gap: federation
+**8/8 covered.**
 
-PS: *"designed for interoperability so BRICS nations can share predictive models and coordinate resources."*
+## How requirement 8 is met (without overclaiming)
 
-Today the platform is interoperable at the **data** level (BRICS cities, ISO-ish fields, one API), but nothing
-represents the **model-sharing** contract. Minimal honest fix (≈1 day):
+PS: *"designed for interoperability so BRICS nations can share predictive models and
+coordinate resources."*
 
-- `GET /api/models` — registry of shareable predictive model cards:
-  `id, name, version, task, inputs[], output_schema, corridors[], countries[], eval metrics, license, endpoint`
-- Models registered today: `delhi-smoke-transport-v1`, `sp-sa-smoke-v1`, `forecast-6h-24h-v1`
-- One "FEDERATION / MODEL EXCHANGE" card in the UI: catalog table + "shareable across BRICS nodes" note
-- No custom training (anti-pattern) — these are declared contracts for the Gemini reasoning modules
-  + rule-based forecaster, versioned like any shared artifact.
+`backend/federation.py` publishes a **model-exchange registry** — a `BRICS-AIR-MODEL-EXCHANGE/1.0`
+protocol node offering 5 versioned contracts. Each card declares the wire format a peer BRICS
+node would consume: `id, version, module, kind, task, input_layers, input_schema, output_schema,
+corridors, countries, transport, license`.
+
+**This is a contract registry, not a model zoo, and the API says so explicitly.** `work-division.md`
+lists *"train custom ML models"* as an anti-pattern, so every card carries `trained: false` and
+names the real in-repo module implementing it. Nothing is fabricated:
+
+- every `output_schema` resolves to an actual Pydantic class in `backend/models.py`
+  (verified — 5/5, 0 broken references)
+- corridors are the ones the cross-border detector actually evaluates
+  (Indo-Gangetic IN→PK, Amazon Basin, Beijing-Tianjin, Mpumalanga)
+- countries are the five in `BRICS_CITIES`
+
+The claim is therefore verifiable: *we publish the interoperable interface and prove it already
+runs across five countries*, rather than dressing up a stub as fitted weights.
+
+Both endpoints are **pure metadata reads** — no network calls, no Gemini quota — so the
+federation card cannot fail or stall during a demo.
 
 ## Demo walkthrough (what judges will see)
 
@@ -35,3 +49,4 @@ represents the **model-sharing** contract. Minimal honest fix (≈1 day):
 5. Authority alert: target + urgency + 3 languages
 6. Upload smog photo → Gemini Vision severity card
 7. Switch city (sidebar) → whole board re-scopes (cache 60s)
+8. Federation / Model Exchange card → 5 shareable contracts, 5 countries, 6 corridors, `GET /api/models`

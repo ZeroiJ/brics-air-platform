@@ -30,11 +30,13 @@ from backend.models import (  # noqa: E402
     BRICS_CITIES,
     CitizenPhoto,
     FireHotspot,
+    FederationRegistry,
     GeminiAQIAnalysis,
     GeminiCrossBorderEvent,
     GeminiForecast,
     GeminiPhotoResult,
     MeteoData,
+    ModelCard,
     lookup_city,
     utcnow,
 )
@@ -42,6 +44,11 @@ from backend.models import (  # noqa: E402
 # --- Pipeline imports (Sujal) ------------------------------------------------
 from backend.pipeline import meteo as meteo_mod  # noqa: E402
 from backend.pipeline import openaq as openaq_mod  # noqa: E402
+
+# Federation registry — PS: "BRICS nations can share predictive models".
+# Static data, imported once; see backend/federation.py for why these are
+# contracts rather than trained artifacts.
+from backend.federation import REGISTRY  # noqa: E402
 
 try:
     from backend.pipeline import firms as firms_mod  # noqa: E402
@@ -677,3 +684,28 @@ def api_status():
         "gemini": {"status": gem_status, "detail": gem_detail},
         "sources": sources,
     }
+
+
+# ---------------------------------------------------------------------------
+# Federation / model exchange
+#
+# PS: "designed for interoperability so BRICS nations can share predictive
+# models and coordinate resources." These endpoints publish the wire format of
+# the reasoning modules already deployed here. They are pure metadata reads —
+# no network calls, no Gemini quota, so they can never fail during a demo.
+# ---------------------------------------------------------------------------
+
+
+@app.get("/api/models", response_model=FederationRegistry)
+def api_models():
+    """Full model-exchange registry this node offers to other BRICS nodes."""
+    return REGISTRY
+
+
+@app.get("/api/models/{model_id}", response_model=ModelCard)
+def api_model(model_id: str):
+    """Fetch a single shareable contract by id (what a peer node would call)."""
+    for card in REGISTRY.models:
+        if card.id == model_id:
+            return card
+    return JSONResponse(status_code=404, content={"detail": f"Unknown model id '{model_id}'"})
