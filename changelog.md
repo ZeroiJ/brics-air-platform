@@ -134,6 +134,13 @@ Changelog updated.
 - Real token verified: all 5 BRICS cities return genuine per-city readings from correct stations (Delhi 10 · Mumbai 158 · São Paulo 74 · Beijing 35 · Johannesburg 116). Guard test passes, full smoke 15/15.
 - Pushed `59adbf9`. **Render env to set:** `WAQI_TOKEN=3ab348db86303129667cd59b047d77ff8f7eb901` (replaces `demo`), plus `GEMINI_API_KEY`, `OPENAQ_API_KEY`, `GEMINI_RETRIES=2`.
 
+### 27 Sep 2026 — UI polish: chart clipping + dead space (Sujal)
+- **Chart x-axis labels were sliced in half** at the card edge. Cause: `margin=dict(b=8)` left ~8px for the city tick labels. Fixed with `b=44`, `height` 420→440, and `automargin=True` on both axes so plotly reserves what it actually needs instead of a guessed value.
+- **Also added `cliponaxis=False`** to the PM2.5 bar trace. The value labels use `textposition="outside"`, and with real data (Delhi PM2.5 ≈ 451) those labels get cut off at the top of the plot — a bug that was invisible while the backend was offline and no bars were drawn.
+- **Filled the ~270px dead space** beside the 470px map with a **Data Layer Status** card: `5/5 data layers live` plus one colour-coded live/cached/fallback row per layer (Government AQI, Satellite Fires, Backup AQI, Wind/Weather, Citizen Sensors) and AI Reasoning. Reuses the cached `fetch_status()` — no extra network call.
+- **This one does double duty:** `work-division.md` requires "data source indicators (live/cached)" in the sidebar, but the sidebar ships collapsed, so judges could not see them. The new card surfaces that same spec requirement in the main canvas instead.
+- Verified against a live local backend: 0 exceptions, all 6 rows render, federation card unaffected. Diff is `+46 −3` — the 3 deletions are the replaced margin/axis lines only.
+
 ### 27 Sep 2026 — CLOSED the last PS gap: federation / model exchange (Sujal)
 - **Track 2 requirement 8 now met → PS coverage 8/8.** PS: *"designed for interoperability so BRICS nations can share predictive models and coordinate resources."* This was the only ❌ in `docs/PS_COVERAGE.md` since the 23rd audit.
 - **New `backend/federation.py`** — a `BRICS-AIR-MODEL-EXCHANGE/1.0` registry node publishing **5 versioned contracts**: AQI cause attribution, transboundary smoke transport, 6h/24h spike forecast, citizen photo attribution, multilingual authority alert.
