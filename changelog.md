@@ -134,6 +134,23 @@ Changelog updated.
 - Real token verified: all 5 BRICS cities return genuine per-city readings from correct stations (Delhi 10 · Mumbai 158 · São Paulo 74 · Beijing 35 · Johannesburg 116). Guard test passes, full smoke 15/15.
 - Pushed `59adbf9`. **Render env to set:** `WAQI_TOKEN=3ab348db86303129667cd59b047d77ff8f7eb901` (replaces `demo`), plus `GEMINI_API_KEY`, `OPENAQ_API_KEY`, `GEMINI_RETRIES=2`.
 
+### 27 Sep 2026 — PRODUCTION FULLY LIVE + demo quota protection (Sujal)
+- **All 6 sources live on prod** (`/api/status` → `overall: ok`, `gemini_live: true`): openaq · firms · waqi · meteo · sensors · gemini. Deployed smoke **15/15**.
+- **9-step judge dry run executed against the live URLs.** Every step passed with real data:
+  1. 5-city AQI map (Delhi **467** real OpenAQ · Mumbai 68 · São Paulo 72 · Beijing 78 · JHB 127) — 0.8s
+  2. Delhi detail: 300 FIRMS hotspots, 20 in the Punjab belt, wind 7.9 km/h E
+  3. **2 cross-border events**: *Punjab/Amritsar → Lahore, E→W, 112 km, high* + *Amazon → São Paulo, 2435 km*
+  4. Forecast 467 → 6h 483 / 24h 501, spike=True, cause cites 17 nearby fires
+  5. **Real Gemini analysis**: Severe / PM2.5 / conf 0.90, sources *crop residue burning · stagnant meteorology · vehicular traffic*, 85% cross-border
+  6. Multilingual alert → Delhi Pollution Control Committee, urgency `immediate`, Devanagari + Portuguese
+  7. 10 citizen sensors, peak PM2.5 312 µg/m³
+  8. Photo upload → 200 (fell back to rule-based; quota exhausted mid-run, handled gracefully)
+  9. São Paulo switch → CETESB São Paulo, Portuguese alert
+- **Quota-leak fixed (important for demo day).** The AI cache key included the live AQI value, but OpenAQ refreshes AQI every few minutes — so every refresh missed the cache and burned another Gemini call. A judge clicking between cities could have drained the 20/day budget in minutes. Cache key is now **city-only**, and TTL raised 600s → **21600s (6h)**, env-overridable via `GEMINI_CACHE_TTL`. A full judge walkthrough now costs ~5 calls total, repeatable all day.
+- Verified with quota exhausted: repeat panel requests all return **instantly** (breaker + cache), 15/15 smoke green.
+- **Demo-day rule:** don't test Gemini on the 28th/29th — the free tier is per Google account (~20/day) and burns in minutes. Quota resets midnight Pacific (~08:30 IST).
+- **429 fast-fail (root-cause fix).** Measured on the live dry run: with quota gone, the *first* panel still took **28.3 s** and the second 17.6 s even though the breaker existed. Cause: `gemini_retry` treated `ClientError` as retryable, so each 429 was retried 5× with 2/4/8/16 s backoff — and the breaker only saw the *final* failure. A daily-quota error can never clear in 30 s, so retrying is pure stall. `_common.py` now filters 429/`RESOURCE_EXHAUSTED` out of the retry predicate (503/5xx waves still retry, which is the case backoff is actually for) and the breaker threshold dropped 2 → 1. Result: **28.3 s → 12.7 s** on the single unavoidable round trip, everything after **0.00 s**. Tunables `GEMINI_FAIL_THRESHOLD` / `GEMINI_COOLDOWN` / `GEMINI_CACHE_TTL` are env-overridable.
+
 ## Sarthak — Gemini AI
 
 ### 20 Sep 2026 — All 5 Gemini modules written, Module 1 live end-to-end

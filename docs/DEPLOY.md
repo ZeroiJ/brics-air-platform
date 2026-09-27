@@ -69,6 +69,20 @@ python scripts/smoke_test.py --base-url https://<backend>.onrender.com   # expec
 > **Port note:** Render injects the `PORT` env var — always bind with `$PORT`,
 > never a hardcoded `8000`/`8501`. Locally you keep using `--port 8000`.
 
+> ### Gemini quota (read before demo day)
+> Free tier is **~20 generations/day per Google account** — not per key, not per
+> service, not per Render deploy. A full judge walkthrough costs ~5 calls.
+>
+> - The backend caches AI answers **6 h, keyed by city**, so clicking between
+>   cities repeatedly costs **zero** extra calls.
+> - **Do NOT test Gemini on the 28th/29th.** You would burn the budget demo day needs.
+> - Quota resets **midnight Pacific (~08:30 IST)**.
+> - If quota *is* exhausted: 429 now fails fast (no retry) → circuit breaker opens →
+>   every panel degrades to the rule-based fallback in **~1 s** instead of stalling
+>   28 s. The dashboard still works, just without live AI prose.
+> - Tunables: `GEMINI_CACHE_TTL` (21600), `GEMINI_FAIL_THRESHOLD` (1),
+>   `GEMINI_COOLDOWN` (300), `GEMINI_RETRIES` (5, transient 5xx only).
+
 ## 3. UptimeRobot (keep free tier awake)
 
 Render free instances spin down after ~15 min idle. UptimeRobot pings keep it hot.

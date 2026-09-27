@@ -24,7 +24,7 @@ from typing import TypeVar
 from dotenv import load_dotenv
 from tenacity import (
     retry,
-    retry_if_exception_type,
+    retry_if_exception,
     stop_after_attempt,
     wait_exponential,
 )
@@ -77,11 +77,33 @@ def get_client() -> genai.Client:
 # ---------------------------------------------------------------------------
 # Retry policy
 # ---------------------------------------------------------------------------
+def _is_quota_error(exc: BaseException) -> bool:
+    """429 RESOURCE_EXHAUSTED — daily free-tier quota spent.
+
+    Retrying is pointless: the quota resets at midnight Pacific, not in 30s.
+    Left retryable it cost ~28s per panel while guaranteeing failure.
+    """
+    code = getattr(exc, "code", None)
+    if code == 429:
+        return True
+    return "RESOURCE_EXHAUSTED" in str(exc) or "quota" in str(exc).lower()
+
+
+def _retryable(exc: BaseException) -> bool:
+    # Retry genuine transients (503 high-demand waves, 5xx), never quota.
+    if _is_quota_error(exc):
+        return False
+    return isinstance(exc, (errors.APIError, errors.ClientError))
+
+
 def gemini_retry(func):
     """Retry transient API failures with exponential backoff.
 
-    Default: 5 attempts (2s/4s/8s/16s waits). The API returns 503-high-demand
-    in waves; override attempts with GEMINI_RETRIES if needed.
+    Default: 5 attempts (2s/4s/8s/16s waits) for 503/5xx waves. HTTP 429
+    (daily quota exhausted) is NOT retried — it fails fast so the caller's
+    circuit breaker opens immediately and the panel degrades to the rule-based
+    fallback in ~1s instead of stalling 28s. Override attempts with
+    GEMINI_RETRIES.
     """
     import os as _os
 
@@ -89,7 +111,7 @@ def gemini_retry(func):
     return retry(
         stop=stop_after_attempt(attempts),
         wait=wait_exponential(multiplier=1, min=2, max=16),
-        retry=retry_if_exception_type((errors.APIError, errors.ClientError)),
+        retry=retry_if_exception(_retryable),
         reraise=True,
     )(func)
 

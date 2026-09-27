@@ -136,15 +136,19 @@ _MEM: dict[str, tuple[float, object]] = {}
 # ---------------------------------------------------------------------------
 # Gemini circuit breaker + response cache.
 # Free-tier quota exhaustion (HTTP 429) otherwise costs 17-33s per panel while
-# tenacity retries with backoff — a visible stall during judging. After
-# _GEM_FAIL_THRESHOLD failures we stop calling Gemini for _GEM_COOLDOWN seconds
-# and serve the rule-based fallbacks (and cached Gemini answers) instantly.
+# tenacity retries with backoff — a visible stall during judging. 429 now fails
+# fast in _common.gemini_retry, so ONE failure is enough to open the circuit and
+# serve the rule-based fallbacks (and cached Gemini answers) instantly.
 # ---------------------------------------------------------------------------
 _GEM_FAIL_STREAK = 0
 _GEM_OPENED_AT = 0.0
-_GEM_FAIL_THRESHOLD = 2
+_GEM_FAIL_THRESHOLD = int(os.getenv("GEMINI_FAIL_THRESHOLD", "1"))
 _GEM_COOLDOWN = 300.0
-_GEM_CACHE_TTL = 600.0
+# Demo-day budget: free tier is ~20 generations/day PER GOOGLE ACCOUNT. A full
+# judge walkthrough is ~5 calls (analysis, forecast, alerts, crossborder, photo),
+# so cache AI answers for a long time — a judge switching cities back and forth
+# must never burn quota. 6h is safely inside a single day.
+_GEM_CACHE_TTL = float(os.getenv("GEMINI_CACHE_TTL", "21600"))
 
 
 def _gem_circuit_open() -> bool:
@@ -551,7 +555,9 @@ async def api_sensors(country: str | None = Query(default=None)):
 async def api_analysis(city: str = Query(...)):
     reading = await get_aqi_city(city)
     meteo = await get_meteo_city(reading.city)
-    result = await _gem_call(f"analysis:{reading.city}:{reading.aqi}", gem_aqi, "analyze_aqi", reading, meteo)
+    # Cache key is city-only: OpenAQ refreshes AQI every few minutes, and keying
+    # on the value would miss the cache and burn a Gemini call per refresh.
+    result = await _gem_call(f"analysis:{reading.city}", gem_aqi, "analyze_aqi", reading, meteo)
     if result is not None:
         return result
     fires = await get_fires()
@@ -563,7 +569,7 @@ async def api_forecast(city: str = Query(...)):
     reading = await get_aqi_city(city)
     meteo = await get_meteo_city(reading.city)
     fires = await get_fires()
-    result = await _gem_call(f"forecast:{reading.city}:{reading.aqi}", gem_forecast, "forecast_aqi", reading, meteo, fires)
+    result = await _gem_call(f"forecast:{reading.city}", gem_forecast, "forecast_aqi", reading, meteo, fires)
     if result is not None:
         return result
     return rule_forecast(reading, meteo, fires)
@@ -584,12 +590,12 @@ async def api_alerts(city: str = Query(...)):
     reading = await get_aqi_city(city)
     meteo = await get_meteo_city(reading.city)
     fires = await get_fires()
-    analysis = await _gem_call(f"analysis:{reading.city}:{reading.aqi}", gem_aqi, "analyze_aqi", reading, meteo)
+    analysis = await _gem_call(f"analysis:{reading.city}", gem_aqi, "analyze_aqi", reading, meteo)
     if analysis is None:
         analysis = rule_analysis(reading, meteo, fires)
     events = rule_crossborder([reading], fires, [meteo])
     event = events[0] if events else None
-    result = await _gem_call(f"alert:{reading.city}:{reading.aqi}", gem_alerts, "generate_alert", analysis, event)
+    result = await _gem_call(f"alert:{reading.city}", gem_alerts, "generate_alert", analysis, event)
     if result is not None:
         return result
     return rule_alert(analysis, event)
