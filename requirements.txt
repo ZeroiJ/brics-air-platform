@@ -13,3 +13,8 @@ folium>=0.17
 plotly>=5.22
 # Gemini SDK (Sarthak — AI modules)
 google-genai>=1.0
+# Citizen report storage (Neon Postgres) — text records only, no image bytes.
+# Store degrades to a local JSON fallback when DATABASE_URL is unset, so the
+# upload path still works if this driver or the database is unavailable.
+psycopg[binary]>=3.1
+# Pillow — already a Streamlit dependency; used directly for EXIF GPS extraction.

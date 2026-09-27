@@ -601,6 +601,13 @@ def fetch_models() -> dict | None:
 
 
 @st.cache_data(ttl=CACHE_TTL, show_spinner=False)
+def fetch_reports(limit: int = 12) -> dict | None:
+    """Citizen evidence records (Neon Postgres, local JSON fallback)."""
+    data = _get("/api/reports", {"limit": limit})
+    return data if isinstance(data, dict) else None
+
+
+@st.cache_data(ttl=CACHE_TTL, show_spinner=False)
 def fetch_status() -> dict:
     data = _get("/api/status")
     return data if isinstance(data, dict) else {}
@@ -1037,18 +1044,32 @@ else:
 photo_col, sensor_col = st.columns([1, 1], gap="medium")
 
 with photo_col:
+    # The citizen's own words. Kept as free text (not a dropdown) because a
+    # reporter describing a specific incident has context we must not constrain.
+    description = st.text_input(
+        "Describe what you see (optional)",
+        placeholder="e.g. thick brown smog over the flyover, burning smell",
+        label_visibility="collapsed",
+        key="citizen_description",
+    )
     upload = st.file_uploader("Upload pollution photo (jpg/png)", type=["jpg", "jpeg", "png"])
     if upload is not None:
         try:
             resp = requests.post(
                 f"{BACKEND_URL}/api/analyze-photo",
-                data={"city": city},
+                data={"city": city, "description": description or ""},
                 files={"file": (upload.name, upload.getvalue(), upload.type or "image/jpeg")},
                 timeout=(5, 90),
             )
             resp.raise_for_status()
             pr = resp.json()
             sev = int(pr.get("severity_score") or 0)
+            # Location provenance matters: a citizen's real phone GPS is evidence,
+            # a city-centroid guess is not. Say which one this is.
+            loc_src = pr.get("location_source", "none")
+            loc_label = {"exif_gps": "PHONE GPS (EXIF)", "city": "CITY CENTROID"}.get(loc_src, "UNKNOWN")
+            gps_txt = (f'{float(pr["lat"]):.4f}, {float(pr["lng"]):.4f}'
+                       if pr.get("lat") is not None else "—")
             st.markdown(
                 f'<div class="card" style="--cat:{"#e24a33" if sev >= 6 else "#c9a86a"};">'
                 f'<div class="eyebrow">Gemini Vision Result</div>'
@@ -1058,6 +1079,22 @@ with photo_col:
                 f'<div class="meta">SOURCE: {pr.get("likely_source", "—")}<br>'
                 f'ADVICE: {pr.get("recommendation", "—")} '
                 f'(confidence {float(pr.get("confidence", 0))*100:.0f}%)</div></div>',
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                f'<div class="card" style="margin-top:10px;">'
+                f'<div class="eyebrow">Report Routed To Authority</div>'
+                f'<div class="med" style="font-size:1.05rem;">'
+                f'{pr.get("routed_authority", "—")}</div>'
+                f'<div class="sub">URGENCY: {str(pr.get("urgency", "—")).upper()} · '
+                f'LOCATION: {gps_txt} <span style="color:{th["text-faint"]};">'
+                f'({loc_label})</span></div>'
+                f'<div class="meta">REPORT ID: {pr.get("report_id", "—")} · '
+                f'STATUS: {str(pr.get("delivery_status", "recorded")).upper()} · '
+                f'STORED IN: {str(pr.get("store", "local")).upper()}<br>'
+                f'Coordinates, your description and the vision verdict are on record for the '
+                f'authority. The image itself is not stored — only the record it produced.</div>'
+                f'</div>',
                 unsafe_allow_html=True,
             )
         except requests.RequestException as e:
@@ -1100,6 +1137,53 @@ with sensor_col:
             '<div class="sub">No citizen sensor readings for this country right now.</div></div>',
             unsafe_allow_html=True,
         )
+
+# --- Recent Citizen Reports (evidence trail) --------------------------------
+# What a citizen uploaded, where, and which authority it was routed to. Stored
+# as text only in Neon Postgres — no image bytes — so the record is auditable
+# and survives Render deploys.
+_rep = fetch_reports(12)
+_rows_r = (_rep or {}).get("reports") or []
+if _rows_r:
+    _urg_c = {"immediate": "#e24a33", "advisory": "#c9a86a", "watch": "#8b91a0"}
+    _gps_n = sum(1 for r in _rows_r if r.get("location_source") == "exif_gps")
+    _items = "".join(
+        f'<div style="padding:5px 0;border-top:1px solid {th["border"]};">'
+        f'<div style="display:flex;justify-content:space-between;gap:10px;">'
+        f'<span style="color:{th["text"]};font-size:.78rem;">'
+        f'{html.escape(str(r.get("city", "?")))}</span>'
+        f'<span style="color:{_urg_c.get(str(r.get("urgency", "watch")), "#8b91a0")};'
+        f'font-family:var(--font-mono);font-size:.66rem;white-space:nowrap;">'
+        f'{(str(r.get("urgency", "watch")) or "watch").upper()} · '
+        f'SEV {r.get("severity_score", "?")}/10</span></div>'
+        f'<div style="color:{th["text-faint"]};font-family:var(--font-mono);'
+        f'font-size:.66rem;margin-top:1px;">'
+        f'{(f"{float(r["lat"]):.4f}, {float(r["lng"]):.4f}" if r.get("lat") is not None else "—")}'
+        f' · {("PHONE GPS" if r.get("location_source") == "exif_gps" else "CITY CENTROID")}'
+        f' → {html.escape(str(r.get("routed_authority", "—")))}</div>'
+        f'<div style="color:{th["text-soft"]};font-size:.72rem;margin-top:2px;">'
+        f'{html.escape(str(r.get("citizen_description") or r.get("pollution_type") or "—"))[:130]}'
+        f'</div></div>'
+        for r in _rows_r[:6]
+    )
+    st.markdown(
+        f'<div class="card"><div class="eyebrow">Citizen Reports → Authority Queue</div>'
+        f'<div class="med" style="font-size:1.15rem;">'
+        f'{len(_rows_r)} on record · {_gps_n} with phone GPS</div>'
+        f'<div style="margin-top:4px;">{_items}</div>'
+        f'<div class="meta">EVIDENCE RECORD IN {str((_rep or {}).get("store", "local")).upper()}'
+        f' · COORDINATES + CITIZEN DESCRIPTION + VISION VERDICT · '
+        f'NO IMAGE BYTES STORED</div></div>',
+        unsafe_allow_html=True,
+    )
+else:
+    st.markdown(
+        '<div class="card"><div class="eyebrow">Citizen Reports → Authority Queue</div>'
+        '<div class="sub">No citizen reports on record yet — upload a pollution photo above '
+        'to create one. Each upload is geolocated from the photo, described by the citizen, '
+        'scored by vision, and routed to the responsible authority.</div></div>',
+        unsafe_allow_html=True,
+    )
 
 # --- Federation / model exchange ---------------------------------------------
 # PS: "designed for interoperability so BRICS nations can share predictive

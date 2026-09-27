@@ -133,5 +133,6 @@ Render free instances spin down after ~15 min idle. UptimeRobot pings keep it ho
 | `GEMINI_API_KEY` | backend | no* | dedicated deploy key preferred |
 | `GEMINI_RETRIES` | backend | no | default 5, exponential backoff |
 | `BACKEND_URL` | frontend | auto | set by blueprint (`hostport`) |
+| `DATABASE_URL` | backend | manual | Neon Postgres DSN for `citizen_reports`. **Quote it** — the URI contains `&`, which breaks `source .env` if unquoted. Without it, reports fall back to a local JSON file that is wiped on every deploy. |
 
 \* No key → graceful fallback. That is a feature, not a bug.

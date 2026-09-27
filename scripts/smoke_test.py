@@ -51,7 +51,11 @@ def run(base_url: str | None) -> int:
     add("GET", "/api/crossborder", keys=["source_country", "affected_city"])
     add("GET", "/api/alerts?city=Delhi", keys=["message_hindi", "message_portuguese", "message_english"])
     add("POST", "/api/analyze-photo", status=200,
-        keys=["pollution_type", "severity_score", "confidence"])
+        keys=["pollution_type", "severity_score", "confidence",
+              "report_id", "location_source", "routed_authority", "delivery_status"])
+    # Citizen evidence record (Neon Postgres, local JSON fallback)
+    add("GET", "/api/reports", keys=["reports", "store", "total"])
+    add("GET", "/api/reports?city=Delhi", keys=["reports", "store", "total"])
     # Federation / model exchange (PS: "BRICS nations can share predictive models")
     add("GET", "/api/models", keys=["protocol", "node", "note", "models"])
     add("GET", "/api/models/brics-aqi-forecast-6h24h-v1",

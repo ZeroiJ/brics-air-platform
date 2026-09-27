@@ -89,6 +89,9 @@ class CitizenPhoto(BaseModel):
     lng: Optional[float] = None
     image_base64: str
     uploaded_at: datetime = Field(default_factory=utcnow)
+    description: Optional[str] = Field(
+        default=None, description="Citizen's own words — what they saw, where, when"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -136,6 +139,30 @@ class GeminiPhotoResult(BaseModel):
     likely_source: str
     recommendation: str
     confidence: float
+
+
+class PhotoAnalysisResponse(GeminiPhotoResult):
+    """What the photo endpoint returns: the Gemini verdict PLUS the evidence record.
+
+    Deliberately a SUBCLASS of GeminiPhotoResult rather than extra fields on it.
+    `GeminiPhotoResult.model_json_schema()` is sent to Gemini as
+    `response_schema`; adding report fields there would make the model try to
+    invent a `report_id`. Subclassing keeps the AI contract frozen while letting
+    the endpoint return the routing outcome.
+
+    Existing consumers keep working — every GeminiPhotoResult field is inherited.
+    """
+
+    report_id: Optional[str] = None
+    location_source: str = Field(default="none", description='"exif_gps" | "city" | "none"')
+    lat: Optional[float] = None
+    lng: Optional[float] = None
+    routed_authority: Optional[str] = None
+    urgency: Optional[str] = None
+    # Honest by construction: we record the routing decision, we do not claim a
+    # message was delivered to anyone. Cloud Functions / SMTP are not wired.
+    delivery_status: str = Field(default="recorded")
+    store: str = Field(default="local", description='"neon" | "local" — where the record landed')
 
 
 class AlertMessage(BaseModel):

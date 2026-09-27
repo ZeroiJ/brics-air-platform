@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import asyncio
 import base64
+import hashlib
 import math
 import os
 import time
@@ -37,6 +38,7 @@ from backend.models import (  # noqa: E402
     GeminiPhotoResult,
     MeteoData,
     ModelCard,
+    PhotoAnalysisResponse,
     lookup_city,
     utcnow,
 )
@@ -49,6 +51,8 @@ from backend.pipeline import openaq as openaq_mod  # noqa: E402
 # Static data, imported once; see backend/federation.py for why these are
 # contracts rather than trained artifacts.
 from backend.federation import REGISTRY  # noqa: E402
+from backend import store  # noqa: E402
+from backend.photo_meta import extract_gps  # noqa: E402
 
 try:
     from backend.pipeline import firms as firms_mod  # noqa: E402
@@ -608,36 +612,89 @@ async def api_alerts(city: str = Query(...)):
     return rule_alert(analysis, event)
 
 
-@app.post("/api/analyze-photo", response_model=GeminiPhotoResult)
+@app.post("/api/analyze-photo", response_model=PhotoAnalysisResponse)
 async def api_analyze_photo(
     city: str = Form(default="Delhi"),
+    description: str = Form(default=""),
     file: UploadFile = File(...),
 ):
     content = await file.read()
     if not content:
         return JSONResponse(status_code=400, content={"detail": "Empty file"})
+
+    # Location: prefer the GPS the phone already embedded in the photo. If the
+    # file has no EXIF (a PC screenshot, or a stripped upload) fall back to the
+    # city centroid and say so — `location_source` records which happened, so we
+    # never present a city guess as a citizen's actual coordinates.
+    lat, lng, loc_src = extract_gps(content)
+    if lat is None:
+        loc_src = "city"
+        for c in BRICS_CITIES:
+            if str(c.get("city", "")).lower() == city.strip().lower():
+                lat, lng = c.get("lat"), c.get("lng")
+                break
+
     b64 = base64.b64encode(content).decode()
-    photo = CitizenPhoto(city=city, image_base64=b64, uploaded_at=utcnow())
+    photo = CitizenPhoto(city=city, lat=lat, lng=lng, image_base64=b64,
+                         uploaded_at=utcnow(), description=description or None)
     result = await _gem_call(f"photo:{city}:{len(content)}", gem_photo, "analyze_photo", photo)
     if result is not None:
-        return result
-    # Rule-based placeholder (valid schema, honest low confidence)
-    kb = len(content) / 1024
-    vision_note = (
-        "unknown — Gemini vision unavailable (API quota exhausted or circuit open)"
-        if bool(os.getenv("GEMINI_API_KEY", "").strip())
-        else "unknown — connect GEMINI_API_KEY for vision analysis"
+        verdict = result
+        engine = "gemini"
+    else:
+        # Rule-based placeholder (valid schema, honest low confidence)
+        kb = len(content) / 1024
+        vision_note = (
+            "unknown — Gemini vision unavailable (API quota exhausted or circuit open)"
+            if bool(os.getenv("GEMINI_API_KEY", "").strip())
+            else "unknown — connect GEMINI_API_KEY for vision analysis"
+        )
+        verdict = GeminiPhotoResult(
+            pollution_visible=True,
+            pollution_type="haze/smoke (unverified — Gemini Vision pending)",
+            estimated_aqi_category="Poor",
+            visibility_km=round(max(0.5, 5.0 - min(kb / 500, 4.0)), 1),
+            severity_score=6,
+            likely_source=vision_note,
+            recommendation="Limit outdoor activity until verified analysis is available.",
+            confidence=0.25,
+        )
+        engine = "rule_fallback"
+
+    # Evidence record. store.save_report never raises — a database problem must
+    # not fail a citizen's upload, and the response says which store took it.
+    meta = store.save_report(
+        city=city,
+        verdict=verdict,
+        description=description,
+        lat=lat, lng=lng, location_source=loc_src,
+        image_bytes=len(content),
+        image_sha256=hashlib.sha256(content).hexdigest(),
+        verdict_engine=engine,
+        country=next((c.get("country", "") for c in BRICS_CITIES
+                      if str(c.get("city", "")).lower() == city.strip().lower()), ""),
     )
-    return GeminiPhotoResult(
-        pollution_visible=True,
-        pollution_type="haze/smoke (unverified — Gemini Vision pending)",
-        estimated_aqi_category="Poor",
-        visibility_km=round(max(0.5, 5.0 - min(kb / 500, 4.0)), 1),
-        severity_score=6,
-        likely_source=vision_note,
-        recommendation="Limit outdoor activity until verified analysis is available.",
-        confidence=0.25,
+    return PhotoAnalysisResponse(
+        **verdict.model_dump(),
+        report_id=meta.get("report_id"),
+        location_source=loc_src,
+        lat=lat, lng=lng,
+        routed_authority=meta.get("routed_authority"),
+        urgency=meta.get("urgency"),
+        delivery_status=meta.get("delivery_status", "recorded"),
+        store=meta.get("store", "local"),
     )
+
+
+@app.get("/api/reports")
+def api_reports(limit: int = Query(default=20, le=100), city: str | None = Query(default=None)):
+    """Recent citizen reports — the evidence trail for what authorities receive.
+
+    Reads from Neon when DATABASE_URL is configured, otherwise from the local
+    JSON fallback. Only text is stored: coordinates, the citizen's description,
+    the Gemini verdict and the routing decision. No image bytes.
+    """
+    return store.recent_reports(limit=limit, city=city)
 
 
 @app.exception_handler(KeyError)
