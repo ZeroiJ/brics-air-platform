@@ -38,6 +38,7 @@ from __future__ import annotations
 import html
 import math
 import os
+import time
 from datetime import datetime, timezone
 
 import requests
@@ -62,6 +63,21 @@ REQ_TIMEOUT = (5.0, 300.0)  # (connect, read) seconds — 300s read so cold Gemi
 # aborting at 10s into "NO DATA / AI ENGINE NOT REACHABLE" and dropping the
 # connection mid-request (which kills the dev uvicorn accept loop on Windows).
 CACHE_TTL = 60
+
+# Render's free tier sleeps the service after ~15 min idle. The first request
+# after that gets a 503 from Render's edge *before* the instance boots, so it
+# never reaches the app and never appears in the backend log — it just looks
+# like a dead backend (blank dashboard, or "PHOTO ANALYSIS FAILED: HTTPError"
+# on an upload). A cold boot takes ~10-20s, so a 503 is worth waiting out.
+#
+# A refused connection or a timeout is a DIFFERENT failure: the service is not
+# coming up at all. Waiting 12s on that per call, across ~15 dashboard fetches,
+# would turn "backend down" into a blank page that never finishes loading. So
+# connection errors get one quick retry, not the patient 503 schedule.
+_RETRY_BACKOFF = 4.0        # seconds, for a 503 from a booting instance
+_RETRY_ATTEMPTS = 3         # 503 only: sleeps 4s then 8s
+_TRANSIENT_BACKOFF = 1.0    # seconds, for a dropped/stalled connection
+_TRANSIENT_ATTEMPTS = 2     # connection errors only: one quick retry
 
 FALLBACK_CITIES = ["Delhi", "Mumbai", "São Paulo", "Beijing", "Johannesburg"]
 
@@ -522,10 +538,44 @@ def style_for_aqi(aqi: int) -> dict:
 # ---------------------------------------------------------------------------
 # HTTP helpers (cached)
 # ---------------------------------------------------------------------------
+def _request(method: str, url: str, **kw) -> "requests.Response":
+    """One call to the backend, but patient about a sleeping Render instance.
+
+    Two distinct failures get two different temperaments:
+
+      * 503 from the edge  -> the instance is booting. A cold boot takes
+        ~10-20s, so wait it out (_RETRY_ATTEMPTS attempts, 4s then 8s).
+      * connection dropped / stalled -> the service is not coming up. One
+        quick retry, then fail, so a genuinely-down backend surfaces fast
+        instead of costing 12s on every one of ~15 dashboard fetches.
+
+    Everything else (status codes, headers, multipart files) passes through
+    untouched, so callers keep using raise_for_status() as before. A 4xx or
+    5xx is never retried — the app answered, and that answer is the truth.
+    """
+    last_exc: Exception | None = None
+    for attempt in range(1, _RETRY_ATTEMPTS + 1):
+        resp = None
+        try:
+            resp = requests.request(method, url, **kw)
+            # 503 while asleep == the instance is booting, not broken.
+            retryable, budget, delay = resp.status_code == 503, _RETRY_ATTEMPTS, _RETRY_BACKOFF
+        except (requests.ConnectionError, requests.Timeout) as exc:
+            last_exc = exc
+            retryable, budget, delay = True, _TRANSIENT_ATTEMPTS, _TRANSIENT_BACKOFF
+        if retryable and attempt < budget:
+            time.sleep(delay * attempt)
+            continue
+        if resp is None:
+            raise last_exc or requests.RequestException("connection failed")
+        resp.raise_for_status()
+        return resp
+    raise last_exc or requests.RequestException("retry loop exhausted")
+
+
 def _get(endpoint: str, params: dict | None = None) -> dict | list | None:
     try:
-        resp = requests.get(f"{BACKEND_URL}{endpoint}", params=params, timeout=REQ_TIMEOUT)
-        resp.raise_for_status()
+        resp = _request("GET", f"{BACKEND_URL}{endpoint}", params=params, timeout=REQ_TIMEOUT)
         return resp.json()
     except requests.RequestException:
         return None
@@ -1055,13 +1105,13 @@ with photo_col:
     upload = st.file_uploader("Upload pollution photo (jpg/png)", type=["jpg", "jpeg", "png"])
     if upload is not None:
         try:
-            resp = requests.post(
+            resp = _request(
+                "POST",
                 f"{BACKEND_URL}/api/analyze-photo",
                 data={"city": city, "description": description or ""},
                 files={"file": (upload.name, upload.getvalue(), upload.type or "image/jpeg")},
-                timeout=(5, 90),
+                timeout=(5, 300),
             )
-            resp.raise_for_status()
             pr = resp.json()
             sev = int(pr.get("severity_score") or 0)
             # Location provenance matters: a citizen's real phone GPS is evidence,
